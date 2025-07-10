@@ -11,6 +11,6 @@ import java.util.logging.Level;
 
 /* @author Carolina*/
 
-public class StudentServer {
+public class DomesticActSimulatorServer {
     
 }
