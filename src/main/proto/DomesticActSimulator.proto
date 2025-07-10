@@ -2,6 +2,7 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "generated.grpc.domestic";
+option java_outer_classname = "DomesticActSimulatorImpl";
 
 package DomesticActSimulator;
 

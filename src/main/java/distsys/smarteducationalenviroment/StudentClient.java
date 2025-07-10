@@ -18,28 +18,6 @@ import io.grpc.StatusRuntimeException;
  */
 public class StudentClient {
      public static void main(String[] args) throws Exception {
-        String host = "localhost";
-        int port = 50051;
-        ManagedChannel channel = ManagedChannelBuilder.
-                forAddress(host, port)
-                .usePlaintext()
-                .build();
-        DomesticActSimulatorGrpc.DomesticActSimulatorBlockingStub blockingStub = DomesticActSimulatorGrpc.newBlockingStub(channel);
-        try {
-            String name = "Paul";
-            StudentTask request = StudentTask.newBuilder().setStudentName("cam{")
-                    .setStudentAge(port);
-
-            HelloReply response = blockingStub.sayHello(request);
-
-            logger.info("Greeting: " + response.getMessage());
-        } catch (StatusRuntimeException e) {
-            logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
-
-            return;
-        } finally {
-            //shutdown channel
-            channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
-        }
+       
     }
 }

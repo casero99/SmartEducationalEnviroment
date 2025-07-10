@@ -1,9 +1,9 @@
+distsys\smarteducationalenviroment\StudentServer.class
 generated\grpc\domestic\StudentTaskCompleted$Builder.class
 generated\grpc\domestic\StudentTask.class
 generated\grpc\domestic\StudentTaskOrBuilder.class
 generated\grpc\feedback\ClassRequest$Builder.class
 generated\grpc\domestic\StudentTaskCompleted$1.class
-generated\grpc\domestic\DomesticActSimulatorOuterClass.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackBaseDescriptorSupplier.class
 generated\grpc\feedback\ClassInsight$1.class
 generated\grpc\domestic\StudentTask$Builder.class
@@ -40,6 +40,7 @@ generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackMethodDescriptorSuppl
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackFileDescriptorSupplier.class
 generated\grpc\analyzer\ParticipationEntryOrBuilder.class
 generated\grpc\analyzer\ParticipationEntry$Builder.class
+generated\grpc\feedback\GenderAFeedbackImpl.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$3.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerBlockingStub.class
 generated\grpc\feedback\FeedbackResponseOrBuilder.class
@@ -49,7 +50,7 @@ generated\grpc\feedback\GenderAFeedbackGrpc$MethodHandlers.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$3.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerFutureStub.class
-generated\grpc\feedback\GenderAFeedbackOuterClass.class
+generated\grpc\domestic\DomesticActSimulatorImpl.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorMethodDescriptorSupplier.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackFutureStub.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackImplBase.class
@@ -58,14 +59,16 @@ generated\grpc\feedback\GenderAFeedbackGrpc.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerStub.class
 generated\grpc\domestic\StudentTask$1.class
 generated\grpc\domestic\StudentTaskCompleted.class
-generated\grpc\analyzer\ParticipationAnalizerOuterClass.class
 generated\grpc\feedback\StudentEvent$1.class
+distsys\smarteducationalenviroment\StudentClient.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$2.class
 generated\grpc\feedback\ClassRequestOrBuilder.class
 generated\grpc\feedback\StudentEvent$Builder.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerImplBase.class
+generated\grpc\analyzer\ParticipationAnalizerImpl.class
 generated\grpc\feedback\FeedbackResponse$1.class
 generated\grpc\feedback\GenderAFeedbackGrpc$1.class
+distsys\smarteducationalenviroment\GenderAFeedbackServer.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$1.class
 generated\grpc\analyzer\ParticipationStatistics$1.class
 generated\grpc\feedback\StudentEvent.class

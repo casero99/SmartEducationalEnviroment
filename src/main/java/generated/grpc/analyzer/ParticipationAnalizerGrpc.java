@@ -221,7 +221,7 @@ public final class ParticipationAnalizerGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return generated.grpc.analyzer.ParticipationAnalizerOuterClass.getDescriptor();
+      return generated.grpc.analyzer.ParticipationAnalizerImpl.getDescriptor();
     }
 
     @java.lang.Override

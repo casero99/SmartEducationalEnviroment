@@ -92,13 +92,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return generated.grpc.analyzer.ParticipationAnalizerOuterClass.internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor;
+    return generated.grpc.analyzer.ParticipationAnalizerImpl.internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return generated.grpc.analyzer.ParticipationAnalizerOuterClass.internal_static_ParticipationAnalizer_ParticipationStatistics_fieldAccessorTable
+    return generated.grpc.analyzer.ParticipationAnalizerImpl.internal_static_ParticipationAnalizer_ParticipationStatistics_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             generated.grpc.analyzer.ParticipationStatistics.class, generated.grpc.analyzer.ParticipationStatistics.Builder.class);
   }
@@ -372,13 +372,13 @@ private static final long serialVersionUID = 0L;
       generated.grpc.analyzer.ParticipationStatisticsOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return generated.grpc.analyzer.ParticipationAnalizerOuterClass.internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor;
+      return generated.grpc.analyzer.ParticipationAnalizerImpl.internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return generated.grpc.analyzer.ParticipationAnalizerOuterClass.internal_static_ParticipationAnalizer_ParticipationStatistics_fieldAccessorTable
+      return generated.grpc.analyzer.ParticipationAnalizerImpl.internal_static_ParticipationAnalizer_ParticipationStatistics_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               generated.grpc.analyzer.ParticipationStatistics.class, generated.grpc.analyzer.ParticipationStatistics.Builder.class);
     }
@@ -413,7 +413,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return generated.grpc.analyzer.ParticipationAnalizerOuterClass.internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor;
+      return generated.grpc.analyzer.ParticipationAnalizerImpl.internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor;
     }
 
     @java.lang.Override

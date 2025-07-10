@@ -82,13 +82,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_ClassInsight_descriptor;
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             generated.grpc.feedback.ClassInsight.class, generated.grpc.feedback.ClassInsight.Builder.class);
   }
@@ -306,13 +306,13 @@ private static final long serialVersionUID = 0L;
       generated.grpc.feedback.ClassInsightOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_ClassInsight_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               generated.grpc.feedback.ClassInsight.class, generated.grpc.feedback.ClassInsight.Builder.class);
     }
@@ -343,7 +343,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_ClassInsight_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_descriptor;
     }
 
     @java.lang.Override

@@ -99,13 +99,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return generated.grpc.domestic.DomesticActSimulatorOuterClass.internal_static_DomesticActSimulator_StudentTask_descriptor;
+    return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return generated.grpc.domestic.DomesticActSimulatorOuterClass.internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable
+    return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             generated.grpc.domestic.StudentTask.class, generated.grpc.domestic.StudentTask.Builder.class);
   }
@@ -433,13 +433,13 @@ private static final long serialVersionUID = 0L;
       generated.grpc.domestic.StudentTaskOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return generated.grpc.domestic.DomesticActSimulatorOuterClass.internal_static_DomesticActSimulator_StudentTask_descriptor;
+      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return generated.grpc.domestic.DomesticActSimulatorOuterClass.internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable
+      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               generated.grpc.domestic.StudentTask.class, generated.grpc.domestic.StudentTask.Builder.class);
     }
@@ -476,7 +476,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return generated.grpc.domestic.DomesticActSimulatorOuterClass.internal_static_DomesticActSimulator_StudentTask_descriptor;
+      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_descriptor;
     }
 
     @java.lang.Override

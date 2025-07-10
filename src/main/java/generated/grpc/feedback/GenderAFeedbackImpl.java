@@ -3,8 +3,8 @@
 
 package generated.grpc.feedback;
 
-public final class GenderAFeedbackOuterClass {
-  private GenderAFeedbackOuterClass() {}
+public final class GenderAFeedbackImpl {
+  private GenderAFeedbackImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -53,8 +53,9 @@ public final class GenderAFeedbackOuterClass {
       ".ClassRequest\032\035.GenderAFeedback.ClassIns" +
       "ight\"\0000\001\022^\n\024liveFeedbackExchange\022\035.Gende" +
       "rAFeedback.StudentEvent\032!.GenderAFeedbac" +
-      "k.FeedbackResponse\"\000(\0010\001B\033\n\027generated.gr" +
-      "pc.feedbackP\001b\006proto3"
+      "k.FeedbackResponse\"\000(\0010\001B0\n\027generated.gr" +
+      "pc.feedbackB\023GenderAFeedbackImplP\001b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

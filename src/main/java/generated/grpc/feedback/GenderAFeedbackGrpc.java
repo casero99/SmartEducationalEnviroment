@@ -277,7 +277,7 @@ public final class GenderAFeedbackGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return generated.grpc.feedback.GenderAFeedbackOuterClass.getDescriptor();
+      return generated.grpc.feedback.GenderAFeedbackImpl.getDescriptor();
     }
 
     @java.lang.Override

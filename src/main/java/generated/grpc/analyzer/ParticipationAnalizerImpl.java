@@ -3,8 +3,8 @@
 
 package generated.grpc.analyzer;
 
-public final class ParticipationAnalizerOuterClass {
-  private ParticipationAnalizerOuterClass() {}
+public final class ParticipationAnalizerImpl {
+  private ParticipationAnalizerImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -43,8 +43,8 @@ public final class ParticipationAnalizerOuterClass {
       "onAnalizer\022u\n\024trackerParticipation\022).Par" +
       "ticipationAnalizer.ParticipationEntry\032.." +
       "ParticipationAnalizer.ParticipationStati" +
-      "stics\"\000(\001B\033\n\027generated.grpc.analyzerP\001b\006" +
-      "proto3"
+      "stics\"\000(\001B6\n\027generated.grpc.analyzerB\031Pa" +
+      "rticipationAnalizerImplP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

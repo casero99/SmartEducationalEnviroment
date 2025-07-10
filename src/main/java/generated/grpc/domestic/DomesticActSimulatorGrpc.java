@@ -239,7 +239,7 @@ public final class DomesticActSimulatorGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return generated.grpc.domestic.DomesticActSimulatorOuterClass.getDescriptor();
+      return generated.grpc.domestic.DomesticActSimulatorImpl.getDescriptor();
     }
 
     @java.lang.Override

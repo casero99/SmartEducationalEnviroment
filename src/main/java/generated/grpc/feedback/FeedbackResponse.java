@@ -82,13 +82,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_FeedbackResponse_descriptor;
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_FeedbackResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_FeedbackResponse_fieldAccessorTable
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_FeedbackResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             generated.grpc.feedback.FeedbackResponse.class, generated.grpc.feedback.FeedbackResponse.Builder.class);
   }
@@ -298,13 +298,13 @@ private static final long serialVersionUID = 0L;
       generated.grpc.feedback.FeedbackResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_FeedbackResponse_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_FeedbackResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_FeedbackResponse_fieldAccessorTable
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_FeedbackResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               generated.grpc.feedback.FeedbackResponse.class, generated.grpc.feedback.FeedbackResponse.Builder.class);
     }
@@ -335,7 +335,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return generated.grpc.feedback.GenderAFeedbackOuterClass.internal_static_GenderAFeedback_FeedbackResponse_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_FeedbackResponse_descriptor;
     }
 
     @java.lang.Override

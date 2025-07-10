@@ -3,8 +3,8 @@
 
 package generated.grpc.domestic;
 
-public final class DomesticActSimulatorOuterClass {
-  private DomesticActSimulatorOuterClass() {}
+public final class DomesticActSimulatorImpl {
+  private DomesticActSimulatorImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -41,7 +41,8 @@ public final class DomesticActSimulatorOuterClass {
       "\002 \001(\0012t\n\024DomesticActSimulator\022\\\n\tstartTa" +
       "sk\022!.DomesticActSimulator.StudentTask\032*." +
       "DomesticActSimulator.StudentTaskComplete" +
-      "d\"\000B\033\n\027generated.grpc.domesticP\001b\006proto3"
+      "d\"\000B5\n\027generated.grpc.domesticB\030Domestic" +
+      "ActSimulatorImplP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
