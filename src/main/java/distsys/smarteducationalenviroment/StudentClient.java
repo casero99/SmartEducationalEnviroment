@@ -7,6 +7,11 @@ import generated.grpc.domestic.StudentTaskCompleted;
 import generated.grpc.analyzer.ParticipationAnalizerGrpc;
 import generated.grpc.analyzer.ParticipationEntry;
 import generated.grpc.analyzer.ParticipationStatistics;
+import generated.grpc.feedback.ClassInsight;
+import generated.grpc.feedback.ClassRequest;
+import generated.grpc.feedback.FeedbackResponse;
+import generated.grpc.feedback.GenderAFeedbackGrpc;
+import generated.grpc.feedback.StudentEvent;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -14,6 +19,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
+import java.awt.HeadlessException;
+import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
 import javax.swing.JOptionPane;
@@ -38,7 +45,7 @@ public class StudentClient {
         runUnaryDomesticTask(channel);
         runClientStreamingParticipationAnalizer(channel);
         runServerStreamingInsight(channel);
-        runBidirectionalGenderAFeedback(channel);
+        runBidirectionalFeedback(channel);
         
         channel.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
      }
@@ -96,7 +103,7 @@ public class StudentClient {
 
 //Service 2. Client Streaming RPC - Participation Analizer
 private static void runClientStreamingParticipationAnalizer(ManagedChannel channel){
-    ParticipationAnalizerGrpc.ParticipationAnalizerBlockingStub asyncStub = ParticipationAnalizerGrpc.newBlockingStub(channel);
+    ParticipationAnalizerGrpc.ParticipationAnalizerStub asyncStub = ParticipationAnalizerGrpc.newStub(channel);
     
     StreamObserver<ParticipationEntry> requestObserver = asyncStub.trackerParticipation(new StreamObserver<ParticipationStatistics>(){
         @Override
@@ -137,9 +144,63 @@ private static void runClientStreamingParticipationAnalizer(ManagedChannel chann
         
         }
         requestObserver.onCompleted();
-    }catch (Exception e){
+    }catch (HeadlessException | NumberFormatException e){
         requestObserver.onError(e);
     }
-            
 }
+    //SERVER 3. Server Streaming RPC -Gender Analizer Feedback
+    private static void runServerStreamingInsight(ManagedChannel channel){
+        GenderAFeedbackGrpc.GenderAFeedbackBlockingStub blockingStub = GenderAFeedbackGrpc.newBlockingStub(channel);
+        
+        String className = JOptionPane.showInputDialog("Enter class name for feedback: ");
+        ClassRequest request = ClassRequest.newBuilder().setClassName(className).build();
+        
+        Iterator<ClassInsight> insights =blockingStub.getClassInsight(request);
+        StringBuilder feedback = new StringBuilder("Class feedback: \n");
+        insights.forEachRemaining(insight -> feedback.append("- ").append(insight.getMessage()).append("\n"));
+        
+        JOptionPane.showMessageDialog(null,feedback.toString());
+    }
+    
+    //SERVER 3. Bi-Directional Streaming RPC -Gender Analizer Feedback
+    private static void runBidirectionalFeedback(ManagedChannel channel) throws InterruptedException {
+        GenderAFeedbackGrpc.GenderAFeedbackStub asyncStub = GenderAFeedbackGrpc.newStub(channel);
+        CountDownLatch latch = new CountDownLatch(1);
+        
+        StreamObserver<StudentEvent> requestObserver = asyncStub.liveFeedbackExchange(new StreamObserver<FeedbackResponse>(){
+            @Override
+            public void onNext(FeedbackResponse value){
+                JOptionPane.showMessageDialog(null,"Observations: " + value.getFeedback());
+            }
+            @Override
+            public void onError(Throwable t){
+                JOptionPane.showMessageDialog(null, "Error: " + t.getMessage());
+                latch.countDown();
+            }
+            @Override
+            public void onCompleted(){
+                JOptionPane.showMessageDialog(null, "Observations IRL session ended.");
+                latch.countDown();
+            }
+        });
+        
+        int eventCount = Integer.parseInt(JOptionPane.showInputDialog("How many events to simulate?"));
+        for (int i = 0; i < eventCount; i++){
+            String name = JOptionPane.showInputDialog("Student name: ");
+            String task = JOptionPane.showInputDialog("Name of task done: ");
+            double duration = Double.parseDouble(JOptionPane.showInputDialog("Task duration (in minutes): "));
+            
+            StudentEvent event = StudentEvent.newBuilder()
+                    .setStudentName(name)
+                    .setTaskName(task)
+                    .setTaskDuration(duration)
+                    .build();
+            
+            requestObserver.onNext(event);
+            
+        }
+        
+        requestObserver.onCompleted();
+        latch.await(3,TimeUnit.SECONDS);
+    }
 }
