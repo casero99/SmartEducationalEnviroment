@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "generated.grpc.feedback";
+
+
+package GenderAFeedback;
+
+// The server that you implement must extend the class  <servicename>ImplBase
+
+// GenderAFeedback provides automated feedback and suggestions based on the data collected by the participants.
+
+service GenderAFeedback {
+
+   //  Server-side Streaming - The client requests classroom-level insights, and the server
+   //  responds with multiple observations, ideas or suggestions.
+   
+   rpc getClassInsight(ClassRequest) returns (stream ClassInsight) {}
+
+   // Bi-directional Streaming - the client sends events and the server responds with real-time suggestions or prompts, 
+   // and it allows responsive feedback from students.
+
+   rpc liveFeedbackExchange(stream StudentEvent) returns (stream FeedbackResponse){}
+ 
+}
+   // Server-Streaming
+   //  message server asks for feedback
+   message ClassRequest {
+     string className = 1;      // Name of the class
+   }
+
+   // The response message containing answer from the server
+   message ClassInsight {
+    string message = 1;         // Comment, idea or suggestion
+   }
+
+    // Bi-Directional streaming
+    // message while student is doing task, 
+    message  StudentEvent {
+    string studentName = 1;     // Name of student
+    string taskName = 2;        // Name of task done
+    double taskDuration = 3;    // Time spend doing the task
+    }
+
+    // inmediate response by server with feedback
+    message FeedbackResponse {
+    string feedback = 1;
+    }
+
+
+   
+
+
+

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "generated.grpc.domestic";
+
+package DomesticActSimulator;
+
+// The server that you implement must extend the class  <servicename>ImplBase
+
+// DomesticActSimulator allows to simulate and complete common household tasks in a virtual format.
+
+service DomesticActSimulator {
+
+   //  Unary gRPC - client sends one student task and server confirms completion.
+   rpc startTask(StudentTask) returns (StudentTaskCompleted){}
+  
+}
+
+   //  message that represents the task done by the student.
+   message StudentTask {
+     string studentName = 1;    // Name of the student
+     int32 studentAge = 2;     // Age of student
+     string taskName = 3;       // Name of the task to be done (ex.washing dishes, ironing)
+     double taskDuration = 4;   // Time spend doing the task (in minutes)
+   }
+
+   // The response message form server confirming the completion of the task
+   message StudentTaskCompleted {
+     string message = 1;        // Confirmation message
+     double taskTime = 2;       // Time registered
+   }
+
+
+   
+
+
+

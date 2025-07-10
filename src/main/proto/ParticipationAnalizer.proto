@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "generated.grpc.analyzer";
+
+
+package ParticipationAnalizer;
+
+// The server that you implement must extend the class  <servicename>ImplBase
+
+// ParticipationAnalizer provides statics on how domestic tasks are being distributed across genders.
+
+
+service ParticipationAnalizer {
+
+   //  Client Streaming - The service allow the students to stream multiple participation records in one section.
+   // Client stream multiple participation registrations (one by one) and the server responds once
+   // by sending participation statistics by gender.
+   rpc trackerParticipation(stream ParticipationEntry) returns (ParticipationStatistics) {}
+  
+}
+
+   //  message of one task entry per student
+   message ParticipationEntry {
+     string studentName = 1;        // Student name
+     string gender = 2;             // Student gender
+     string taskName = 3;           // Name of task
+     double taskDuration = 4;       // Task duration
+     int32 sessionID = 5;          // Class or session ID
+   }
+
+   // Overall participation statistics
+   message ParticipationStatistics {
+     float malePercentage = 1;      // Percentage of task done by males
+     float femalePercentage = 2;    // Percentage of task done by female
+     string summary = 3;            // Summary of percentages of both genders
+   }
+
+
+   
+
+
+
