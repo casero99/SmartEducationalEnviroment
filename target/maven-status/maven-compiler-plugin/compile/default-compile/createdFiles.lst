@@ -1,4 +1,3 @@
-distsys\smarteducationalenviroment\StudentServer.class
 generated\grpc\domestic\StudentTaskCompleted$Builder.class
 generated\grpc\domestic\StudentTask.class
 generated\grpc\domestic\StudentTaskOrBuilder.class
@@ -44,6 +43,7 @@ generated\grpc\feedback\GenderAFeedbackImpl.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$3.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerBlockingStub.class
 generated\grpc\feedback\FeedbackResponseOrBuilder.class
+distsys\smarteducationalenviroment\DomesticActSimulatorServer.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$MethodHandlers.class
 generated\grpc\domestic\DomesticActSimulatorGrpc.class
 generated\grpc\feedback\GenderAFeedbackGrpc$MethodHandlers.class
@@ -57,6 +57,7 @@ generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackImplBase.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackBlockingStub.class
 generated\grpc\feedback\GenderAFeedbackGrpc.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerStub.class
+distsys\smarteducationalenviroment\ParticipationAnalizerServer.class
 generated\grpc\domestic\StudentTask$1.class
 generated\grpc\domestic\StudentTaskCompleted.class
 generated\grpc\feedback\StudentEvent$1.class

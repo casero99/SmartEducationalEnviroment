@@ -4,12 +4,18 @@ package distsys.smarteducationalenviroment;
 import generated.grpc.domestic.DomesticActSimulatorGrpc;
 import generated.grpc.domestic.StudentTask;
 import generated.grpc.domestic.StudentTaskCompleted;
+import generated.grpc.analyzer.ParticipationAnalizerGrpc;
+import generated.grpc.analyzer.ParticipationEntry;
+import generated.grpc.analyzer.ParticipationStatistics;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 import java.util.logging.Level;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
-import java.util.logging.Logger;
+import io.grpc.stub.StreamObserver;
+import java.util.concurrent.CountDownLatch;
+
 import javax.swing.JOptionPane;
 
 /*@author Carolina*/
@@ -29,7 +35,16 @@ public class StudentClient {
                 .usePlaintext()
                 .build();
         
-        //stub
+        runUnaryDomesticTask(channel);
+        runClientStreamingParticipationAnalizer(channel);
+        runServerStreamingInsight(channel);
+        runBidirectionalGenderAFeedback(channel);
+        
+        channel.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
+     }
+        
+        //SERVICE 1. UNARY - Domestic Activity Simulator
+     private static void runUnaryDomesticTask(ManagedChannel channel) throws InterruptedException{
         DomesticActSimulatorGrpc.DomesticActSimulatorBlockingStub blockingStub = DomesticActSimulatorGrpc.newBlockingStub(channel);
         try {
             String name = JOptionPane.showInputDialog("Please enter name: ");
@@ -74,6 +89,57 @@ public class StudentClient {
             //shutdown channel
             channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
         }
+     
     
     }
+
+
+//Service 2. Client Streaming RPC - Participation Analizer
+private static void runClientStreamingParticipationAnalizer(ManagedChannel channel){
+    ParticipationAnalizerGrpc.ParticipationAnalizerBlockingStub asyncStub = ParticipationAnalizerGrpc.newBlockingStub(channel);
+    
+    StreamObserver<ParticipationEntry> requestObserver = asyncStub.trackerParticipation(new StreamObserver<ParticipationStatistics>(){
+        @Override
+        public void onNext(ParticipationStatistics statistics){
+            JOptionPane.showMessageDialog(null, "Participation Summary: "
+            + "\n Percentage Male: " + statistics.getMalePercentage()
+            + "\n Percentage Female: " + statistics.getFemalePercentage()
+            + "\n Summary: " + statistics.getSummary());
+        }
+        
+        @Override
+        public void onError(Throwable t){
+            JOptionPane.showMessageDialog(null, "Error: " + t.getMessage());
+        }
+        
+        @Override
+        public void onCompleted(){
+            JOptionPane.showMessageDialog(null, "Participation analysis completed");
+        }
+    });
+    try{
+        int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many students participated?"));
+        for(int i =0; i < entryCount; i++){
+            String name = JOptionPane.showInputDialog("Student name: ");
+            String gender = JOptionPane.showInputDialog("Gender Male/Female/Other: ");
+            String task = JOptionPane.showInputDialog("Task performed: ");
+            String durationString = JOptionPane.showInputDialog("Duration (minutes): ");
+            double taskDuration = Double.parseDouble(durationString);
+            
+            ParticipationEntry entry = ParticipationEntry.newBuilder()
+                    .setStudentName(name)
+                    .setGender(gender)
+                    .setTaskName(task)
+                    .setTaskDuration(taskDuration)
+                    .setSessionID(1)
+                    .build();
+            requestObserver.onNext(entry);
+        
+        }
+        requestObserver.onCompleted();
+    }catch (Exception e){
+        requestObserver.onError(e);
+    }
+            
+}
 }
