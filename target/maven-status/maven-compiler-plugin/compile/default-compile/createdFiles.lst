@@ -23,6 +23,7 @@ generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorBaseDescrip
 generated\grpc\feedback\ClassRequest.class
 generated\grpc\feedback\GenderAFeedbackGrpc$3.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorFutureStub.class
+distsys\smarteducationalenviroment\ParticipationAnalizerServer$1.class
 generated\grpc\feedback\StudentEventOrBuilder.class
 generated\grpc\analyzer\ParticipationStatistics.class
 generated\grpc\feedback\ClassInsight.class

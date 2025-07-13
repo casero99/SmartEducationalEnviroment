@@ -20,7 +20,6 @@ public class DomesticActSimulatorServer{
     public static void main(String[] args) throws IOException, InterruptedException {
         
 
-        DomesticActSimulatorImpl serviceImpl = new DomesticActSimulatorImpl();
 
         int port = 50051;
 
@@ -42,7 +41,7 @@ public class DomesticActSimulatorServer{
             e.printStackTrace();
         }
 
-    }
+}
 
     public void startTask(StudentTask request, StreamObserver<StudentTaskCompleted> responseObserver) {
 
