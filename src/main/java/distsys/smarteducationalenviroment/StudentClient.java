@@ -128,15 +128,32 @@ private static void runClientStreamingParticipationAnalizer(ManagedChannel chann
         int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many students participated?"));
         for(int i =0; i < entryCount; i++){
             String name = JOptionPane.showInputDialog("Student name: ");
-            String gender = JOptionPane.showInputDialog("Gender Male/Female/Other: ");
-            String task = JOptionPane.showInputDialog("Task performed: ");
+            
+            
+            String [] genders = {"Male","Female", "Other"};
+            String gender = (String)JOptionPane.showInputDialog(null,
+                    "Gender Male/Female/Other:  ",
+                    "Household Task",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    genders,
+                    genders[0]);
+            
+            String [] tasks = {"Washing Dishes","Sweeping", "Mooping", "Laundry", "Cooking", "Ironing","Make the bed"};
+            String taskName = (String)JOptionPane.showInputDialog(null,
+                    "Select Task performed: ",
+                    "Household Task",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    tasks,
+                    tasks[0]);
             String durationString = JOptionPane.showInputDialog("Duration (minutes): ");
             double taskDuration = Double.parseDouble(durationString);
             
             ParticipationEntry entry = ParticipationEntry.newBuilder()
                     .setStudentName(name)
                     .setGender(gender)
-                    .setTaskName(task)
+                    .setTaskName(taskName)
                     .setTaskDuration(taskDuration)
                     .setSessionID(1)
                     .build();
@@ -187,12 +204,22 @@ private static void runClientStreamingParticipationAnalizer(ManagedChannel chann
         int eventCount = Integer.parseInt(JOptionPane.showInputDialog("How many events to simulate?"));
         for (int i = 0; i < eventCount; i++){
             String name = JOptionPane.showInputDialog("Student name: ");
-            String task = JOptionPane.showInputDialog("Name of task done: ");
+            
+            String [] tasks = {"Washing Dishes","Sweeping", "Mooping", "Laundry", "Cooking", "Ironing","Make the bed"};
+            String taskName = (String)JOptionPane.showInputDialog(null,
+                    "Name of task done: ",
+                    "Household Task",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    tasks,
+                    tasks[0]);
+            
+            
             double duration = Double.parseDouble(JOptionPane.showInputDialog("Task duration (in minutes): "));
             
             StudentEvent event = StudentEvent.newBuilder()
                     .setStudentName(name)
-                    .setTaskName(task)
+                    .setTaskName(taskName)
                     .setTaskDuration(duration)
                     .build();
             

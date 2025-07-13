@@ -3,8 +3,8 @@
 
 package generated.grpc.feedback;
 
-public final class GenderAFeedbackImpl {
-  private GenderAFeedbackImpl() {}
+public final class GenderAFeedbackImpl extends GenderAFeedbackGrpc.GenderAFeedbackImplBase{
+  public GenderAFeedbackImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
