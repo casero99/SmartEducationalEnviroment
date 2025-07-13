@@ -3,8 +3,8 @@
 
 package generated.grpc.analyzer;
 
-public final class ParticipationAnalizerImpl {
-  private ParticipationAnalizerImpl() {}
+public final class ParticipationAnalizerImpl extends ParticipationAnalizerGrpc.ParticipationAnalizerImplBase{
+  public ParticipationAnalizerImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }

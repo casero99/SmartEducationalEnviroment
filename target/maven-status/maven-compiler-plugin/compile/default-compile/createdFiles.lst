@@ -33,6 +33,7 @@ generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorFileDescrip
 generated\grpc\analyzer\ParticipationStatistics$Builder.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorImplBase.class
 generated\grpc\feedback\FeedbackResponse.class
+distsys\smarteducationalenviroment\StudentClient$2.class
 generated\grpc\analyzer\ParticipationStatisticsOrBuilder.class
 generated\grpc\domestic\StudentTaskCompletedOrBuilder.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackMethodDescriptorSupplier.class
@@ -51,6 +52,7 @@ generated\grpc\analyzer\ParticipationAnalizerGrpc.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$3.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerFutureStub.class
 generated\grpc\domestic\DomesticActSimulatorImpl.class
+distsys\smarteducationalenviroment\StudentClient$1.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorMethodDescriptorSupplier.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackFutureStub.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackImplBase.class

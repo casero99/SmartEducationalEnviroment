@@ -3,8 +3,8 @@
 
 package generated.grpc.domestic;
 
-public final class DomesticActSimulatorImpl {
-  private DomesticActSimulatorImpl() {}
+public final class DomesticActSimulatorImpl extends DomesticActSimulatorGrpc.DomesticActSimulatorImplBase{
+  public DomesticActSimulatorImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
