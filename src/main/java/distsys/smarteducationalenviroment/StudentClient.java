@@ -43,7 +43,7 @@ public class StudentClient {
                 .usePlaintext()
                 .build();
         
-        runUnaryDomesticTask(channel1);
+       // runUnaryDomesticTask(channel1);
         
         
         channel1.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
@@ -57,14 +57,14 @@ public class StudentClient {
         runClientStreamingParticipationAnalizer(channel2);
         channel2.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
         
-        //Channel 3. Port 50053 -
+        //Channel 3. Port 50053 - Server Streaming & Bi-directional Streaming server. Gender A. Feedback
         int port3 = 50053;
         ManagedChannel channel3 = ManagedChannelBuilder
                 .forAddress(host, port3)
                 .usePlaintext()
                 .build();
-        runServerStreamingInsight(channel3);
-        runBidirectionalFeedback(channel3);
+        // runServerStreamingInsight(channel3);
+        // runBidirectionalFeedback(channel3);
         channel3.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
      }
         

@@ -1,6 +1,7 @@
 
 package distsys.smarteducationalenviroment;
 
+import generated.grpc.domestic.DomesticActSimulatorGrpc.DomesticActSimulatorImplBase;
 import generated.grpc.domestic.DomesticActSimulatorImpl;
 import generated.grpc.domestic.StudentTask;
 import generated.grpc.domestic.StudentTaskCompleted;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
 
 /* @author Carolina*/
 
-public class DomesticActSimulatorServer{
+public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase{
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {

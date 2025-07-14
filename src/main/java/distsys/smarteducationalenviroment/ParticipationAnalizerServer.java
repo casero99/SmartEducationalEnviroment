@@ -2,6 +2,7 @@
 package distsys.smarteducationalenviroment;
 
 
+import generated.grpc.analyzer.ParticipationAnalizerGrpc.ParticipationAnalizerImplBase;
 import generated.grpc.analyzer.ParticipationAnalizerImpl;
 import generated.grpc.analyzer.ParticipationEntry;
 import generated.grpc.analyzer.ParticipationStatistics;
@@ -14,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /* @author Carolina*/
-public class ParticipationAnalizerServer {
+public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase{
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -41,8 +42,8 @@ public class ParticipationAnalizerServer {
         }
 
     }
-    
-    public StreamObserver<ParticipationEntry> recordRoute(final StreamObserver<ParticipationStatistics> responseObserver){
+    @Override
+    public  StreamObserver<ParticipationEntry> trackerParticipation(final StreamObserver<ParticipationStatistics> responseObserver){
         return new StreamObserver<ParticipationEntry>(){
             
             int maleCount =0;

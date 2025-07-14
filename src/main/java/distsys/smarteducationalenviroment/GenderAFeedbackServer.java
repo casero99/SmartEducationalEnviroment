@@ -4,6 +4,7 @@ package distsys.smarteducationalenviroment;
 import generated.grpc.feedback.ClassInsight;
 import generated.grpc.feedback.ClassRequest;
 import generated.grpc.feedback.FeedbackResponse;
+import generated.grpc.feedback.GenderAFeedbackGrpc.GenderAFeedbackImplBase;
 import generated.grpc.feedback.GenderAFeedbackImpl;
 import generated.grpc.feedback.StudentEvent;
 import io.grpc.Server;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
 
 /*@author Carolina*/
 
-public class GenderAFeedbackServer {
+public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -68,7 +69,7 @@ public class GenderAFeedbackServer {
     }
     
     //Bi-directional RPC
-    public StreamObserver<StudentEvent> participateLive(final StreamObserver<FeedbackResponse> responseObserver){
+    public StreamObserver<StudentEvent> liveFeedbackExchange(final StreamObserver<FeedbackResponse> responseObserver){
         return new StreamObserver<StudentEvent>(){
             
             @Override
