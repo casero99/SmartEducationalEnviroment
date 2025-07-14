@@ -5,7 +5,6 @@ import generated.grpc.feedback.ClassInsight;
 import generated.grpc.feedback.ClassRequest;
 import generated.grpc.feedback.FeedbackResponse;
 import generated.grpc.feedback.GenderAFeedbackGrpc.GenderAFeedbackImplBase;
-import generated.grpc.feedback.GenderAFeedbackImpl;
 import generated.grpc.feedback.StudentEvent;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -26,7 +25,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
 
         try {
             Server server = ServerBuilder.forPort(port)
-                    .addService(new GenderAFeedbackImpl())
+                    .addService(new GenderAFeedbackServer())
                     .build()
                     .start();
             logger.log(Level.INFO, "ParticipationAnalizer started, listening on {0}", port);

@@ -2,7 +2,6 @@
 package distsys.smarteducationalenviroment;
 
 import generated.grpc.domestic.DomesticActSimulatorGrpc.DomesticActSimulatorImplBase;
-import generated.grpc.domestic.DomesticActSimulatorImpl;
 import generated.grpc.domestic.StudentTask;
 import generated.grpc.domestic.StudentTaskCompleted;
 import io.grpc.Server;
@@ -26,7 +25,7 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase{
 
         try {
             Server server = ServerBuilder.forPort(port)
-                    .addService(new DomesticActSimulatorImpl())
+                    .addService(new DomesticActSimulatorServer())
                     .build()
                     .start();
             logger.log(Level.INFO, "DomesticActSimulator started, listening on {0}", port);

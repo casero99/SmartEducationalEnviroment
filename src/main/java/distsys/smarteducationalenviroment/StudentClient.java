@@ -43,7 +43,7 @@ public class StudentClient {
                 .usePlaintext()
                 .build();
         
-       // runUnaryDomesticTask(channel1);
+       runUnaryDomesticTask(channel1);
         
         
         channel1.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
@@ -63,8 +63,8 @@ public class StudentClient {
                 .forAddress(host, port3)
                 .usePlaintext()
                 .build();
-        // runServerStreamingInsight(channel3);
-        // runBidirectionalFeedback(channel3);
+        runServerStreamingInsight(channel3);
+        runBidirectionalFeedback(channel3);
         channel3.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
      }
         

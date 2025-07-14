@@ -3,7 +3,6 @@ package distsys.smarteducationalenviroment;
 
 
 import generated.grpc.analyzer.ParticipationAnalizerGrpc.ParticipationAnalizerImplBase;
-import generated.grpc.analyzer.ParticipationAnalizerImpl;
 import generated.grpc.analyzer.ParticipationEntry;
 import generated.grpc.analyzer.ParticipationStatistics;
 import io.grpc.Server;
@@ -25,7 +24,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase{
 
         try {
             Server server = ServerBuilder.forPort(port)
-                    .addService(new ParticipationAnalizerImpl())
+                    .addService(new ParticipationAnalizerServer())
                     .build()
                     .start();
             logger.log(Level.INFO, "ParticipationAnalizer started, listening on {0}", port);
