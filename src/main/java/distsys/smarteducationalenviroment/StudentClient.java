@@ -34,20 +34,38 @@ public class StudentClient {
     //Unary rpc StrudentClient
      public static void main(String[] args) throws Exception {
         String host = "localhost";
-        int port = 50051;
         
-        //creating channel
-        ManagedChannel channel = ManagedChannelBuilder.
-                forAddress(host, port)
+        
+        //Channel 1. Port 50051 - Unary Server. Domestic Activity Simulator
+        int port1 = 50051;
+        ManagedChannel channel1 = ManagedChannelBuilder
+                .forAddress(host, port1)
                 .usePlaintext()
                 .build();
         
-        runUnaryDomesticTask(channel);
-        runClientStreamingParticipationAnalizer(channel);
-        runServerStreamingInsight(channel);
-        runBidirectionalFeedback(channel);
+        runUnaryDomesticTask(channel1);
         
-        channel.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
+        
+        channel1.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
+        
+        //Channel 2. Port 50052 - Client Streaming. Participation Analizer
+        int port2 = 50052;
+        ManagedChannel channel2 = ManagedChannelBuilder
+                .forAddress(host, port2)
+                .usePlaintext()
+                .build();
+        runClientStreamingParticipationAnalizer(channel2);
+        channel2.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
+        
+        //Channel 3. Port 50053 -
+        int port3 = 50053;
+        ManagedChannel channel3 = ManagedChannelBuilder
+                .forAddress(host, port3)
+                .usePlaintext()
+                .build();
+        runServerStreamingInsight(channel3);
+        runBidirectionalFeedback(channel3);
+        channel3.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
      }
         
         //SERVICE 1. UNARY - Domestic Activity Simulator
