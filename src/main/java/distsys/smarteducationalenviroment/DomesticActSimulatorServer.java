@@ -1,25 +1,26 @@
-
 package distsys.smarteducationalenviroment;
-/*
+
+import generated.grpc.domestic.Student;
 import generated.grpc.domestic.DomesticActSimulatorGrpc.DomesticActSimulatorImplBase;
-import generated.grpc.domestic.StudentTask;
-import generated.grpc.domestic.StudentTaskCompleted;
+import generated.grpc.domestic.RegisterStudentsRequest;
+import generated.grpc.domestic.ResisterStudentsReply;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /* @author Carolina*/
-/*
-public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase{
+public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
+
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        
+    List<Student> studentList = new ArrayList<>();
 
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         int port = 50051;
 
@@ -33,40 +34,52 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase{
             server.awaitTermination();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-
+            e.printStackTrace(); // TODO Auto-generated catch block
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            e.printStackTrace();// TODO Auto-generated catch block
         }
-
-}
-
+    }
+    @Override
     public void registerStudents(RegisterStudentsRequest request, StreamObserver<ResisterStudentsReply> responseObserver) {
 
-        List <Student> studentList request.getStudentList;
         System.out.println("Inside registerStudents");
 
-        String studentName = request.getStudentName();
-        int studentAge = request.getStudentAge();
-        String gender = request.getGender();
-        String taskName = request.getTaskName();
-        
-        System.out.println("Student name: " + studentName);
-        System.out.println("Student age: " + studentAge);
-        
-        StudentTaskCompleted.Builder response = StudentTaskCompleted.newBuilder();
-        if(!studentName.isEmpty() && studentAge != 0 && !taskName.isEmpty() && taskDuration != 0){
-            response.setTaskTime(0).setMessage("The student " + studentName + " , age:  " + studentAge +
-                    " , is doing : " + taskName + " ,with a time of: " + taskDuration + " was added succesfully!");
-            
-        }else{
-            response.setTaskTime(100).setMessage("Enter student name again");
+        List<Student> students = new ArrayList<>();
+
+        StringBuilder result = new StringBuilder();
+
+        for (Student student : request.getStudentsList()) {
+            String studentName = student.getStudentName();
+            int studentAge = student.getStudentAge();
+            String gender = student.getGender();
+            String taskName = student.getTaskName();
+
+            System.out.println("Name: " + studentName);
+            System.out.println("Age: " + studentAge);
+            System.out.println("Gender: " + gender);
+            System.out.println("Task to do: " + taskName);
+
+            if (!studentName.isEmpty() && studentAge != 0 && !taskName.isEmpty()) {
+                students.add(student); //adding student info to the list
+
+                result.append("good ")
+                        .append(studentName)
+                        .append(" (").append(gender).append(", ")
+                        .append(studentAge).append(" y/o)")
+                        .append(" is assigned to: ").append(taskName)
+                        .append("\n");
+
+            } else {
+                result.append("Missing data from studen registry.");
+            }
         }
-        
-        responseObserver.onNext(response.build());
+
+        String summary = "Class created sucesfully! " + students.size() + " students were added to the list.\n" + result.toString();
+
+        ResisterStudentsReply reply = ResisterStudentsReply.newBuilder()
+                .setMessage(summary)
+                .build();
+        responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
 }
-*/

@@ -1,6 +1,6 @@
 
 package distsys.smarteducationalenviroment;
-/*
+
 import generated.grpc.feedback.ClassInsight;
 import generated.grpc.feedback.ClassRequest;
 import generated.grpc.feedback.FeedbackResponse;
@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*@author Carolina*/
-/*
+
 public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
@@ -105,4 +105,3 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
     }
     
 }
-*/
