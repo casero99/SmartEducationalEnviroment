@@ -1,6 +1,6 @@
 
 package distsys.smarteducationalenviroment;
-
+/*
 import generated.grpc.domestic.DomesticActSimulatorGrpc.DomesticActSimulatorImplBase;
 import generated.grpc.domestic.StudentTask;
 import generated.grpc.domestic.StudentTaskCompleted;
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 
 /* @author Carolina*/
-
+/*
 public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase{
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
@@ -43,14 +43,15 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase{
 
 }
 
-    public void startTask(StudentTask request, StreamObserver<StudentTaskCompleted> responseObserver) {
+    public void registerStudents(RegisterStudentsRequest request, StreamObserver<ResisterStudentsReply> responseObserver) {
 
-        System.out.println("Inside StartTask");
+        List <Student> studentList request.getStudentList;
+        System.out.println("Inside registerStudents");
 
         String studentName = request.getStudentName();
         int studentAge = request.getStudentAge();
+        String gender = request.getGender();
         String taskName = request.getTaskName();
-        double taskDuration = request.getTaskDuration();
         
         System.out.println("Student name: " + studentName);
         System.out.println("Student age: " + studentAge);
@@ -68,3 +69,4 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase{
         responseObserver.onCompleted();
     }
 }
+*/

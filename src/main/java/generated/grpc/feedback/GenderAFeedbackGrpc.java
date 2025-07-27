@@ -15,66 +15,66 @@ public final class GenderAFeedbackGrpc {
   public static final String SERVICE_NAME = "GenderAFeedback.GenderAFeedback";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<generated.grpc.feedback.ClassRequest,
-      generated.grpc.feedback.ClassInsight> getGetClassInsightMethod;
+  private static volatile io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask,
+      generated.grpc.feedback.TaskFeedbackSummary> getTaskPerformanceMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getClassInsight",
-      requestType = generated.grpc.feedback.ClassRequest.class,
-      responseType = generated.grpc.feedback.ClassInsight.class,
+      fullMethodName = SERVICE_NAME + '/' + "taskPerformance",
+      requestType = generated.grpc.feedback.StudentTask.class,
+      responseType = generated.grpc.feedback.TaskFeedbackSummary.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<generated.grpc.feedback.ClassRequest,
-      generated.grpc.feedback.ClassInsight> getGetClassInsightMethod() {
-    io.grpc.MethodDescriptor<generated.grpc.feedback.ClassRequest, generated.grpc.feedback.ClassInsight> getGetClassInsightMethod;
-    if ((getGetClassInsightMethod = GenderAFeedbackGrpc.getGetClassInsightMethod) == null) {
+  public static io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask,
+      generated.grpc.feedback.TaskFeedbackSummary> getTaskPerformanceMethod() {
+    io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask, generated.grpc.feedback.TaskFeedbackSummary> getTaskPerformanceMethod;
+    if ((getTaskPerformanceMethod = GenderAFeedbackGrpc.getTaskPerformanceMethod) == null) {
       synchronized (GenderAFeedbackGrpc.class) {
-        if ((getGetClassInsightMethod = GenderAFeedbackGrpc.getGetClassInsightMethod) == null) {
-          GenderAFeedbackGrpc.getGetClassInsightMethod = getGetClassInsightMethod =
-              io.grpc.MethodDescriptor.<generated.grpc.feedback.ClassRequest, generated.grpc.feedback.ClassInsight>newBuilder()
+        if ((getTaskPerformanceMethod = GenderAFeedbackGrpc.getTaskPerformanceMethod) == null) {
+          GenderAFeedbackGrpc.getTaskPerformanceMethod = getTaskPerformanceMethod =
+              io.grpc.MethodDescriptor.<generated.grpc.feedback.StudentTask, generated.grpc.feedback.TaskFeedbackSummary>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getClassInsight"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "taskPerformance"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  generated.grpc.feedback.ClassRequest.getDefaultInstance()))
+                  generated.grpc.feedback.StudentTask.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  generated.grpc.feedback.ClassInsight.getDefaultInstance()))
-              .setSchemaDescriptor(new GenderAFeedbackMethodDescriptorSupplier("getClassInsight"))
+                  generated.grpc.feedback.TaskFeedbackSummary.getDefaultInstance()))
+              .setSchemaDescriptor(new GenderAFeedbackMethodDescriptorSupplier("taskPerformance"))
               .build();
         }
       }
     }
-    return getGetClassInsightMethod;
+    return getTaskPerformanceMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<generated.grpc.feedback.StudentEvent,
-      generated.grpc.feedback.FeedbackResponse> getLiveFeedbackExchangeMethod;
+  private static volatile io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask,
+      generated.grpc.feedback.TaskFeedback> getLiveTaskFeedbackMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "liveFeedbackExchange",
-      requestType = generated.grpc.feedback.StudentEvent.class,
-      responseType = generated.grpc.feedback.FeedbackResponse.class,
+      fullMethodName = SERVICE_NAME + '/' + "liveTaskFeedback",
+      requestType = generated.grpc.feedback.StudentTask.class,
+      responseType = generated.grpc.feedback.TaskFeedback.class,
       methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<generated.grpc.feedback.StudentEvent,
-      generated.grpc.feedback.FeedbackResponse> getLiveFeedbackExchangeMethod() {
-    io.grpc.MethodDescriptor<generated.grpc.feedback.StudentEvent, generated.grpc.feedback.FeedbackResponse> getLiveFeedbackExchangeMethod;
-    if ((getLiveFeedbackExchangeMethod = GenderAFeedbackGrpc.getLiveFeedbackExchangeMethod) == null) {
+  public static io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask,
+      generated.grpc.feedback.TaskFeedback> getLiveTaskFeedbackMethod() {
+    io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask, generated.grpc.feedback.TaskFeedback> getLiveTaskFeedbackMethod;
+    if ((getLiveTaskFeedbackMethod = GenderAFeedbackGrpc.getLiveTaskFeedbackMethod) == null) {
       synchronized (GenderAFeedbackGrpc.class) {
-        if ((getLiveFeedbackExchangeMethod = GenderAFeedbackGrpc.getLiveFeedbackExchangeMethod) == null) {
-          GenderAFeedbackGrpc.getLiveFeedbackExchangeMethod = getLiveFeedbackExchangeMethod =
-              io.grpc.MethodDescriptor.<generated.grpc.feedback.StudentEvent, generated.grpc.feedback.FeedbackResponse>newBuilder()
+        if ((getLiveTaskFeedbackMethod = GenderAFeedbackGrpc.getLiveTaskFeedbackMethod) == null) {
+          GenderAFeedbackGrpc.getLiveTaskFeedbackMethod = getLiveTaskFeedbackMethod =
+              io.grpc.MethodDescriptor.<generated.grpc.feedback.StudentTask, generated.grpc.feedback.TaskFeedback>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "liveFeedbackExchange"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "liveTaskFeedback"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  generated.grpc.feedback.StudentEvent.getDefaultInstance()))
+                  generated.grpc.feedback.StudentTask.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  generated.grpc.feedback.FeedbackResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new GenderAFeedbackMethodDescriptorSupplier("liveFeedbackExchange"))
+                  generated.grpc.feedback.TaskFeedback.getDefaultInstance()))
+              .setSchemaDescriptor(new GenderAFeedbackMethodDescriptorSupplier("liveTaskFeedback"))
               .build();
         }
       }
     }
-    return getLiveFeedbackExchangeMethod;
+    return getLiveTaskFeedbackMethod;
   }
 
   /**
@@ -126,35 +126,38 @@ public final class GenderAFeedbackGrpc {
   public static abstract class GenderAFeedbackImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     *  Client Streaming - The client starts the duration of tasks from each students. 
+     * </pre>
      */
-    public void getClassInsight(generated.grpc.feedback.ClassRequest request,
-        io.grpc.stub.StreamObserver<generated.grpc.feedback.ClassInsight> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetClassInsightMethod(), responseObserver);
+    public void taskPerformance(generated.grpc.feedback.StudentTask request,
+        io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedbackSummary> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTaskPerformanceMethod(), responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<generated.grpc.feedback.StudentEvent> liveFeedbackExchange(
-        io.grpc.stub.StreamObserver<generated.grpc.feedback.FeedbackResponse> responseObserver) {
-      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getLiveFeedbackExchangeMethod(), responseObserver);
+    public io.grpc.stub.StreamObserver<generated.grpc.feedback.StudentTask> liveTaskFeedback(
+        io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedback> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getLiveTaskFeedbackMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getGetClassInsightMethod(),
+            getTaskPerformanceMethod(),
             io.grpc.stub.ServerCalls.asyncServerStreamingCall(
               new MethodHandlers<
-                generated.grpc.feedback.ClassRequest,
-                generated.grpc.feedback.ClassInsight>(
-                  this, METHODID_GET_CLASS_INSIGHT)))
+                generated.grpc.feedback.StudentTask,
+                generated.grpc.feedback.TaskFeedbackSummary>(
+                  this, METHODID_TASK_PERFORMANCE)))
           .addMethod(
-            getLiveFeedbackExchangeMethod(),
+            getLiveTaskFeedbackMethod(),
             io.grpc.stub.ServerCalls.asyncBidiStreamingCall(
               new MethodHandlers<
-                generated.grpc.feedback.StudentEvent,
-                generated.grpc.feedback.FeedbackResponse>(
-                  this, METHODID_LIVE_FEEDBACK_EXCHANGE)))
+                generated.grpc.feedback.StudentTask,
+                generated.grpc.feedback.TaskFeedback>(
+                  this, METHODID_LIVE_TASK_FEEDBACK)))
           .build();
     }
   }
@@ -174,19 +177,22 @@ public final class GenderAFeedbackGrpc {
     }
 
     /**
+     * <pre>
+     *  Client Streaming - The client starts the duration of tasks from each students. 
+     * </pre>
      */
-    public void getClassInsight(generated.grpc.feedback.ClassRequest request,
-        io.grpc.stub.StreamObserver<generated.grpc.feedback.ClassInsight> responseObserver) {
+    public void taskPerformance(generated.grpc.feedback.StudentTask request,
+        io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedbackSummary> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
-          getChannel().newCall(getGetClassInsightMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getTaskPerformanceMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<generated.grpc.feedback.StudentEvent> liveFeedbackExchange(
-        io.grpc.stub.StreamObserver<generated.grpc.feedback.FeedbackResponse> responseObserver) {
+    public io.grpc.stub.StreamObserver<generated.grpc.feedback.StudentTask> liveTaskFeedback(
+        io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedback> responseObserver) {
       return io.grpc.stub.ClientCalls.asyncBidiStreamingCall(
-          getChannel().newCall(getLiveFeedbackExchangeMethod(), getCallOptions()), responseObserver);
+          getChannel().newCall(getLiveTaskFeedbackMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -205,11 +211,14 @@ public final class GenderAFeedbackGrpc {
     }
 
     /**
+     * <pre>
+     *  Client Streaming - The client starts the duration of tasks from each students. 
+     * </pre>
      */
-    public java.util.Iterator<generated.grpc.feedback.ClassInsight> getClassInsight(
-        generated.grpc.feedback.ClassRequest request) {
+    public java.util.Iterator<generated.grpc.feedback.TaskFeedbackSummary> taskPerformance(
+        generated.grpc.feedback.StudentTask request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
-          getChannel(), getGetClassInsightMethod(), getCallOptions(), request);
+          getChannel(), getTaskPerformanceMethod(), getCallOptions(), request);
     }
   }
 
@@ -228,8 +237,8 @@ public final class GenderAFeedbackGrpc {
     }
   }
 
-  private static final int METHODID_GET_CLASS_INSIGHT = 0;
-  private static final int METHODID_LIVE_FEEDBACK_EXCHANGE = 1;
+  private static final int METHODID_TASK_PERFORMANCE = 0;
+  private static final int METHODID_LIVE_TASK_FEEDBACK = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -248,9 +257,9 @@ public final class GenderAFeedbackGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_CLASS_INSIGHT:
-          serviceImpl.getClassInsight((generated.grpc.feedback.ClassRequest) request,
-              (io.grpc.stub.StreamObserver<generated.grpc.feedback.ClassInsight>) responseObserver);
+        case METHODID_TASK_PERFORMANCE:
+          serviceImpl.taskPerformance((generated.grpc.feedback.StudentTask) request,
+              (io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedbackSummary>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -262,9 +271,9 @@ public final class GenderAFeedbackGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_LIVE_FEEDBACK_EXCHANGE:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.liveFeedbackExchange(
-              (io.grpc.stub.StreamObserver<generated.grpc.feedback.FeedbackResponse>) responseObserver);
+        case METHODID_LIVE_TASK_FEEDBACK:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.liveTaskFeedback(
+              (io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedback>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -316,8 +325,8 @@ public final class GenderAFeedbackGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new GenderAFeedbackFileDescriptorSupplier())
-              .addMethod(getGetClassInsightMethod())
-              .addMethod(getLiveFeedbackExchangeMethod())
+              .addMethod(getTaskPerformanceMethod())
+              .addMethod(getLiveTaskFeedbackMethod())
               .build();
         }
       }

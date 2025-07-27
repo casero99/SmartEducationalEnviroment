@@ -3,8 +3,8 @@
 
 package generated.grpc.domestic;
 
-public final class DomesticActSimulatorImpl extends DomesticActSimulatorGrpc.DomesticActSimulatorImplBase{
-  public DomesticActSimulatorImpl() {}
+public final class DomesticActSimulatorImpl {
+  private DomesticActSimulatorImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -15,15 +15,20 @@ public final class DomesticActSimulatorImpl extends DomesticActSimulatorGrpc.Dom
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_DomesticActSimulator_StudentTask_descriptor;
+    internal_static_DomesticActSimulator_Student_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable;
+      internal_static_DomesticActSimulator_Student_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_DomesticActSimulator_StudentTaskCompleted_descriptor;
+    internal_static_DomesticActSimulator_RegisterStudentsRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_DomesticActSimulator_StudentTaskCompleted_fieldAccessorTable;
+      internal_static_DomesticActSimulator_RegisterStudentsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DomesticActSimulator_ResisterStudentsReply_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DomesticActSimulator_ResisterStudentsReply_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -34,32 +39,40 @@ public final class DomesticActSimulatorImpl extends DomesticActSimulatorGrpc.Dom
   static {
     java.lang.String[] descriptorData = {
       "\n\032DomesticActSimulator.proto\022\024DomesticAc" +
-      "tSimulator\"^\n\013StudentTask\022\023\n\013studentName" +
-      "\030\001 \001(\t\022\022\n\nstudentAge\030\002 \001(\005\022\020\n\010taskName\030\003" +
-      " \001(\t\022\024\n\014taskDuration\030\004 \001(\001\"9\n\024StudentTas" +
-      "kCompleted\022\017\n\007message\030\001 \001(\t\022\020\n\010taskTime\030" +
-      "\002 \001(\0012t\n\024DomesticActSimulator\022\\\n\tstartTa" +
-      "sk\022!.DomesticActSimulator.StudentTask\032*." +
-      "DomesticActSimulator.StudentTaskComplete" +
-      "d\"\000B5\n\027generated.grpc.domesticB\030Domestic" +
-      "ActSimulatorImplP\001b\006proto3"
+      "tSimulator\"T\n\007Student\022\023\n\013studentName\030\001 \001" +
+      "(\t\022\022\n\nstudentAge\030\002 \001(\005\022\016\n\006gender\030\003 \001(\t\022\020" +
+      "\n\010taskName\030\004 \001(\t\"J\n\027RegisterStudentsRequ" +
+      "est\022/\n\010students\030\001 \003(\0132\035.DomesticActSimul" +
+      "ator.Student\"(\n\025ResisterStudentsReply\022\017\n" +
+      "\007message\030\001 \001(\t2\210\001\n\024DomesticActSimulator\022" +
+      "p\n\020registerStudents\022-.DomesticActSimulat" +
+      "or.RegisterStudentsRequest\032+.DomesticAct" +
+      "Simulator.ResisterStudentsReply\"\000B5\n\027gen" +
+      "erated.grpc.domesticB\030DomesticActSimulat" +
+      "orImplP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_DomesticActSimulator_StudentTask_descriptor =
+    internal_static_DomesticActSimulator_Student_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable = new
+    internal_static_DomesticActSimulator_Student_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_DomesticActSimulator_StudentTask_descriptor,
-        new java.lang.String[] { "StudentName", "StudentAge", "TaskName", "TaskDuration", });
-    internal_static_DomesticActSimulator_StudentTaskCompleted_descriptor =
+        internal_static_DomesticActSimulator_Student_descriptor,
+        new java.lang.String[] { "StudentName", "StudentAge", "Gender", "TaskName", });
+    internal_static_DomesticActSimulator_RegisterStudentsRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_DomesticActSimulator_StudentTaskCompleted_fieldAccessorTable = new
+    internal_static_DomesticActSimulator_RegisterStudentsRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_DomesticActSimulator_StudentTaskCompleted_descriptor,
-        new java.lang.String[] { "Message", "TaskTime", });
+        internal_static_DomesticActSimulator_RegisterStudentsRequest_descriptor,
+        new java.lang.String[] { "Students", });
+    internal_static_DomesticActSimulator_ResisterStudentsReply_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_DomesticActSimulator_ResisterStudentsReply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DomesticActSimulator_ResisterStudentsReply_descriptor,
+        new java.lang.String[] { "Message", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

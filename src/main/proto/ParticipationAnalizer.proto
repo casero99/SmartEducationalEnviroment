@@ -15,10 +15,19 @@ package ParticipationAnalizer;
 service ParticipationAnalizer {
 
    //  Server streaming
-   rpc analyzerParticipation(ParticipationRequest) returns (Stream ParticipationStatistics) {}
-   rpc SubmitCustomFeedback(Stream CustomFeedbackRequest) returns (CustomFeedbackReply){}
+   rpc analyzerParticipation (ParticipationRequest) returns (stream ParticipationStatistics) {}
+   rpc submitCustomFeedback (stream CustomFeedbackRequest) returns (CustomFeedbackReply){}
   
 }
+
+//shared student info (3 services)
+message Student {
+     string studentName = 1;    // Name of the student
+     int32 studentAge = 2;      // Age of student
+     string gender = 3;         // Male, Female, Other 
+     string taskName = 4;       // Name of the task to be done (ex.washing dishes, ironing)
+     
+   }
 
    //  message of one task entry per student
    message ParticipationRequest {

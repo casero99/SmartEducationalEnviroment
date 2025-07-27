@@ -1,6 +1,6 @@
 
 package distsys.smarteducationalenviroment;
-
+/*
 import generated.grpc.domestic.DomesticActSimulatorGrpc;
 import generated.grpc.domestic.StudentTask;
 import generated.grpc.domestic.StudentTaskCompleted;
@@ -26,7 +26,7 @@ import java.util.concurrent.CountDownLatch;
 import javax.swing.JOptionPane;
 
 /*@author Carolina*/
-
+/*
 public class StudentClient {
     
     private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
@@ -249,3 +249,4 @@ private static void runClientStreamingParticipationAnalizer(ManagedChannel chann
         latch.await(3,TimeUnit.SECONDS);
     }
 }
+*/

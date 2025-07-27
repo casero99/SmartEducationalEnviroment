@@ -15,35 +15,35 @@ public final class DomesticActSimulatorGrpc {
   public static final String SERVICE_NAME = "DomesticActSimulator.DomesticActSimulator";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<generated.grpc.domestic.StudentTask,
-      generated.grpc.domestic.StudentTaskCompleted> getStartTaskMethod;
+  private static volatile io.grpc.MethodDescriptor<generated.grpc.domestic.RegisterStudentsRequest,
+      generated.grpc.domestic.ResisterStudentsReply> getRegisterStudentsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "startTask",
-      requestType = generated.grpc.domestic.StudentTask.class,
-      responseType = generated.grpc.domestic.StudentTaskCompleted.class,
+      fullMethodName = SERVICE_NAME + '/' + "registerStudents",
+      requestType = generated.grpc.domestic.RegisterStudentsRequest.class,
+      responseType = generated.grpc.domestic.ResisterStudentsReply.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<generated.grpc.domestic.StudentTask,
-      generated.grpc.domestic.StudentTaskCompleted> getStartTaskMethod() {
-    io.grpc.MethodDescriptor<generated.grpc.domestic.StudentTask, generated.grpc.domestic.StudentTaskCompleted> getStartTaskMethod;
-    if ((getStartTaskMethod = DomesticActSimulatorGrpc.getStartTaskMethod) == null) {
+  public static io.grpc.MethodDescriptor<generated.grpc.domestic.RegisterStudentsRequest,
+      generated.grpc.domestic.ResisterStudentsReply> getRegisterStudentsMethod() {
+    io.grpc.MethodDescriptor<generated.grpc.domestic.RegisterStudentsRequest, generated.grpc.domestic.ResisterStudentsReply> getRegisterStudentsMethod;
+    if ((getRegisterStudentsMethod = DomesticActSimulatorGrpc.getRegisterStudentsMethod) == null) {
       synchronized (DomesticActSimulatorGrpc.class) {
-        if ((getStartTaskMethod = DomesticActSimulatorGrpc.getStartTaskMethod) == null) {
-          DomesticActSimulatorGrpc.getStartTaskMethod = getStartTaskMethod =
-              io.grpc.MethodDescriptor.<generated.grpc.domestic.StudentTask, generated.grpc.domestic.StudentTaskCompleted>newBuilder()
+        if ((getRegisterStudentsMethod = DomesticActSimulatorGrpc.getRegisterStudentsMethod) == null) {
+          DomesticActSimulatorGrpc.getRegisterStudentsMethod = getRegisterStudentsMethod =
+              io.grpc.MethodDescriptor.<generated.grpc.domestic.RegisterStudentsRequest, generated.grpc.domestic.ResisterStudentsReply>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "startTask"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "registerStudents"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  generated.grpc.domestic.StudentTask.getDefaultInstance()))
+                  generated.grpc.domestic.RegisterStudentsRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  generated.grpc.domestic.StudentTaskCompleted.getDefaultInstance()))
-              .setSchemaDescriptor(new DomesticActSimulatorMethodDescriptorSupplier("startTask"))
+                  generated.grpc.domestic.ResisterStudentsReply.getDefaultInstance()))
+              .setSchemaDescriptor(new DomesticActSimulatorMethodDescriptorSupplier("registerStudents"))
               .build();
         }
       }
     }
-    return getStartTaskMethod;
+    return getRegisterStudentsMethod;
   }
 
   /**
@@ -99,20 +99,20 @@ public final class DomesticActSimulatorGrpc {
      *  Unary gRPC - client sends one student task and server confirms completion.
      * </pre>
      */
-    public void startTask(generated.grpc.domestic.StudentTask request,
-        io.grpc.stub.StreamObserver<generated.grpc.domestic.StudentTaskCompleted> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getStartTaskMethod(), responseObserver);
+    public void registerStudents(generated.grpc.domestic.RegisterStudentsRequest request,
+        io.grpc.stub.StreamObserver<generated.grpc.domestic.ResisterStudentsReply> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterStudentsMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getStartTaskMethod(),
+            getRegisterStudentsMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                generated.grpc.domestic.StudentTask,
-                generated.grpc.domestic.StudentTaskCompleted>(
-                  this, METHODID_START_TASK)))
+                generated.grpc.domestic.RegisterStudentsRequest,
+                generated.grpc.domestic.ResisterStudentsReply>(
+                  this, METHODID_REGISTER_STUDENTS)))
           .build();
     }
   }
@@ -136,10 +136,10 @@ public final class DomesticActSimulatorGrpc {
      *  Unary gRPC - client sends one student task and server confirms completion.
      * </pre>
      */
-    public void startTask(generated.grpc.domestic.StudentTask request,
-        io.grpc.stub.StreamObserver<generated.grpc.domestic.StudentTaskCompleted> responseObserver) {
+    public void registerStudents(generated.grpc.domestic.RegisterStudentsRequest request,
+        io.grpc.stub.StreamObserver<generated.grpc.domestic.ResisterStudentsReply> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getStartTaskMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getRegisterStudentsMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -162,9 +162,9 @@ public final class DomesticActSimulatorGrpc {
      *  Unary gRPC - client sends one student task and server confirms completion.
      * </pre>
      */
-    public generated.grpc.domestic.StudentTaskCompleted startTask(generated.grpc.domestic.StudentTask request) {
+    public generated.grpc.domestic.ResisterStudentsReply registerStudents(generated.grpc.domestic.RegisterStudentsRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getStartTaskMethod(), getCallOptions(), request);
+          getChannel(), getRegisterStudentsMethod(), getCallOptions(), request);
     }
   }
 
@@ -187,14 +187,14 @@ public final class DomesticActSimulatorGrpc {
      *  Unary gRPC - client sends one student task and server confirms completion.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<generated.grpc.domestic.StudentTaskCompleted> startTask(
-        generated.grpc.domestic.StudentTask request) {
+    public com.google.common.util.concurrent.ListenableFuture<generated.grpc.domestic.ResisterStudentsReply> registerStudents(
+        generated.grpc.domestic.RegisterStudentsRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getStartTaskMethod(), getCallOptions()), request);
+          getChannel().newCall(getRegisterStudentsMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_START_TASK = 0;
+  private static final int METHODID_REGISTER_STUDENTS = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -213,9 +213,9 @@ public final class DomesticActSimulatorGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_START_TASK:
-          serviceImpl.startTask((generated.grpc.domestic.StudentTask) request,
-              (io.grpc.stub.StreamObserver<generated.grpc.domestic.StudentTaskCompleted>) responseObserver);
+        case METHODID_REGISTER_STUDENTS:
+          serviceImpl.registerStudents((generated.grpc.domestic.RegisterStudentsRequest) request,
+              (io.grpc.stub.StreamObserver<generated.grpc.domestic.ResisterStudentsReply>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -278,7 +278,7 @@ public final class DomesticActSimulatorGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new DomesticActSimulatorFileDescriptorSupplier())
-              .addMethod(getStartTaskMethod())
+              .addMethod(getRegisterStudentsMethod())
               .build();
         }
       }

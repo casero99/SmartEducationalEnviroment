@@ -5,22 +5,23 @@ package generated.grpc.domestic;
 
 /**
  * <pre>
- *  message that represents the task done by the student.
+ *shared student info (3 services)
  * </pre>
  *
- * Protobuf type {@code DomesticActSimulator.StudentTask}
+ * Protobuf type {@code DomesticActSimulator.Student}
  */
-public final class StudentTask extends
+public final class Student extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:DomesticActSimulator.StudentTask)
-    StudentTaskOrBuilder {
+    // @@protoc_insertion_point(message_implements:DomesticActSimulator.Student)
+    StudentOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use StudentTask.newBuilder() to construct.
-  private StudentTask(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use Student.newBuilder() to construct.
+  private Student(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private StudentTask() {
+  private Student() {
     studentName_ = "";
+    gender_ = "";
     taskName_ = "";
   }
 
@@ -28,7 +29,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new StudentTask();
+    return new Student();
   }
 
   @java.lang.Override
@@ -36,7 +37,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private StudentTask(
+  private Student(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -68,12 +69,13 @@ private static final long serialVersionUID = 0L;
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            taskName_ = s;
+            gender_ = s;
             break;
           }
-          case 33: {
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            taskDuration_ = input.readDouble();
+            taskName_ = s;
             break;
           }
           default: {
@@ -99,15 +101,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_descriptor;
+    return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_Student_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable
+    return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_Student_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            generated.grpc.domestic.StudentTask.class, generated.grpc.domestic.StudentTask.Builder.class);
+            generated.grpc.domestic.Student.class, generated.grpc.domestic.Student.Builder.class);
   }
 
   public static final int STUDENTNAME_FIELD_NUMBER = 1;
@@ -171,14 +173,60 @@ private static final long serialVersionUID = 0L;
     return studentAge_;
   }
 
-  public static final int TASKNAME_FIELD_NUMBER = 3;
+  public static final int GENDER_FIELD_NUMBER = 3;
+  private volatile java.lang.Object gender_;
+  /**
+   * <pre>
+   * Male, Female, Other 
+   * </pre>
+   *
+   * <code>string gender = 3;</code>
+   * @return The gender.
+   */
+  @java.lang.Override
+  public java.lang.String getGender() {
+    java.lang.Object ref = gender_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      gender_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Male, Female, Other 
+   * </pre>
+   *
+   * <code>string gender = 3;</code>
+   * @return The bytes for gender.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getGenderBytes() {
+    java.lang.Object ref = gender_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      gender_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int TASKNAME_FIELD_NUMBER = 4;
   private volatile java.lang.Object taskName_;
   /**
    * <pre>
    * Name of the task to be done (ex.washing dishes, ironing)
    * </pre>
    *
-   * <code>string taskName = 3;</code>
+   * <code>string taskName = 4;</code>
    * @return The taskName.
    */
   @java.lang.Override
@@ -199,7 +247,7 @@ private static final long serialVersionUID = 0L;
    * Name of the task to be done (ex.washing dishes, ironing)
    * </pre>
    *
-   * <code>string taskName = 3;</code>
+   * <code>string taskName = 4;</code>
    * @return The bytes for taskName.
    */
   @java.lang.Override
@@ -215,21 +263,6 @@ private static final long serialVersionUID = 0L;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
-  }
-
-  public static final int TASKDURATION_FIELD_NUMBER = 4;
-  private double taskDuration_;
-  /**
-   * <pre>
-   * Time spend doing the task (in minutes)
-   * </pre>
-   *
-   * <code>double taskDuration = 4;</code>
-   * @return The taskDuration.
-   */
-  @java.lang.Override
-  public double getTaskDuration() {
-    return taskDuration_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -252,11 +285,11 @@ private static final long serialVersionUID = 0L;
     if (studentAge_ != 0) {
       output.writeInt32(2, studentAge_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(taskName_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, taskName_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gender_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, gender_);
     }
-    if (java.lang.Double.doubleToRawLongBits(taskDuration_) != 0) {
-      output.writeDouble(4, taskDuration_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(taskName_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, taskName_);
     }
     unknownFields.writeTo(output);
   }
@@ -274,12 +307,11 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, studentAge_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(taskName_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, taskName_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(gender_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, gender_);
     }
-    if (java.lang.Double.doubleToRawLongBits(taskDuration_) != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(4, taskDuration_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(taskName_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, taskName_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -291,20 +323,19 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof generated.grpc.domestic.StudentTask)) {
+    if (!(obj instanceof generated.grpc.domestic.Student)) {
       return super.equals(obj);
     }
-    generated.grpc.domestic.StudentTask other = (generated.grpc.domestic.StudentTask) obj;
+    generated.grpc.domestic.Student other = (generated.grpc.domestic.Student) obj;
 
     if (!getStudentName()
         .equals(other.getStudentName())) return false;
     if (getStudentAge()
         != other.getStudentAge()) return false;
+    if (!getGender()
+        .equals(other.getGender())) return false;
     if (!getTaskName()
         .equals(other.getTaskName())) return false;
-    if (java.lang.Double.doubleToLongBits(getTaskDuration())
-        != java.lang.Double.doubleToLongBits(
-            other.getTaskDuration())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -320,79 +351,78 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getStudentName().hashCode();
     hash = (37 * hash) + STUDENTAGE_FIELD_NUMBER;
     hash = (53 * hash) + getStudentAge();
+    hash = (37 * hash) + GENDER_FIELD_NUMBER;
+    hash = (53 * hash) + getGender().hashCode();
     hash = (37 * hash) + TASKNAME_FIELD_NUMBER;
     hash = (53 * hash) + getTaskName().hashCode();
-    hash = (37 * hash) + TASKDURATION_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getTaskDuration()));
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(byte[] data)
+  public static generated.grpc.domestic.Student parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(java.io.InputStream input)
+  public static generated.grpc.domestic.Student parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static generated.grpc.domestic.StudentTask parseDelimitedFrom(java.io.InputStream input)
+  public static generated.grpc.domestic.Student parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static generated.grpc.domestic.StudentTask parseDelimitedFrom(
+  public static generated.grpc.domestic.Student parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static generated.grpc.domestic.StudentTask parseFrom(
+  public static generated.grpc.domestic.Student parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -405,7 +435,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(generated.grpc.domestic.StudentTask prototype) {
+  public static Builder newBuilder(generated.grpc.domestic.Student prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -422,29 +452,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *  message that represents the task done by the student.
+   *shared student info (3 services)
    * </pre>
    *
-   * Protobuf type {@code DomesticActSimulator.StudentTask}
+   * Protobuf type {@code DomesticActSimulator.Student}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:DomesticActSimulator.StudentTask)
-      generated.grpc.domestic.StudentTaskOrBuilder {
+      // @@protoc_insertion_point(builder_implements:DomesticActSimulator.Student)
+      generated.grpc.domestic.StudentOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_descriptor;
+      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_Student_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_fieldAccessorTable
+      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_Student_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              generated.grpc.domestic.StudentTask.class, generated.grpc.domestic.StudentTask.Builder.class);
+              generated.grpc.domestic.Student.class, generated.grpc.domestic.Student.Builder.class);
     }
 
-    // Construct using generated.grpc.domestic.StudentTask.newBuilder()
+    // Construct using generated.grpc.domestic.Student.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -466,9 +496,9 @@ private static final long serialVersionUID = 0L;
 
       studentAge_ = 0;
 
-      taskName_ = "";
+      gender_ = "";
 
-      taskDuration_ = 0D;
+      taskName_ = "";
 
       return this;
     }
@@ -476,17 +506,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_StudentTask_descriptor;
+      return generated.grpc.domestic.DomesticActSimulatorImpl.internal_static_DomesticActSimulator_Student_descriptor;
     }
 
     @java.lang.Override
-    public generated.grpc.domestic.StudentTask getDefaultInstanceForType() {
-      return generated.grpc.domestic.StudentTask.getDefaultInstance();
+    public generated.grpc.domestic.Student getDefaultInstanceForType() {
+      return generated.grpc.domestic.Student.getDefaultInstance();
     }
 
     @java.lang.Override
-    public generated.grpc.domestic.StudentTask build() {
-      generated.grpc.domestic.StudentTask result = buildPartial();
+    public generated.grpc.domestic.Student build() {
+      generated.grpc.domestic.Student result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -494,12 +524,12 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public generated.grpc.domestic.StudentTask buildPartial() {
-      generated.grpc.domestic.StudentTask result = new generated.grpc.domestic.StudentTask(this);
+    public generated.grpc.domestic.Student buildPartial() {
+      generated.grpc.domestic.Student result = new generated.grpc.domestic.Student(this);
       result.studentName_ = studentName_;
       result.studentAge_ = studentAge_;
+      result.gender_ = gender_;
       result.taskName_ = taskName_;
-      result.taskDuration_ = taskDuration_;
       onBuilt();
       return result;
     }
@@ -538,16 +568,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof generated.grpc.domestic.StudentTask) {
-        return mergeFrom((generated.grpc.domestic.StudentTask)other);
+      if (other instanceof generated.grpc.domestic.Student) {
+        return mergeFrom((generated.grpc.domestic.Student)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(generated.grpc.domestic.StudentTask other) {
-      if (other == generated.grpc.domestic.StudentTask.getDefaultInstance()) return this;
+    public Builder mergeFrom(generated.grpc.domestic.Student other) {
+      if (other == generated.grpc.domestic.Student.getDefaultInstance()) return this;
       if (!other.getStudentName().isEmpty()) {
         studentName_ = other.studentName_;
         onChanged();
@@ -555,12 +585,13 @@ private static final long serialVersionUID = 0L;
       if (other.getStudentAge() != 0) {
         setStudentAge(other.getStudentAge());
       }
+      if (!other.getGender().isEmpty()) {
+        gender_ = other.gender_;
+        onChanged();
+      }
       if (!other.getTaskName().isEmpty()) {
         taskName_ = other.taskName_;
         onChanged();
-      }
-      if (other.getTaskDuration() != 0D) {
-        setTaskDuration(other.getTaskDuration());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -577,11 +608,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      generated.grpc.domestic.StudentTask parsedMessage = null;
+      generated.grpc.domestic.Student parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (generated.grpc.domestic.StudentTask) e.getUnfinishedMessage();
+        parsedMessage = (generated.grpc.domestic.Student) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -730,13 +761,109 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object gender_ = "";
+    /**
+     * <pre>
+     * Male, Female, Other 
+     * </pre>
+     *
+     * <code>string gender = 3;</code>
+     * @return The gender.
+     */
+    public java.lang.String getGender() {
+      java.lang.Object ref = gender_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        gender_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Male, Female, Other 
+     * </pre>
+     *
+     * <code>string gender = 3;</code>
+     * @return The bytes for gender.
+     */
+    public com.google.protobuf.ByteString
+        getGenderBytes() {
+      java.lang.Object ref = gender_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        gender_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Male, Female, Other 
+     * </pre>
+     *
+     * <code>string gender = 3;</code>
+     * @param value The gender to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGender(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      gender_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Male, Female, Other 
+     * </pre>
+     *
+     * <code>string gender = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearGender() {
+      
+      gender_ = getDefaultInstance().getGender();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Male, Female, Other 
+     * </pre>
+     *
+     * <code>string gender = 3;</code>
+     * @param value The bytes for gender to set.
+     * @return This builder for chaining.
+     */
+    public Builder setGenderBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      gender_ = value;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object taskName_ = "";
     /**
      * <pre>
      * Name of the task to be done (ex.washing dishes, ironing)
      * </pre>
      *
-     * <code>string taskName = 3;</code>
+     * <code>string taskName = 4;</code>
      * @return The taskName.
      */
     public java.lang.String getTaskName() {
@@ -756,7 +883,7 @@ private static final long serialVersionUID = 0L;
      * Name of the task to be done (ex.washing dishes, ironing)
      * </pre>
      *
-     * <code>string taskName = 3;</code>
+     * <code>string taskName = 4;</code>
      * @return The bytes for taskName.
      */
     public com.google.protobuf.ByteString
@@ -777,7 +904,7 @@ private static final long serialVersionUID = 0L;
      * Name of the task to be done (ex.washing dishes, ironing)
      * </pre>
      *
-     * <code>string taskName = 3;</code>
+     * <code>string taskName = 4;</code>
      * @param value The taskName to set.
      * @return This builder for chaining.
      */
@@ -796,7 +923,7 @@ private static final long serialVersionUID = 0L;
      * Name of the task to be done (ex.washing dishes, ironing)
      * </pre>
      *
-     * <code>string taskName = 3;</code>
+     * <code>string taskName = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearTaskName() {
@@ -810,7 +937,7 @@ private static final long serialVersionUID = 0L;
      * Name of the task to be done (ex.washing dishes, ironing)
      * </pre>
      *
-     * <code>string taskName = 3;</code>
+     * <code>string taskName = 4;</code>
      * @param value The bytes for taskName to set.
      * @return This builder for chaining.
      */
@@ -822,49 +949,6 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       taskName_ = value;
-      onChanged();
-      return this;
-    }
-
-    private double taskDuration_ ;
-    /**
-     * <pre>
-     * Time spend doing the task (in minutes)
-     * </pre>
-     *
-     * <code>double taskDuration = 4;</code>
-     * @return The taskDuration.
-     */
-    @java.lang.Override
-    public double getTaskDuration() {
-      return taskDuration_;
-    }
-    /**
-     * <pre>
-     * Time spend doing the task (in minutes)
-     * </pre>
-     *
-     * <code>double taskDuration = 4;</code>
-     * @param value The taskDuration to set.
-     * @return This builder for chaining.
-     */
-    public Builder setTaskDuration(double value) {
-      
-      taskDuration_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Time spend doing the task (in minutes)
-     * </pre>
-     *
-     * <code>double taskDuration = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearTaskDuration() {
-      
-      taskDuration_ = 0D;
       onChanged();
       return this;
     }
@@ -881,41 +965,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:DomesticActSimulator.StudentTask)
+    // @@protoc_insertion_point(builder_scope:DomesticActSimulator.Student)
   }
 
-  // @@protoc_insertion_point(class_scope:DomesticActSimulator.StudentTask)
-  private static final generated.grpc.domestic.StudentTask DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:DomesticActSimulator.Student)
+  private static final generated.grpc.domestic.Student DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new generated.grpc.domestic.StudentTask();
+    DEFAULT_INSTANCE = new generated.grpc.domestic.Student();
   }
 
-  public static generated.grpc.domestic.StudentTask getDefaultInstance() {
+  public static generated.grpc.domestic.Student getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<StudentTask>
-      PARSER = new com.google.protobuf.AbstractParser<StudentTask>() {
+  private static final com.google.protobuf.Parser<Student>
+      PARSER = new com.google.protobuf.AbstractParser<Student>() {
     @java.lang.Override
-    public StudentTask parsePartialFrom(
+    public Student parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new StudentTask(input, extensionRegistry);
+      return new Student(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<StudentTask> parser() {
+  public static com.google.protobuf.Parser<Student> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<StudentTask> getParserForType() {
+  public com.google.protobuf.Parser<Student> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public generated.grpc.domestic.StudentTask getDefaultInstanceForType() {
+  public generated.grpc.domestic.Student getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

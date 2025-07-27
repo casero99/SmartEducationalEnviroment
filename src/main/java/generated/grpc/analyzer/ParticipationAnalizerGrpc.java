@@ -15,35 +15,66 @@ public final class ParticipationAnalizerGrpc {
   public static final String SERVICE_NAME = "ParticipationAnalizer.ParticipationAnalizer";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<generated.grpc.analyzer.ParticipationEntry,
-      generated.grpc.analyzer.ParticipationStatistics> getTrackerParticipationMethod;
+  private static volatile io.grpc.MethodDescriptor<generated.grpc.analyzer.ParticipationRequest,
+      generated.grpc.analyzer.ParticipationStatistics> getAnalyzerParticipationMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "trackerParticipation",
-      requestType = generated.grpc.analyzer.ParticipationEntry.class,
+      fullMethodName = SERVICE_NAME + '/' + "analyzerParticipation",
+      requestType = generated.grpc.analyzer.ParticipationRequest.class,
       responseType = generated.grpc.analyzer.ParticipationStatistics.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-  public static io.grpc.MethodDescriptor<generated.grpc.analyzer.ParticipationEntry,
-      generated.grpc.analyzer.ParticipationStatistics> getTrackerParticipationMethod() {
-    io.grpc.MethodDescriptor<generated.grpc.analyzer.ParticipationEntry, generated.grpc.analyzer.ParticipationStatistics> getTrackerParticipationMethod;
-    if ((getTrackerParticipationMethod = ParticipationAnalizerGrpc.getTrackerParticipationMethod) == null) {
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<generated.grpc.analyzer.ParticipationRequest,
+      generated.grpc.analyzer.ParticipationStatistics> getAnalyzerParticipationMethod() {
+    io.grpc.MethodDescriptor<generated.grpc.analyzer.ParticipationRequest, generated.grpc.analyzer.ParticipationStatistics> getAnalyzerParticipationMethod;
+    if ((getAnalyzerParticipationMethod = ParticipationAnalizerGrpc.getAnalyzerParticipationMethod) == null) {
       synchronized (ParticipationAnalizerGrpc.class) {
-        if ((getTrackerParticipationMethod = ParticipationAnalizerGrpc.getTrackerParticipationMethod) == null) {
-          ParticipationAnalizerGrpc.getTrackerParticipationMethod = getTrackerParticipationMethod =
-              io.grpc.MethodDescriptor.<generated.grpc.analyzer.ParticipationEntry, generated.grpc.analyzer.ParticipationStatistics>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "trackerParticipation"))
+        if ((getAnalyzerParticipationMethod = ParticipationAnalizerGrpc.getAnalyzerParticipationMethod) == null) {
+          ParticipationAnalizerGrpc.getAnalyzerParticipationMethod = getAnalyzerParticipationMethod =
+              io.grpc.MethodDescriptor.<generated.grpc.analyzer.ParticipationRequest, generated.grpc.analyzer.ParticipationStatistics>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "analyzerParticipation"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  generated.grpc.analyzer.ParticipationEntry.getDefaultInstance()))
+                  generated.grpc.analyzer.ParticipationRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   generated.grpc.analyzer.ParticipationStatistics.getDefaultInstance()))
-              .setSchemaDescriptor(new ParticipationAnalizerMethodDescriptorSupplier("trackerParticipation"))
+              .setSchemaDescriptor(new ParticipationAnalizerMethodDescriptorSupplier("analyzerParticipation"))
               .build();
         }
       }
     }
-    return getTrackerParticipationMethod;
+    return getAnalyzerParticipationMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<generated.grpc.analyzer.CustomFeedbackRequest,
+      generated.grpc.analyzer.CustomFeedbackReply> getSubmitCustomFeedbackMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "submitCustomFeedback",
+      requestType = generated.grpc.analyzer.CustomFeedbackRequest.class,
+      responseType = generated.grpc.analyzer.CustomFeedbackReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<generated.grpc.analyzer.CustomFeedbackRequest,
+      generated.grpc.analyzer.CustomFeedbackReply> getSubmitCustomFeedbackMethod() {
+    io.grpc.MethodDescriptor<generated.grpc.analyzer.CustomFeedbackRequest, generated.grpc.analyzer.CustomFeedbackReply> getSubmitCustomFeedbackMethod;
+    if ((getSubmitCustomFeedbackMethod = ParticipationAnalizerGrpc.getSubmitCustomFeedbackMethod) == null) {
+      synchronized (ParticipationAnalizerGrpc.class) {
+        if ((getSubmitCustomFeedbackMethod = ParticipationAnalizerGrpc.getSubmitCustomFeedbackMethod) == null) {
+          ParticipationAnalizerGrpc.getSubmitCustomFeedbackMethod = getSubmitCustomFeedbackMethod =
+              io.grpc.MethodDescriptor.<generated.grpc.analyzer.CustomFeedbackRequest, generated.grpc.analyzer.CustomFeedbackReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "submitCustomFeedback"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  generated.grpc.analyzer.CustomFeedbackRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  generated.grpc.analyzer.CustomFeedbackReply.getDefaultInstance()))
+              .setSchemaDescriptor(new ParticipationAnalizerMethodDescriptorSupplier("submitCustomFeedback"))
+              .build();
+        }
+      }
+    }
+    return getSubmitCustomFeedbackMethod;
   }
 
   /**
@@ -96,25 +127,37 @@ public final class ParticipationAnalizerGrpc {
 
     /**
      * <pre>
-     *  Client Streaming - The service allow the students to stream multiple participation records in one section.
-     * Client stream multiple participation registrations (one by one) and the server responds once
-     * by sending participation statistics by gender.
+     *  Server streaming
      * </pre>
      */
-    public io.grpc.stub.StreamObserver<generated.grpc.analyzer.ParticipationEntry> trackerParticipation(
+    public void analyzerParticipation(generated.grpc.analyzer.ParticipationRequest request,
         io.grpc.stub.StreamObserver<generated.grpc.analyzer.ParticipationStatistics> responseObserver) {
-      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getTrackerParticipationMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAnalyzerParticipationMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackRequest> submitCustomFeedback(
+        io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackReply> responseObserver) {
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getSubmitCustomFeedbackMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getTrackerParticipationMethod(),
+            getAnalyzerParticipationMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                generated.grpc.analyzer.ParticipationRequest,
+                generated.grpc.analyzer.ParticipationStatistics>(
+                  this, METHODID_ANALYZER_PARTICIPATION)))
+          .addMethod(
+            getSubmitCustomFeedbackMethod(),
             io.grpc.stub.ServerCalls.asyncClientStreamingCall(
               new MethodHandlers<
-                generated.grpc.analyzer.ParticipationEntry,
-                generated.grpc.analyzer.ParticipationStatistics>(
-                  this, METHODID_TRACKER_PARTICIPATION)))
+                generated.grpc.analyzer.CustomFeedbackRequest,
+                generated.grpc.analyzer.CustomFeedbackReply>(
+                  this, METHODID_SUBMIT_CUSTOM_FEEDBACK)))
           .build();
     }
   }
@@ -135,15 +178,21 @@ public final class ParticipationAnalizerGrpc {
 
     /**
      * <pre>
-     *  Client Streaming - The service allow the students to stream multiple participation records in one section.
-     * Client stream multiple participation registrations (one by one) and the server responds once
-     * by sending participation statistics by gender.
+     *  Server streaming
      * </pre>
      */
-    public io.grpc.stub.StreamObserver<generated.grpc.analyzer.ParticipationEntry> trackerParticipation(
+    public void analyzerParticipation(generated.grpc.analyzer.ParticipationRequest request,
         io.grpc.stub.StreamObserver<generated.grpc.analyzer.ParticipationStatistics> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getAnalyzerParticipationMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackRequest> submitCustomFeedback(
+        io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackReply> responseObserver) {
       return io.grpc.stub.ClientCalls.asyncClientStreamingCall(
-          getChannel().newCall(getTrackerParticipationMethod(), getCallOptions()), responseObserver);
+          getChannel().newCall(getSubmitCustomFeedbackMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -159,6 +208,17 @@ public final class ParticipationAnalizerGrpc {
     protected ParticipationAnalizerBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new ParticipationAnalizerBlockingStub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     *  Server streaming
+     * </pre>
+     */
+    public java.util.Iterator<generated.grpc.analyzer.ParticipationStatistics> analyzerParticipation(
+        generated.grpc.analyzer.ParticipationRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getAnalyzerParticipationMethod(), getCallOptions(), request);
     }
   }
 
@@ -177,7 +237,8 @@ public final class ParticipationAnalizerGrpc {
     }
   }
 
-  private static final int METHODID_TRACKER_PARTICIPATION = 0;
+  private static final int METHODID_ANALYZER_PARTICIPATION = 0;
+  private static final int METHODID_SUBMIT_CUSTOM_FEEDBACK = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -196,6 +257,10 @@ public final class ParticipationAnalizerGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_ANALYZER_PARTICIPATION:
+          serviceImpl.analyzerParticipation((generated.grpc.analyzer.ParticipationRequest) request,
+              (io.grpc.stub.StreamObserver<generated.grpc.analyzer.ParticipationStatistics>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -206,9 +271,9 @@ public final class ParticipationAnalizerGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_TRACKER_PARTICIPATION:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.trackerParticipation(
-              (io.grpc.stub.StreamObserver<generated.grpc.analyzer.ParticipationStatistics>) responseObserver);
+        case METHODID_SUBMIT_CUSTOM_FEEDBACK:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.submitCustomFeedback(
+              (io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackReply>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -260,7 +325,8 @@ public final class ParticipationAnalizerGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ParticipationAnalizerFileDescriptorSupplier())
-              .addMethod(getTrackerParticipationMethod())
+              .addMethod(getAnalyzerParticipationMethod())
+              .addMethod(getSubmitCustomFeedbackMethod())
               .build();
         }
       }

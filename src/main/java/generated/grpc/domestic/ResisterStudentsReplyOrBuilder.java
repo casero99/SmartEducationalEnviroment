@@ -3,13 +3,13 @@
 
 package generated.grpc.domestic;
 
-public interface StudentTaskCompletedOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:DomesticActSimulator.StudentTaskCompleted)
+public interface ResisterStudentsReplyOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:DomesticActSimulator.ResisterStudentsReply)
     com.google.protobuf.MessageOrBuilder {
 
   /**
    * <pre>
-   * Confirmation message
+   * Confirmation message (ex. 5 students registered)
    * </pre>
    *
    * <code>string message = 1;</code>
@@ -18,7 +18,7 @@ public interface StudentTaskCompletedOrBuilder extends
   java.lang.String getMessage();
   /**
    * <pre>
-   * Confirmation message
+   * Confirmation message (ex. 5 students registered)
    * </pre>
    *
    * <code>string message = 1;</code>
@@ -26,14 +26,4 @@ public interface StudentTaskCompletedOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMessageBytes();
-
-  /**
-   * <pre>
-   * Time registered
-   * </pre>
-   *
-   * <code>double taskTime = 2;</code>
-   * @return The taskTime.
-   */
-  double getTaskTime();
 }

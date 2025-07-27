@@ -5,30 +5,29 @@ package generated.grpc.feedback;
 
 /**
  * <pre>
- * Server-Streaming
- *  message server asks for feedback
+ * feedback of students
  * </pre>
  *
- * Protobuf type {@code GenderAFeedback.ClassRequest}
+ * Protobuf type {@code GenderAFeedback.TaskFeedbackSummary}
  */
-public final class ClassRequest extends
+public final class TaskFeedbackSummary extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:GenderAFeedback.ClassRequest)
-    ClassRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:GenderAFeedback.TaskFeedbackSummary)
+    TaskFeedbackSummaryOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use ClassRequest.newBuilder() to construct.
-  private ClassRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use TaskFeedbackSummary.newBuilder() to construct.
+  private TaskFeedbackSummary(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private ClassRequest() {
-    className_ = "";
+  private TaskFeedbackSummary() {
+    summary_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new ClassRequest();
+    return new TaskFeedbackSummary();
   }
 
   @java.lang.Override
@@ -36,7 +35,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private ClassRequest(
+  private TaskFeedbackSummary(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -57,7 +56,7 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            className_ = s;
+            summary_ = s;
             break;
           }
           default: {
@@ -83,57 +82,57 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassRequest_descriptor;
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedbackSummary_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassRequest_fieldAccessorTable
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedbackSummary_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            generated.grpc.feedback.ClassRequest.class, generated.grpc.feedback.ClassRequest.Builder.class);
+            generated.grpc.feedback.TaskFeedbackSummary.class, generated.grpc.feedback.TaskFeedbackSummary.Builder.class);
   }
 
-  public static final int CLASSNAME_FIELD_NUMBER = 1;
-  private volatile java.lang.Object className_;
+  public static final int SUMMARY_FIELD_NUMBER = 1;
+  private volatile java.lang.Object summary_;
   /**
    * <pre>
-   * Name of the class
+   * Overall feedback of students performance
    * </pre>
    *
-   * <code>string className = 1;</code>
-   * @return The className.
+   * <code>string summary = 1;</code>
+   * @return The summary.
    */
   @java.lang.Override
-  public java.lang.String getClassName() {
-    java.lang.Object ref = className_;
+  public java.lang.String getSummary() {
+    java.lang.Object ref = summary_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      className_ = s;
+      summary_ = s;
       return s;
     }
   }
   /**
    * <pre>
-   * Name of the class
+   * Overall feedback of students performance
    * </pre>
    *
-   * <code>string className = 1;</code>
-   * @return The bytes for className.
+   * <code>string summary = 1;</code>
+   * @return The bytes for summary.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getClassNameBytes() {
-    java.lang.Object ref = className_;
+      getSummaryBytes() {
+    java.lang.Object ref = summary_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      className_ = b;
+      summary_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -154,8 +153,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(className_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, className_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(summary_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, summary_);
     }
     unknownFields.writeTo(output);
   }
@@ -166,8 +165,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(className_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, className_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(summary_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, summary_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -179,13 +178,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof generated.grpc.feedback.ClassRequest)) {
+    if (!(obj instanceof generated.grpc.feedback.TaskFeedbackSummary)) {
       return super.equals(obj);
     }
-    generated.grpc.feedback.ClassRequest other = (generated.grpc.feedback.ClassRequest) obj;
+    generated.grpc.feedback.TaskFeedbackSummary other = (generated.grpc.feedback.TaskFeedbackSummary) obj;
 
-    if (!getClassName()
-        .equals(other.getClassName())) return false;
+    if (!getSummary()
+        .equals(other.getSummary())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -197,76 +196,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + CLASSNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getClassName().hashCode();
+    hash = (37 * hash) + SUMMARY_FIELD_NUMBER;
+    hash = (53 * hash) + getSummary().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(byte[] data)
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(java.io.InputStream input)
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassRequest parseDelimitedFrom(java.io.InputStream input)
+  public static generated.grpc.feedback.TaskFeedbackSummary parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static generated.grpc.feedback.ClassRequest parseDelimitedFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static generated.grpc.feedback.ClassRequest parseFrom(
+  public static generated.grpc.feedback.TaskFeedbackSummary parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -279,7 +278,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(generated.grpc.feedback.ClassRequest prototype) {
+  public static Builder newBuilder(generated.grpc.feedback.TaskFeedbackSummary prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -296,30 +295,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Server-Streaming
-   *  message server asks for feedback
+   * feedback of students
    * </pre>
    *
-   * Protobuf type {@code GenderAFeedback.ClassRequest}
+   * Protobuf type {@code GenderAFeedback.TaskFeedbackSummary}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:GenderAFeedback.ClassRequest)
-      generated.grpc.feedback.ClassRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:GenderAFeedback.TaskFeedbackSummary)
+      generated.grpc.feedback.TaskFeedbackSummaryOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassRequest_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedbackSummary_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassRequest_fieldAccessorTable
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedbackSummary_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              generated.grpc.feedback.ClassRequest.class, generated.grpc.feedback.ClassRequest.Builder.class);
+              generated.grpc.feedback.TaskFeedbackSummary.class, generated.grpc.feedback.TaskFeedbackSummary.Builder.class);
     }
 
-    // Construct using generated.grpc.feedback.ClassRequest.newBuilder()
+    // Construct using generated.grpc.feedback.TaskFeedbackSummary.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -337,7 +335,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      className_ = "";
+      summary_ = "";
 
       return this;
     }
@@ -345,17 +343,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassRequest_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedbackSummary_descriptor;
     }
 
     @java.lang.Override
-    public generated.grpc.feedback.ClassRequest getDefaultInstanceForType() {
-      return generated.grpc.feedback.ClassRequest.getDefaultInstance();
+    public generated.grpc.feedback.TaskFeedbackSummary getDefaultInstanceForType() {
+      return generated.grpc.feedback.TaskFeedbackSummary.getDefaultInstance();
     }
 
     @java.lang.Override
-    public generated.grpc.feedback.ClassRequest build() {
-      generated.grpc.feedback.ClassRequest result = buildPartial();
+    public generated.grpc.feedback.TaskFeedbackSummary build() {
+      generated.grpc.feedback.TaskFeedbackSummary result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -363,9 +361,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public generated.grpc.feedback.ClassRequest buildPartial() {
-      generated.grpc.feedback.ClassRequest result = new generated.grpc.feedback.ClassRequest(this);
-      result.className_ = className_;
+    public generated.grpc.feedback.TaskFeedbackSummary buildPartial() {
+      generated.grpc.feedback.TaskFeedbackSummary result = new generated.grpc.feedback.TaskFeedbackSummary(this);
+      result.summary_ = summary_;
       onBuilt();
       return result;
     }
@@ -404,18 +402,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof generated.grpc.feedback.ClassRequest) {
-        return mergeFrom((generated.grpc.feedback.ClassRequest)other);
+      if (other instanceof generated.grpc.feedback.TaskFeedbackSummary) {
+        return mergeFrom((generated.grpc.feedback.TaskFeedbackSummary)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(generated.grpc.feedback.ClassRequest other) {
-      if (other == generated.grpc.feedback.ClassRequest.getDefaultInstance()) return this;
-      if (!other.getClassName().isEmpty()) {
-        className_ = other.className_;
+    public Builder mergeFrom(generated.grpc.feedback.TaskFeedbackSummary other) {
+      if (other == generated.grpc.feedback.TaskFeedbackSummary.getDefaultInstance()) return this;
+      if (!other.getSummary().isEmpty()) {
+        summary_ = other.summary_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -433,11 +431,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      generated.grpc.feedback.ClassRequest parsedMessage = null;
+      generated.grpc.feedback.TaskFeedbackSummary parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (generated.grpc.feedback.ClassRequest) e.getUnfinishedMessage();
+        parsedMessage = (generated.grpc.feedback.TaskFeedbackSummary) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -447,22 +445,22 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object className_ = "";
+    private java.lang.Object summary_ = "";
     /**
      * <pre>
-     * Name of the class
+     * Overall feedback of students performance
      * </pre>
      *
-     * <code>string className = 1;</code>
-     * @return The className.
+     * <code>string summary = 1;</code>
+     * @return The summary.
      */
-    public java.lang.String getClassName() {
-      java.lang.Object ref = className_;
+    public java.lang.String getSummary() {
+      java.lang.Object ref = summary_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        className_ = s;
+        summary_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -470,20 +468,20 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Name of the class
+     * Overall feedback of students performance
      * </pre>
      *
-     * <code>string className = 1;</code>
-     * @return The bytes for className.
+     * <code>string summary = 1;</code>
+     * @return The bytes for summary.
      */
     public com.google.protobuf.ByteString
-        getClassNameBytes() {
-      java.lang.Object ref = className_;
+        getSummaryBytes() {
+      java.lang.Object ref = summary_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        className_ = b;
+        summary_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -491,54 +489,54 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Name of the class
+     * Overall feedback of students performance
      * </pre>
      *
-     * <code>string className = 1;</code>
-     * @param value The className to set.
+     * <code>string summary = 1;</code>
+     * @param value The summary to set.
      * @return This builder for chaining.
      */
-    public Builder setClassName(
+    public Builder setSummary(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      className_ = value;
+      summary_ = value;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Name of the class
+     * Overall feedback of students performance
      * </pre>
      *
-     * <code>string className = 1;</code>
+     * <code>string summary = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearClassName() {
+    public Builder clearSummary() {
       
-      className_ = getDefaultInstance().getClassName();
+      summary_ = getDefaultInstance().getSummary();
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Name of the class
+     * Overall feedback of students performance
      * </pre>
      *
-     * <code>string className = 1;</code>
-     * @param value The bytes for className to set.
+     * <code>string summary = 1;</code>
+     * @param value The bytes for summary to set.
      * @return This builder for chaining.
      */
-    public Builder setClassNameBytes(
+    public Builder setSummaryBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      className_ = value;
+      summary_ = value;
       onChanged();
       return this;
     }
@@ -555,41 +553,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:GenderAFeedback.ClassRequest)
+    // @@protoc_insertion_point(builder_scope:GenderAFeedback.TaskFeedbackSummary)
   }
 
-  // @@protoc_insertion_point(class_scope:GenderAFeedback.ClassRequest)
-  private static final generated.grpc.feedback.ClassRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:GenderAFeedback.TaskFeedbackSummary)
+  private static final generated.grpc.feedback.TaskFeedbackSummary DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new generated.grpc.feedback.ClassRequest();
+    DEFAULT_INSTANCE = new generated.grpc.feedback.TaskFeedbackSummary();
   }
 
-  public static generated.grpc.feedback.ClassRequest getDefaultInstance() {
+  public static generated.grpc.feedback.TaskFeedbackSummary getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<ClassRequest>
-      PARSER = new com.google.protobuf.AbstractParser<ClassRequest>() {
+  private static final com.google.protobuf.Parser<TaskFeedbackSummary>
+      PARSER = new com.google.protobuf.AbstractParser<TaskFeedbackSummary>() {
     @java.lang.Override
-    public ClassRequest parsePartialFrom(
+    public TaskFeedbackSummary parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new ClassRequest(input, extensionRegistry);
+      return new TaskFeedbackSummary(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<ClassRequest> parser() {
+  public static com.google.protobuf.Parser<TaskFeedbackSummary> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<ClassRequest> getParserForType() {
+  public com.google.protobuf.Parser<TaskFeedbackSummary> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public generated.grpc.feedback.ClassRequest getDefaultInstanceForType() {
+  public generated.grpc.feedback.TaskFeedbackSummary getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -3,13 +3,13 @@
 
 package generated.grpc.feedback;
 
-public interface StudentEventOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:GenderAFeedback.StudentEvent)
+public interface StudentTaskOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:GenderAFeedback.StudentTask)
     com.google.protobuf.MessageOrBuilder {
 
   /**
    * <pre>
-   * Name of student
+   * Student name
    * </pre>
    *
    * <code>string studentName = 1;</code>
@@ -18,7 +18,7 @@ public interface StudentEventOrBuilder extends
   java.lang.String getStudentName();
   /**
    * <pre>
-   * Name of student
+   * Student name
    * </pre>
    *
    * <code>string studentName = 1;</code>
@@ -29,31 +29,31 @@ public interface StudentEventOrBuilder extends
 
   /**
    * <pre>
-   * Name of task done
+   * Task to be done by student
    * </pre>
    *
-   * <code>string taskName = 2;</code>
-   * @return The taskName.
+   * <code>string studentTask = 2;</code>
+   * @return The studentTask.
    */
-  java.lang.String getTaskName();
+  java.lang.String getStudentTask();
   /**
    * <pre>
-   * Name of task done
+   * Task to be done by student
    * </pre>
    *
-   * <code>string taskName = 2;</code>
-   * @return The bytes for taskName.
+   * <code>string studentTask = 2;</code>
+   * @return The bytes for studentTask.
    */
   com.google.protobuf.ByteString
-      getTaskNameBytes();
+      getStudentTaskBytes();
 
   /**
    * <pre>
-   * Time spend doing the task
+   * Task duration in seconds
    * </pre>
    *
-   * <code>double taskDuration = 3;</code>
+   * <code>int32 taskDuration = 3;</code>
    * @return The taskDuration.
    */
-  double getTaskDuration();
+  int getTaskDuration();
 }

@@ -3,8 +3,8 @@
 
 package generated.grpc.feedback;
 
-public final class GenderAFeedbackImpl extends GenderAFeedbackGrpc.GenderAFeedbackImplBase{
-  public GenderAFeedbackImpl() {}
+public final class GenderAFeedbackImpl {
+  private GenderAFeedbackImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -15,25 +15,20 @@ public final class GenderAFeedbackImpl extends GenderAFeedbackGrpc.GenderAFeedba
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GenderAFeedback_ClassRequest_descriptor;
+    internal_static_GenderAFeedback_StudentTask_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GenderAFeedback_ClassRequest_fieldAccessorTable;
+      internal_static_GenderAFeedback_StudentTask_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GenderAFeedback_ClassInsight_descriptor;
+    internal_static_GenderAFeedback_TaskFeedbackSummary_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable;
+      internal_static_GenderAFeedback_TaskFeedbackSummary_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GenderAFeedback_StudentEvent_descriptor;
+    internal_static_GenderAFeedback_TaskFeedback_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GenderAFeedback_StudentEvent_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GenderAFeedback_FeedbackResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GenderAFeedback_FeedbackResponse_fieldAccessorTable;
+      internal_static_GenderAFeedback_TaskFeedback_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -44,47 +39,40 @@ public final class GenderAFeedbackImpl extends GenderAFeedbackGrpc.GenderAFeedba
   static {
     java.lang.String[] descriptorData = {
       "\n\025GenderAFeedback.proto\022\017GenderAFeedback" +
-      "\"!\n\014ClassRequest\022\021\n\tclassName\030\001 \001(\t\"\037\n\014C" +
-      "lassInsight\022\017\n\007message\030\001 \001(\t\"K\n\014StudentE" +
-      "vent\022\023\n\013studentName\030\001 \001(\t\022\020\n\010taskName\030\002 " +
-      "\001(\t\022\024\n\014taskDuration\030\003 \001(\001\"$\n\020FeedbackRes" +
-      "ponse\022\020\n\010feedback\030\001 \001(\t2\306\001\n\017GenderAFeedb" +
-      "ack\022S\n\017getClassInsight\022\035.GenderAFeedback" +
-      ".ClassRequest\032\035.GenderAFeedback.ClassIns" +
-      "ight\"\0000\001\022^\n\024liveFeedbackExchange\022\035.Gende" +
-      "rAFeedback.StudentEvent\032!.GenderAFeedbac" +
-      "k.FeedbackResponse\"\000(\0010\001B0\n\027generated.gr" +
-      "pc.feedbackB\023GenderAFeedbackImplP\001b\006prot" +
-      "o3"
+      "\"M\n\013StudentTask\022\023\n\013studentName\030\001 \001(\t\022\023\n\013" +
+      "studentTask\030\002 \001(\t\022\024\n\014taskDuration\030\003 \001(\005\"" +
+      "&\n\023TaskFeedbackSummary\022\017\n\007summary\030\001 \001(\t\"" +
+      "5\n\014TaskFeedback\022\023\n\013studentName\030\001 \001(\t\022\020\n\010" +
+      "feedback\030\002 \001(\t2\303\001\n\017GenderAFeedback\022Y\n\017ta" +
+      "skPerformance\022\034.GenderAFeedback.StudentT" +
+      "ask\032$.GenderAFeedback.TaskFeedbackSummar" +
+      "y\"\0000\001\022U\n\020liveTaskFeedback\022\034.GenderAFeedb" +
+      "ack.StudentTask\032\035.GenderAFeedback.TaskFe" +
+      "edback\"\000(\0010\001B0\n\027generated.grpc.feedbackB" +
+      "\023GenderAFeedbackImplP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_GenderAFeedback_ClassRequest_descriptor =
+    internal_static_GenderAFeedback_StudentTask_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_GenderAFeedback_ClassRequest_fieldAccessorTable = new
+    internal_static_GenderAFeedback_StudentTask_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GenderAFeedback_ClassRequest_descriptor,
-        new java.lang.String[] { "ClassName", });
-    internal_static_GenderAFeedback_ClassInsight_descriptor =
+        internal_static_GenderAFeedback_StudentTask_descriptor,
+        new java.lang.String[] { "StudentName", "StudentTask", "TaskDuration", });
+    internal_static_GenderAFeedback_TaskFeedbackSummary_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable = new
+    internal_static_GenderAFeedback_TaskFeedbackSummary_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GenderAFeedback_ClassInsight_descriptor,
-        new java.lang.String[] { "Message", });
-    internal_static_GenderAFeedback_StudentEvent_descriptor =
+        internal_static_GenderAFeedback_TaskFeedbackSummary_descriptor,
+        new java.lang.String[] { "Summary", });
+    internal_static_GenderAFeedback_TaskFeedback_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_GenderAFeedback_StudentEvent_fieldAccessorTable = new
+    internal_static_GenderAFeedback_TaskFeedback_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GenderAFeedback_StudentEvent_descriptor,
-        new java.lang.String[] { "StudentName", "TaskName", "TaskDuration", });
-    internal_static_GenderAFeedback_FeedbackResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_GenderAFeedback_FeedbackResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GenderAFeedback_FeedbackResponse_descriptor,
-        new java.lang.String[] { "Feedback", });
+        internal_static_GenderAFeedback_TaskFeedback_descriptor,
+        new java.lang.String[] { "StudentName", "Feedback", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

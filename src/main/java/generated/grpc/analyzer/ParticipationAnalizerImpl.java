@@ -3,8 +3,8 @@
 
 package generated.grpc.analyzer;
 
-public final class ParticipationAnalizerImpl extends ParticipationAnalizerGrpc.ParticipationAnalizerImplBase{
-  public ParticipationAnalizerImpl() {}
+public final class ParticipationAnalizerImpl {
+  private ParticipationAnalizerImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -15,15 +15,30 @@ public final class ParticipationAnalizerImpl extends ParticipationAnalizerGrpc.P
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ParticipationAnalizer_ParticipationEntry_descriptor;
+    internal_static_ParticipationAnalizer_Student_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ParticipationAnalizer_ParticipationEntry_fieldAccessorTable;
+      internal_static_ParticipationAnalizer_Student_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ParticipationAnalizer_ParticipationRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ParticipationAnalizer_ParticipationRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ParticipationAnalizer_ParticipationStatistics_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ParticipationAnalizer_CustomFeedbackRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ParticipationAnalizer_CustomFeedbackRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ParticipationAnalizer_CustomFeedbackReply_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ParticipationAnalizer_CustomFeedbackReply_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -34,34 +49,59 @@ public final class ParticipationAnalizerImpl extends ParticipationAnalizerGrpc.P
   static {
     java.lang.String[] descriptorData = {
       "\n\033ParticipationAnalizer.proto\022\025Participa" +
-      "tionAnalizer\"t\n\022ParticipationEntry\022\023\n\013st" +
-      "udentName\030\001 \001(\t\022\016\n\006gender\030\002 \001(\t\022\020\n\010taskN" +
-      "ame\030\003 \001(\t\022\024\n\014taskDuration\030\004 \001(\001\022\021\n\tsessi" +
-      "onID\030\005 \001(\005\"\\\n\027ParticipationStatistics\022\026\n" +
-      "\016malePercentage\030\001 \001(\002\022\030\n\020femalePercentag" +
-      "e\030\002 \001(\002\022\017\n\007summary\030\003 \001(\t2\216\001\n\025Participati" +
-      "onAnalizer\022u\n\024trackerParticipation\022).Par" +
-      "ticipationAnalizer.ParticipationEntry\032.." +
-      "ParticipationAnalizer.ParticipationStati" +
-      "stics\"\000(\001B6\n\027generated.grpc.analyzerB\031Pa" +
-      "rticipationAnalizerImplP\001b\006proto3"
+      "tionAnalizer\"T\n\007Student\022\023\n\013studentName\030\001" +
+      " \001(\t\022\022\n\nstudentAge\030\002 \001(\005\022\016\n\006gender\030\003 \001(\t" +
+      "\022\020\n\010taskName\030\004 \001(\t\"H\n\024ParticipationReque" +
+      "st\0220\n\010students\030\001 \003(\0132\036.ParticipationAnal" +
+      "izer.Student\"\\\n\027ParticipationStatistics\022" +
+      "\026\n\016malePercentage\030\001 \001(\002\022\030\n\020femalePercent" +
+      "age\030\002 \001(\002\022\017\n\007summary\030\003 \001(\t\">\n\025CustomFeed" +
+      "backRequest\022\023\n\013studentName\030\001 \001(\t\022\020\n\010feed" +
+      "back\030\002 \001(\t\"&\n\023CustomFeedbackReply\022\017\n\007mes" +
+      "sage\030\001 \001(\t2\207\002\n\025ParticipationAnalizer\022x\n\025" +
+      "analyzerParticipation\022+.ParticipationAna" +
+      "lizer.ParticipationRequest\032..Participati" +
+      "onAnalizer.ParticipationStatistics\"\0000\001\022t" +
+      "\n\024submitCustomFeedback\022,.ParticipationAn" +
+      "alizer.CustomFeedbackRequest\032*.Participa" +
+      "tionAnalizer.CustomFeedbackReply\"\000(\001B6\n\027" +
+      "generated.grpc.analyzerB\031ParticipationAn" +
+      "alizerImplP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_ParticipationAnalizer_ParticipationEntry_descriptor =
+    internal_static_ParticipationAnalizer_Student_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_ParticipationAnalizer_ParticipationEntry_fieldAccessorTable = new
+    internal_static_ParticipationAnalizer_Student_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ParticipationAnalizer_ParticipationEntry_descriptor,
-        new java.lang.String[] { "StudentName", "Gender", "TaskName", "TaskDuration", "SessionID", });
-    internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor =
+        internal_static_ParticipationAnalizer_Student_descriptor,
+        new java.lang.String[] { "StudentName", "StudentAge", "Gender", "TaskName", });
+    internal_static_ParticipationAnalizer_ParticipationRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_ParticipationAnalizer_ParticipationRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ParticipationAnalizer_ParticipationRequest_descriptor,
+        new java.lang.String[] { "Students", });
+    internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_ParticipationAnalizer_ParticipationStatistics_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ParticipationAnalizer_ParticipationStatistics_descriptor,
         new java.lang.String[] { "MalePercentage", "FemalePercentage", "Summary", });
+    internal_static_ParticipationAnalizer_CustomFeedbackRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_ParticipationAnalizer_CustomFeedbackRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ParticipationAnalizer_CustomFeedbackRequest_descriptor,
+        new java.lang.String[] { "StudentName", "Feedback", });
+    internal_static_ParticipationAnalizer_CustomFeedbackReply_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_ParticipationAnalizer_CustomFeedbackReply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ParticipationAnalizer_CustomFeedbackReply_descriptor,
+        new java.lang.String[] { "Message", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

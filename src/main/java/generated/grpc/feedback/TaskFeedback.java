@@ -5,29 +5,30 @@ package generated.grpc.feedback;
 
 /**
  * <pre>
- * The response message containing answer from the server
+ *  class feedback
  * </pre>
  *
- * Protobuf type {@code GenderAFeedback.ClassInsight}
+ * Protobuf type {@code GenderAFeedback.TaskFeedback}
  */
-public final class ClassInsight extends
+public final class TaskFeedback extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:GenderAFeedback.ClassInsight)
-    ClassInsightOrBuilder {
+    // @@protoc_insertion_point(message_implements:GenderAFeedback.TaskFeedback)
+    TaskFeedbackOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use ClassInsight.newBuilder() to construct.
-  private ClassInsight(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use TaskFeedback.newBuilder() to construct.
+  private TaskFeedback(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private ClassInsight() {
-    message_ = "";
+  private TaskFeedback() {
+    studentName_ = "";
+    feedback_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new ClassInsight();
+    return new TaskFeedback();
   }
 
   @java.lang.Override
@@ -35,7 +36,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private ClassInsight(
+  private TaskFeedback(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -56,7 +57,13 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            message_ = s;
+            studentName_ = s;
+            break;
+          }
+          case 18: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            feedback_ = s;
             break;
           }
           default: {
@@ -82,57 +89,103 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_descriptor;
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedback_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable
+    return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedback_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            generated.grpc.feedback.ClassInsight.class, generated.grpc.feedback.ClassInsight.Builder.class);
+            generated.grpc.feedback.TaskFeedback.class, generated.grpc.feedback.TaskFeedback.Builder.class);
   }
 
-  public static final int MESSAGE_FIELD_NUMBER = 1;
-  private volatile java.lang.Object message_;
+  public static final int STUDENTNAME_FIELD_NUMBER = 1;
+  private volatile java.lang.Object studentName_;
   /**
    * <pre>
-   * Comment, idea or suggestion
+   *student name
    * </pre>
    *
-   * <code>string message = 1;</code>
-   * @return The message.
+   * <code>string studentName = 1;</code>
+   * @return The studentName.
    */
   @java.lang.Override
-  public java.lang.String getMessage() {
-    java.lang.Object ref = message_;
+  public java.lang.String getStudentName() {
+    java.lang.Object ref = studentName_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      message_ = s;
+      studentName_ = s;
       return s;
     }
   }
   /**
    * <pre>
-   * Comment, idea or suggestion
+   *student name
    * </pre>
    *
-   * <code>string message = 1;</code>
-   * @return The bytes for message.
+   * <code>string studentName = 1;</code>
+   * @return The bytes for studentName.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getMessageBytes() {
-    java.lang.Object ref = message_;
+      getStudentNameBytes() {
+    java.lang.Object ref = studentName_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      message_ = b;
+      studentName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int FEEDBACK_FIELD_NUMBER = 2;
+  private volatile java.lang.Object feedback_;
+  /**
+   * <pre>
+   *student feedback
+   * </pre>
+   *
+   * <code>string feedback = 2;</code>
+   * @return The feedback.
+   */
+  @java.lang.Override
+  public java.lang.String getFeedback() {
+    java.lang.Object ref = feedback_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      feedback_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *student feedback
+   * </pre>
+   *
+   * <code>string feedback = 2;</code>
+   * @return The bytes for feedback.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getFeedbackBytes() {
+    java.lang.Object ref = feedback_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      feedback_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -153,8 +206,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(studentName_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, studentName_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(feedback_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, feedback_);
     }
     unknownFields.writeTo(output);
   }
@@ -165,8 +221,11 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(studentName_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, studentName_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(feedback_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, feedback_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -178,13 +237,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof generated.grpc.feedback.ClassInsight)) {
+    if (!(obj instanceof generated.grpc.feedback.TaskFeedback)) {
       return super.equals(obj);
     }
-    generated.grpc.feedback.ClassInsight other = (generated.grpc.feedback.ClassInsight) obj;
+    generated.grpc.feedback.TaskFeedback other = (generated.grpc.feedback.TaskFeedback) obj;
 
-    if (!getMessage()
-        .equals(other.getMessage())) return false;
+    if (!getStudentName()
+        .equals(other.getStudentName())) return false;
+    if (!getFeedback()
+        .equals(other.getFeedback())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -196,76 +257,78 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-    hash = (53 * hash) + getMessage().hashCode();
+    hash = (37 * hash) + STUDENTNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getStudentName().hashCode();
+    hash = (37 * hash) + FEEDBACK_FIELD_NUMBER;
+    hash = (53 * hash) + getFeedback().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(byte[] data)
+  public static generated.grpc.feedback.TaskFeedback parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(java.io.InputStream input)
+  public static generated.grpc.feedback.TaskFeedback parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassInsight parseDelimitedFrom(java.io.InputStream input)
+  public static generated.grpc.feedback.TaskFeedback parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static generated.grpc.feedback.ClassInsight parseDelimitedFrom(
+  public static generated.grpc.feedback.TaskFeedback parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static generated.grpc.feedback.ClassInsight parseFrom(
+  public static generated.grpc.feedback.TaskFeedback parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -278,7 +341,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(generated.grpc.feedback.ClassInsight prototype) {
+  public static Builder newBuilder(generated.grpc.feedback.TaskFeedback prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -295,29 +358,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The response message containing answer from the server
+   *  class feedback
    * </pre>
    *
-   * Protobuf type {@code GenderAFeedback.ClassInsight}
+   * Protobuf type {@code GenderAFeedback.TaskFeedback}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:GenderAFeedback.ClassInsight)
-      generated.grpc.feedback.ClassInsightOrBuilder {
+      // @@protoc_insertion_point(builder_implements:GenderAFeedback.TaskFeedback)
+      generated.grpc.feedback.TaskFeedbackOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedback_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_fieldAccessorTable
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedback_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              generated.grpc.feedback.ClassInsight.class, generated.grpc.feedback.ClassInsight.Builder.class);
+              generated.grpc.feedback.TaskFeedback.class, generated.grpc.feedback.TaskFeedback.Builder.class);
     }
 
-    // Construct using generated.grpc.feedback.ClassInsight.newBuilder()
+    // Construct using generated.grpc.feedback.TaskFeedback.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -335,7 +398,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      message_ = "";
+      studentName_ = "";
+
+      feedback_ = "";
 
       return this;
     }
@@ -343,17 +408,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_ClassInsight_descriptor;
+      return generated.grpc.feedback.GenderAFeedbackImpl.internal_static_GenderAFeedback_TaskFeedback_descriptor;
     }
 
     @java.lang.Override
-    public generated.grpc.feedback.ClassInsight getDefaultInstanceForType() {
-      return generated.grpc.feedback.ClassInsight.getDefaultInstance();
+    public generated.grpc.feedback.TaskFeedback getDefaultInstanceForType() {
+      return generated.grpc.feedback.TaskFeedback.getDefaultInstance();
     }
 
     @java.lang.Override
-    public generated.grpc.feedback.ClassInsight build() {
-      generated.grpc.feedback.ClassInsight result = buildPartial();
+    public generated.grpc.feedback.TaskFeedback build() {
+      generated.grpc.feedback.TaskFeedback result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -361,9 +426,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public generated.grpc.feedback.ClassInsight buildPartial() {
-      generated.grpc.feedback.ClassInsight result = new generated.grpc.feedback.ClassInsight(this);
-      result.message_ = message_;
+    public generated.grpc.feedback.TaskFeedback buildPartial() {
+      generated.grpc.feedback.TaskFeedback result = new generated.grpc.feedback.TaskFeedback(this);
+      result.studentName_ = studentName_;
+      result.feedback_ = feedback_;
       onBuilt();
       return result;
     }
@@ -402,18 +468,22 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof generated.grpc.feedback.ClassInsight) {
-        return mergeFrom((generated.grpc.feedback.ClassInsight)other);
+      if (other instanceof generated.grpc.feedback.TaskFeedback) {
+        return mergeFrom((generated.grpc.feedback.TaskFeedback)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(generated.grpc.feedback.ClassInsight other) {
-      if (other == generated.grpc.feedback.ClassInsight.getDefaultInstance()) return this;
-      if (!other.getMessage().isEmpty()) {
-        message_ = other.message_;
+    public Builder mergeFrom(generated.grpc.feedback.TaskFeedback other) {
+      if (other == generated.grpc.feedback.TaskFeedback.getDefaultInstance()) return this;
+      if (!other.getStudentName().isEmpty()) {
+        studentName_ = other.studentName_;
+        onChanged();
+      }
+      if (!other.getFeedback().isEmpty()) {
+        feedback_ = other.feedback_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -431,11 +501,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      generated.grpc.feedback.ClassInsight parsedMessage = null;
+      generated.grpc.feedback.TaskFeedback parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (generated.grpc.feedback.ClassInsight) e.getUnfinishedMessage();
+        parsedMessage = (generated.grpc.feedback.TaskFeedback) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -445,22 +515,22 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object message_ = "";
+    private java.lang.Object studentName_ = "";
     /**
      * <pre>
-     * Comment, idea or suggestion
+     *student name
      * </pre>
      *
-     * <code>string message = 1;</code>
-     * @return The message.
+     * <code>string studentName = 1;</code>
+     * @return The studentName.
      */
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
+    public java.lang.String getStudentName() {
+      java.lang.Object ref = studentName_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        message_ = s;
+        studentName_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -468,20 +538,20 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Comment, idea or suggestion
+     *student name
      * </pre>
      *
-     * <code>string message = 1;</code>
-     * @return The bytes for message.
+     * <code>string studentName = 1;</code>
+     * @return The bytes for studentName.
      */
     public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
+        getStudentNameBytes() {
+      java.lang.Object ref = studentName_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        message_ = b;
+        studentName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -489,54 +559,150 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Comment, idea or suggestion
+     *student name
      * </pre>
      *
-     * <code>string message = 1;</code>
-     * @param value The message to set.
+     * <code>string studentName = 1;</code>
+     * @param value The studentName to set.
      * @return This builder for chaining.
      */
-    public Builder setMessage(
+    public Builder setStudentName(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      message_ = value;
+      studentName_ = value;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Comment, idea or suggestion
+     *student name
      * </pre>
      *
-     * <code>string message = 1;</code>
+     * <code>string studentName = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearMessage() {
+    public Builder clearStudentName() {
       
-      message_ = getDefaultInstance().getMessage();
+      studentName_ = getDefaultInstance().getStudentName();
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * Comment, idea or suggestion
+     *student name
      * </pre>
      *
-     * <code>string message = 1;</code>
-     * @param value The bytes for message to set.
+     * <code>string studentName = 1;</code>
+     * @param value The bytes for studentName to set.
      * @return This builder for chaining.
      */
-    public Builder setMessageBytes(
+    public Builder setStudentNameBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      message_ = value;
+      studentName_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object feedback_ = "";
+    /**
+     * <pre>
+     *student feedback
+     * </pre>
+     *
+     * <code>string feedback = 2;</code>
+     * @return The feedback.
+     */
+    public java.lang.String getFeedback() {
+      java.lang.Object ref = feedback_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        feedback_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *student feedback
+     * </pre>
+     *
+     * <code>string feedback = 2;</code>
+     * @return The bytes for feedback.
+     */
+    public com.google.protobuf.ByteString
+        getFeedbackBytes() {
+      java.lang.Object ref = feedback_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        feedback_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *student feedback
+     * </pre>
+     *
+     * <code>string feedback = 2;</code>
+     * @param value The feedback to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFeedback(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      feedback_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *student feedback
+     * </pre>
+     *
+     * <code>string feedback = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFeedback() {
+      
+      feedback_ = getDefaultInstance().getFeedback();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *student feedback
+     * </pre>
+     *
+     * <code>string feedback = 2;</code>
+     * @param value The bytes for feedback to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFeedbackBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      feedback_ = value;
       onChanged();
       return this;
     }
@@ -553,41 +719,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:GenderAFeedback.ClassInsight)
+    // @@protoc_insertion_point(builder_scope:GenderAFeedback.TaskFeedback)
   }
 
-  // @@protoc_insertion_point(class_scope:GenderAFeedback.ClassInsight)
-  private static final generated.grpc.feedback.ClassInsight DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:GenderAFeedback.TaskFeedback)
+  private static final generated.grpc.feedback.TaskFeedback DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new generated.grpc.feedback.ClassInsight();
+    DEFAULT_INSTANCE = new generated.grpc.feedback.TaskFeedback();
   }
 
-  public static generated.grpc.feedback.ClassInsight getDefaultInstance() {
+  public static generated.grpc.feedback.TaskFeedback getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<ClassInsight>
-      PARSER = new com.google.protobuf.AbstractParser<ClassInsight>() {
+  private static final com.google.protobuf.Parser<TaskFeedback>
+      PARSER = new com.google.protobuf.AbstractParser<TaskFeedback>() {
     @java.lang.Override
-    public ClassInsight parsePartialFrom(
+    public TaskFeedback parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new ClassInsight(input, extensionRegistry);
+      return new TaskFeedback(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<ClassInsight> parser() {
+  public static com.google.protobuf.Parser<TaskFeedback> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<ClassInsight> getParserForType() {
+  public com.google.protobuf.Parser<TaskFeedback> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public generated.grpc.feedback.ClassInsight getDefaultInstanceForType() {
+  public generated.grpc.feedback.TaskFeedback getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

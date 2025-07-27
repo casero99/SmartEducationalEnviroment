@@ -14,7 +14,7 @@ package DomesticActSimulator;
 service DomesticActSimulator {
 
    //  Unary gRPC - client sends one student task and server confirms completion.
-   rpc RegisterStudents(RegisterStudentsRequest) returns (ResisterStudentsReply){}
+   rpc registerStudents (RegisterStudentsRequest) returns (ResisterStudentsReply){}
   
 }
 
@@ -23,15 +23,15 @@ service DomesticActSimulator {
     //shared student info (3 services)
    message Student {
      string studentName = 1;    // Name of the student
-     int32 studentAge = 2;     // Age of student
-     String gender = 3;   // Male, Female, Other 
+     int32 studentAge = 2;      // Age of student
+     string gender = 3;         // Male, Female, Other 
      string taskName = 4;       // Name of the task to be done (ex.washing dishes, ironing)
      
    }
 
    // The response message form server confirming the completion of the task
    message RegisterStudentsRequest {
-     repeated Student students = 1  //repeat the info on the other services
+     repeated Student students = 1;  //repeat the info on the other services
    }
 
 // The response message form server confirming the student registration
