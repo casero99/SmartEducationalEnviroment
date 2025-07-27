@@ -14,20 +14,15 @@ package ParticipationAnalizer;
 
 service ParticipationAnalizer {
 
-   //  Client Streaming - The service allow the students to stream multiple participation records in one section.
-   // Client stream multiple participation registrations (one by one) and the server responds once
-   // by sending participation statistics by gender.
-   rpc trackerParticipation(stream ParticipationEntry) returns (ParticipationStatistics) {}
+   //  Server streaming
+   rpc analyzerParticipation(ParticipationRequest) returns (Stream ParticipationStatistics) {}
+   rpc SubmitCustomFeedback(Stream CustomFeedbackRequest) returns (CustomFeedbackReply){}
   
 }
 
    //  message of one task entry per student
-   message ParticipationEntry {
-     string studentName = 1;        // Student name
-     string gender = 2;             // Student gender
-     string taskName = 3;           // Name of task
-     double taskDuration = 4;       // Task duration
-     int32 sessionID = 5;          // Class or session ID
+   message ParticipationRequest {
+     repeated Student students = 1;
    }
 
    // Overall participation statistics
@@ -35,6 +30,15 @@ service ParticipationAnalizer {
      float malePercentage = 1;      // Percentage of task done by males
      float femalePercentage = 2;    // Percentage of task done by female
      string summary = 3;            // Summary of percentages of both genders
+   }
+
+    message CustomFeedbackRequest {
+     string studentName = 1;
+     string feedback = 2;
+   }
+
+    message CustomFeedbackReply {
+     string message = 1;            // feedback saved
    }
 
 

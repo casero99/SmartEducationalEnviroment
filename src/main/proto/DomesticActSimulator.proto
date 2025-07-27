@@ -9,26 +9,34 @@ package DomesticActSimulator;
 // The server that you implement must extend the class  <servicename>ImplBase
 
 // DomesticActSimulator allows to simulate and complete common household tasks in a virtual format.
+// This rpc is for the user to enter the number of students in the class and their general information.
 
 service DomesticActSimulator {
 
    //  Unary gRPC - client sends one student task and server confirms completion.
-   rpc startTask(StudentTask) returns (StudentTaskCompleted){}
+   rpc RegisterStudents(RegisterStudentsRequest) returns (ResisterStudentsReply){}
   
 }
 
    //  message that represents the task done by the student.
-   message StudentTask {
+
+    //shared student info (3 services)
+   message Student {
      string studentName = 1;    // Name of the student
      int32 studentAge = 2;     // Age of student
-     string taskName = 3;       // Name of the task to be done (ex.washing dishes, ironing)
-     double taskDuration = 4;   // Time spend doing the task (in minutes)
+     String gender = 3;   // Male, Female, Other 
+     string taskName = 4;       // Name of the task to be done (ex.washing dishes, ironing)
+     
    }
 
    // The response message form server confirming the completion of the task
-   message StudentTaskCompleted {
-     string message = 1;        // Confirmation message
-     double taskTime = 2;       // Time registered
+   message RegisterStudentsRequest {
+     repeated Student students = 1  //repeat the info on the other services
+   }
+
+// The response message form server confirming the student registration
+   message ResisterStudentsReply {
+     string message = 1;        // Confirmation message (ex. 5 students registered)
    }
 
 
