@@ -85,30 +85,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                         .build();
             }
         };
-                
-                }           /*
-        String[] insights = {
-        "The student " + studentName + " is showing gender inbalance in participation.",
-        "Consider rotating household task equally between the students.",
-        "Encourage boys to engage more in care-work related tasks.",
-        "Encourage girls to engage more in care-work related tasks.",
-        "Provide more example demostrations for a better understanding."
-    };
-        for(String message : insights){
-            TaskFeedbackSummary insight = TaskFeedbackSummary.newBuilder().setSummary(message).build();
-            responseObserver.onNext(insight);
-            
-            try{
-                Thread.sleep(500); //pause between messages
-            } catch (InterruptedException e){
-                Thread.currentThread().interrupt();
-            }
-        }
-        responseObserver.onCompleted();
-    }
-                
-                
-    
+        
     */ //Bi-directional RPC
     public StreamObserver<StudentTask> liveTaskFeedback(final StreamObserver<TaskFeedback> responseObserver) {
         return new StreamObserver<StudentTask>() {
