@@ -1,6 +1,8 @@
 
 package distsys.smarteducationalenviroment;
 
+import generated.grpc.analyzer.CustomFeedbackReply;
+import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.domestic.DomesticActSimulatorGrpc;
 import generated.grpc.domestic.RegisterStudentsRequest;
 import generated.grpc.domestic.ResisterStudentsReply;
@@ -21,7 +23,9 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import java.awt.HeadlessException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import javax.swing.JOptionPane;
@@ -56,7 +60,8 @@ public class StudentClient {
                 .forAddress(host, port2)
                 .usePlaintext()
                 .build();
-        runClientStreamingParticipationAnalizer(channel2);
+        runServerStreamingParticipationAnalizer(channel2);
+        runClientStreamingCustomFeedback(channel2);
         channel2.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
         
         //Channel 3. Port 50053 - Server Streaming & Bi-directional Streaming server. Gender A. Feedback
@@ -134,64 +139,89 @@ public class StudentClient {
     }
 
 
-//Service 2. Client Streaming RPC - Participation Analizer
-private static void runClientStreamingParticipationAnalizer(ManagedChannel channel){
+//SERVER 2. Server Streaming RPC - Participation Analizer
+private static void runServerStreamingParticipationAnalizer(ManagedChannel channel){
+    ParticipationAnalizerGrpc.ParticipationAnalizerBlockingStub blockingStub = ParticipationAnalizerGrpc.newBlockingStub(channel);
+    
+    //collecting students for analisis
+    List<generated.grpc.analyzer.Student> students = new ArrayList<>();
+    int number = Integer.parseInt(JOptionPane.showInputDialog("How many students are to analize?"));
+    
+    for(int i = 0; i < number; i++){
+        String name = JOptionPane.showInputDialog("Student name: ");
+        int age = Integer.parseInt(JOptionPane.showInputDialog("Student age: "));
+        String gender = JOptionPane.showInputDialog("Gender (Male/Female/Other): ");
+        String task = JOptionPane.showInputDialog("Task to-do: ");
+        
+        generated.grpc.analyzer.Student student = generated.grpc.analyzer.Student.newBuilder()
+                .setStudentName(name)
+                .setStudentAge(age)
+                .setGender(gender)
+                .setTaskName(task)
+                .build();
+        
+        students.add(student);
+    }
+    
+    //building the request
+    ParticipationRequest request = ParticipationRequest.newBuilder()
+            .addAllStudents(students)
+            .build();
+    
+    //receiving data for ParticipationStatistics
+    Iterator<ParticipationStatistics> pStats = blockingStub.analyzerParticipation(request);
+    StringBuilder feedback = new StringBuilder("Statistics received: \n");
+    
+    pStats.forEachRemaining(percentage ->{
+        feedback.append(" MALE %: ").append(percentage.getMalePercentage())
+                .append(", FEMALE %: ").append(percentage.getFemalePercentage())
+                .append("\n").append(percentage.getSummary()).append("\n");
+    });
+    
+    JOptionPane.showMessageDialog(null, feedback.toString());
+}
+     
+//SERVER 2. Client Streaming RPC - Participation Analizer     
+private static void runClientStreamingCustomFeedback(ManagedChannel channel) throws InterruptedException{
     ParticipationAnalizerGrpc.ParticipationAnalizerStub asyncStub = ParticipationAnalizerGrpc.newStub(channel);
     
-    StreamObserver<ParticipationRequest> requestObserver = asyncStub.analyzerParticipation(new StreamObserver<ParticipationStatistics>(){
+    CountDownLatch latch = new CountDownLatch(1);
+    
+    StreamObserver<CustomFeedbackRequest> requestObserver = asyncStub.submitCustomFeedback(new StreamObserver<CustomFeedbackReply>(){
+        
         @Override
-        public void onNext(ParticipationStatistics statistics){
-            JOptionPane.showMessageDialog(null, "Participation Summary: "
-            + "\n Percentage Male: " + statistics.getMalePercentage()
-            + "\n Percentage Female: " + statistics.getFemalePercentage()
-            + "\n Summary: " + statistics.getSummary());
+        public void onNext(CustomFeedbackReply value){
+            JOptionPane.showMessageDialog(null, "Server response: " +value.getMessage());
         }
         
         @Override
         public void onError(Throwable t){
-            JOptionPane.showMessageDialog(null, "Error: " + t.getMessage());
+            JOptionPane.showMessageDialog(null, "Error sending feedback: " + t.getMessage());
         }
         
         @Override
         public void onCompleted(){
-            JOptionPane.showMessageDialog(null, "Participation analysis completed");
+            JOptionPane.showMessageDialog(null, "Participation analysis completed and submitted");
+            latch.countDown();
         }
     });
     try{
-        int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many students participated?"));
+        int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many feedback submitted?"));
+        
         for(int i =0; i < entryCount; i++){
             String name = JOptionPane.showInputDialog("Student name: ");
+            String feedback = JOptionPane.showInputDialog("Feedback: \n");
             
-            
-            String [] genders = {"Male","Female", "Other"};
-            String gender = (String)JOptionPane.showInputDialog(null,
-                    "Gender Male/Female/Other:  ",
-                    "Household Task",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    genders,
-                    genders[0]);
-            
-            String [] tasks = {"Washing Dishes","Sweeping", "Mooping", "Laundry", "Cooking", "Ironing","Make the bed"};
-            String taskName = (String)JOptionPane.showInputDialog(null,
-                    "Select Task performed: ",
-                    "Household Task",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    tasks,
-                    tasks[0]);
-            String durationString = JOptionPane.showInputDialog("Duration (minutes): ");
-            double taskDuration = Double.parseDouble(durationString);
-            
-            ParticipationEntry entry = ParticipationEntry.newBuilder()
+            CustomFeedbackRequest feedbackMsg = CustomFeedbackRequest.newBuilder()
                     .setStudentName(name)
-                    .setGender(gender)
-                    .setTaskName(taskName)
-                    .setTaskDuration(taskDuration)
-                    .setSessionID(1)
+                    .setFeedback(feedback)
                     .build();
-            requestObserver.onNext(entry);
-        
+            requestObserver.onNext(feedbackMsg);
+
+            
+            requestObserver.onCompleted();
+            latch.await(3, TimeUnit.SECONDS);
+          
         }
         requestObserver.onCompleted();
     }catch (HeadlessException | NumberFormatException e){
