@@ -31,12 +31,16 @@ service GenderAFeedback {
    }
 
    // feedback of students
+   //client streaming
    message TaskFeedbackSummary {
-    string summary = 1;         // Overall feedback of students performance
+   int32 totalTask = 1;    
+   int32 totalTime = 2;
+   string summary = 3;         // Overall feedback of students performance
    }
 
 
     //  class feedback
+    //bidirectional streaming
     message TaskFeedback {
     string studentName = 1;     //student name
     string feedback = 2;        //student feedback

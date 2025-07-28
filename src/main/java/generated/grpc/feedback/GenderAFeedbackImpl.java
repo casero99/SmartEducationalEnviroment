@@ -41,15 +41,16 @@ public final class GenderAFeedbackImpl {
       "\n\025GenderAFeedback.proto\022\017GenderAFeedback" +
       "\"M\n\013StudentTask\022\023\n\013studentName\030\001 \001(\t\022\023\n\013" +
       "studentTask\030\002 \001(\t\022\024\n\014taskDuration\030\003 \001(\005\"" +
-      "&\n\023TaskFeedbackSummary\022\017\n\007summary\030\001 \001(\t\"" +
-      "5\n\014TaskFeedback\022\023\n\013studentName\030\001 \001(\t\022\020\n\010" +
-      "feedback\030\002 \001(\t2\303\001\n\017GenderAFeedback\022Y\n\017ta" +
-      "skPerformance\022\034.GenderAFeedback.StudentT" +
-      "ask\032$.GenderAFeedback.TaskFeedbackSummar" +
-      "y\"\0000\001\022U\n\020liveTaskFeedback\022\034.GenderAFeedb" +
-      "ack.StudentTask\032\035.GenderAFeedback.TaskFe" +
-      "edback\"\000(\0010\001B0\n\027generated.grpc.feedbackB" +
-      "\023GenderAFeedbackImplP\001b\006proto3"
+      "L\n\023TaskFeedbackSummary\022\021\n\ttotalTask\030\001 \001(" +
+      "\005\022\021\n\ttotalTime\030\002 \001(\005\022\017\n\007summary\030\003 \001(\t\"5\n" +
+      "\014TaskFeedback\022\023\n\013studentName\030\001 \001(\t\022\020\n\010fe" +
+      "edback\030\002 \001(\t2\303\001\n\017GenderAFeedback\022Y\n\017task" +
+      "Performance\022\034.GenderAFeedback.StudentTas" +
+      "k\032$.GenderAFeedback.TaskFeedbackSummary\"" +
+      "\0000\001\022U\n\020liveTaskFeedback\022\034.GenderAFeedbac" +
+      "k.StudentTask\032\035.GenderAFeedback.TaskFeed" +
+      "back\"\000(\0010\001B0\n\027generated.grpc.feedbackB\023G" +
+      "enderAFeedbackImplP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -66,7 +67,7 @@ public final class GenderAFeedbackImpl {
     internal_static_GenderAFeedback_TaskFeedbackSummary_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_GenderAFeedback_TaskFeedbackSummary_descriptor,
-        new java.lang.String[] { "Summary", });
+        new java.lang.String[] { "TotalTask", "TotalTime", "Summary", });
     internal_static_GenderAFeedback_TaskFeedback_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_GenderAFeedback_TaskFeedback_fieldAccessorTable = new

@@ -6,6 +6,7 @@ package generated.grpc.feedback;
 /**
  * <pre>
  * feedback of students
+ *client streaming
  * </pre>
  *
  * Protobuf type {@code GenderAFeedback.TaskFeedbackSummary}
@@ -53,7 +54,17 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
+          case 8: {
+
+            totalTask_ = input.readInt32();
+            break;
+          }
+          case 16: {
+
+            totalTime_ = input.readInt32();
+            break;
+          }
+          case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
             summary_ = s;
@@ -93,14 +104,36 @@ private static final long serialVersionUID = 0L;
             generated.grpc.feedback.TaskFeedbackSummary.class, generated.grpc.feedback.TaskFeedbackSummary.Builder.class);
   }
 
-  public static final int SUMMARY_FIELD_NUMBER = 1;
+  public static final int TOTALTASK_FIELD_NUMBER = 1;
+  private int totalTask_;
+  /**
+   * <code>int32 totalTask = 1;</code>
+   * @return The totalTask.
+   */
+  @java.lang.Override
+  public int getTotalTask() {
+    return totalTask_;
+  }
+
+  public static final int TOTALTIME_FIELD_NUMBER = 2;
+  private int totalTime_;
+  /**
+   * <code>int32 totalTime = 2;</code>
+   * @return The totalTime.
+   */
+  @java.lang.Override
+  public int getTotalTime() {
+    return totalTime_;
+  }
+
+  public static final int SUMMARY_FIELD_NUMBER = 3;
   private volatile java.lang.Object summary_;
   /**
    * <pre>
    * Overall feedback of students performance
    * </pre>
    *
-   * <code>string summary = 1;</code>
+   * <code>string summary = 3;</code>
    * @return The summary.
    */
   @java.lang.Override
@@ -121,7 +154,7 @@ private static final long serialVersionUID = 0L;
    * Overall feedback of students performance
    * </pre>
    *
-   * <code>string summary = 1;</code>
+   * <code>string summary = 3;</code>
    * @return The bytes for summary.
    */
   @java.lang.Override
@@ -153,8 +186,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (totalTask_ != 0) {
+      output.writeInt32(1, totalTask_);
+    }
+    if (totalTime_ != 0) {
+      output.writeInt32(2, totalTime_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(summary_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, summary_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, summary_);
     }
     unknownFields.writeTo(output);
   }
@@ -165,8 +204,16 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (totalTask_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, totalTask_);
+    }
+    if (totalTime_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, totalTime_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(summary_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, summary_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, summary_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -183,6 +230,10 @@ private static final long serialVersionUID = 0L;
     }
     generated.grpc.feedback.TaskFeedbackSummary other = (generated.grpc.feedback.TaskFeedbackSummary) obj;
 
+    if (getTotalTask()
+        != other.getTotalTask()) return false;
+    if (getTotalTime()
+        != other.getTotalTime()) return false;
     if (!getSummary()
         .equals(other.getSummary())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
@@ -196,6 +247,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + TOTALTASK_FIELD_NUMBER;
+    hash = (53 * hash) + getTotalTask();
+    hash = (37 * hash) + TOTALTIME_FIELD_NUMBER;
+    hash = (53 * hash) + getTotalTime();
     hash = (37 * hash) + SUMMARY_FIELD_NUMBER;
     hash = (53 * hash) + getSummary().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -296,6 +351,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * feedback of students
+   *client streaming
    * </pre>
    *
    * Protobuf type {@code GenderAFeedback.TaskFeedbackSummary}
@@ -335,6 +391,10 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      totalTask_ = 0;
+
+      totalTime_ = 0;
+
       summary_ = "";
 
       return this;
@@ -363,6 +423,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public generated.grpc.feedback.TaskFeedbackSummary buildPartial() {
       generated.grpc.feedback.TaskFeedbackSummary result = new generated.grpc.feedback.TaskFeedbackSummary(this);
+      result.totalTask_ = totalTask_;
+      result.totalTime_ = totalTime_;
       result.summary_ = summary_;
       onBuilt();
       return result;
@@ -412,6 +474,12 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(generated.grpc.feedback.TaskFeedbackSummary other) {
       if (other == generated.grpc.feedback.TaskFeedbackSummary.getDefaultInstance()) return this;
+      if (other.getTotalTask() != 0) {
+        setTotalTask(other.getTotalTask());
+      }
+      if (other.getTotalTime() != 0) {
+        setTotalTime(other.getTotalTime());
+      }
       if (!other.getSummary().isEmpty()) {
         summary_ = other.summary_;
         onChanged();
@@ -445,13 +513,75 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private int totalTask_ ;
+    /**
+     * <code>int32 totalTask = 1;</code>
+     * @return The totalTask.
+     */
+    @java.lang.Override
+    public int getTotalTask() {
+      return totalTask_;
+    }
+    /**
+     * <code>int32 totalTask = 1;</code>
+     * @param value The totalTask to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTotalTask(int value) {
+      
+      totalTask_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 totalTask = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTotalTask() {
+      
+      totalTask_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int totalTime_ ;
+    /**
+     * <code>int32 totalTime = 2;</code>
+     * @return The totalTime.
+     */
+    @java.lang.Override
+    public int getTotalTime() {
+      return totalTime_;
+    }
+    /**
+     * <code>int32 totalTime = 2;</code>
+     * @param value The totalTime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTotalTime(int value) {
+      
+      totalTime_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 totalTime = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTotalTime() {
+      
+      totalTime_ = 0;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object summary_ = "";
     /**
      * <pre>
      * Overall feedback of students performance
      * </pre>
      *
-     * <code>string summary = 1;</code>
+     * <code>string summary = 3;</code>
      * @return The summary.
      */
     public java.lang.String getSummary() {
@@ -471,7 +601,7 @@ private static final long serialVersionUID = 0L;
      * Overall feedback of students performance
      * </pre>
      *
-     * <code>string summary = 1;</code>
+     * <code>string summary = 3;</code>
      * @return The bytes for summary.
      */
     public com.google.protobuf.ByteString
@@ -492,7 +622,7 @@ private static final long serialVersionUID = 0L;
      * Overall feedback of students performance
      * </pre>
      *
-     * <code>string summary = 1;</code>
+     * <code>string summary = 3;</code>
      * @param value The summary to set.
      * @return This builder for chaining.
      */
@@ -511,7 +641,7 @@ private static final long serialVersionUID = 0L;
      * Overall feedback of students performance
      * </pre>
      *
-     * <code>string summary = 1;</code>
+     * <code>string summary = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearSummary() {
@@ -525,7 +655,7 @@ private static final long serialVersionUID = 0L;
      * Overall feedback of students performance
      * </pre>
      *
-     * <code>string summary = 1;</code>
+     * <code>string summary = 3;</code>
      * @param value The bytes for summary to set.
      * @return This builder for chaining.
      */

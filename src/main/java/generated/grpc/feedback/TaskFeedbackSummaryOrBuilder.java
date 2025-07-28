@@ -8,11 +8,23 @@ public interface TaskFeedbackSummaryOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <code>int32 totalTask = 1;</code>
+   * @return The totalTask.
+   */
+  int getTotalTask();
+
+  /**
+   * <code>int32 totalTime = 2;</code>
+   * @return The totalTime.
+   */
+  int getTotalTime();
+
+  /**
    * <pre>
    * Overall feedback of students performance
    * </pre>
    *
-   * <code>string summary = 1;</code>
+   * <code>string summary = 3;</code>
    * @return The summary.
    */
   java.lang.String getSummary();
@@ -21,7 +33,7 @@ public interface TaskFeedbackSummaryOrBuilder extends
    * Overall feedback of students performance
    * </pre>
    *
-   * <code>string summary = 1;</code>
+   * <code>string summary = 3;</code>
    * @return The bytes for summary.
    */
   com.google.protobuf.ByteString

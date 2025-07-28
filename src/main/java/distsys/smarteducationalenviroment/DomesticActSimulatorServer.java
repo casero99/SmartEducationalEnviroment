@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /* @author Carolina*/
+
 public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
 
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
@@ -30,7 +31,7 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
                     .build()
                     .start();
             logger.log(Level.INFO, "DomesticActSimulator started, listening on {0}", port);
-            System.out.println(" Server started, listening on" + port);
+            System.out.println(" Server started, listening on " + port);
             server.awaitTermination();
 
         } catch (IOException e) {

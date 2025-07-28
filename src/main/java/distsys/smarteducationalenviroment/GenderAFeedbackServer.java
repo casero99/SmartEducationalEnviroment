@@ -1,11 +1,10 @@
-
 package distsys.smarteducationalenviroment;
 
-import generated.grpc.feedback.ClassInsight;
-import generated.grpc.feedback.ClassRequest;
-import generated.grpc.feedback.FeedbackResponse;
+import generated.grpc.feedback.TaskFeedbackSummary;
+import generated.grpc.feedback.StudentTask;
+import generated.grpc.feedback.TaskFeedback;
 import generated.grpc.feedback.GenderAFeedbackGrpc.GenderAFeedbackImplBase;
-import generated.grpc.feedback.StudentEvent;
+import generated.grpc.feedback.StudentTask;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
@@ -15,11 +14,11 @@ import java.util.logging.Logger;
 
 /*@author Carolina*/
 
-public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
+public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
+
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        
 
         int port = 50053;
 
@@ -34,7 +33,6 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
 
         } catch (IOException e) {
             e.printStackTrace();// TODO Auto-generated catch block
-            
 
         } catch (InterruptedException e) {
             e.printStackTrace();// TODO Auto-generated catch block
@@ -42,20 +40,64 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
         }
 
     }
-    
-    public void getClassIngsight(ClassRequest request, StreamObserver<ClassInsight> responseObserver){
+
+    //public void taskPerformance(StudentTask request, StreamObserver<TaskFeedbackSummary> responseObserver){
+    public StreamObserver<StudentTask> taskPerformance(StreamObserver<TaskFeedbackSummary> responseObserver) {
+        return new StreamObserver<StudentTask>(){
         
-        String className = request.getClassName();
-        
+                int totalDuration = 0;
+                int taskCount = 0;
+                StringBuilder feedbackBuilder = new StringBuilder();
+                
+                
+                public void onNext(StudentTask task){
+                    String studentName = task.getStudentName();
+                String studentTaks = task.getStudentTask();
+                int taskDuration = task.getTaskDuration();
+                
+                totalDuration += taskDuration;
+                taskCount++;
+                
+                String msg;
+                if (taskDuration <= 5){
+                    msg = "Fast, efficient, and done pretty well! (:";
+                }else if(taskDuration <= 10){
+                    msg = "Okay. Have the task done.";
+                }else{
+                    msg="Too slow. Try to speed up";
+                }
+                
+                feedbackBuilder.append("Good").append(studentName).append(" did ").append(studentTask)
+                .append(" in ").append(taskDuration).append(" seconds ").append(msg).append("\n");
+                
+                System.out.println("Received task from " + studentName);
+                }
+                
+                public void onError(Throwable t){
+                logger.log(level.WARNING, "Encountered error in recordRoute", t);
+                }
+                
+                public void onCompleted(){
+                int totalTaskDuration = (taskCount == 0) ? 0 : totalDuration / taskCount;
+                
+                TaskFeedbackSummary summary = TaskFeedbackSummary.newBuilder()
+                .setTotalTask(taskCount)
+                .setTotalTime(totalTaskDuration)
+                .setSummary(feedbackBuilder.toString())
+                .build();
+                }
+                }
+                
+                /*
         String[] insights = {
-        "The class" + className + " is showing gender inbalance in participation.",
+        "The student " + studentName + " is showing gender inbalance in participation.",
         "Consider rotating household task equally between the students.",
         "Encourage boys to engage more in care-work related tasks.",
         "Encourage girls to engage more in care-work related tasks.",
         "Provide more example demostrations for a better understanding."
     };
         for(String message : insights){
-            ClassInsight insight = ClassInsight.newBuilder().setMessage(message).build();
+            TaskFeedbackSummary insight = TaskFeedbackSummary.newBuilder().setSummary(message).build();
             responseObserver.onNext(insight);
             
             try{
@@ -66,42 +108,46 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase{
         }
         responseObserver.onCompleted();
     }
-    
+                
+    */
+
     //Bi-directional RPC
-    public StreamObserver<StudentEvent> liveFeedbackExchange(final StreamObserver<FeedbackResponse> responseObserver){
-        return new StreamObserver<StudentEvent>(){
-            
+    @Override;
+
+    public StreamObserver<StudentTask> liveTaskFeedback(final StreamObserver<TaskFeedback> responseObserver) {
+        return new StreamObserver<StudentTask>() {
+
             @Override
-            public void onNext(StudentEvent event){
+            public void onNext(StudentTask event) {
                 //aqui va la logica de bi-directional streaming
                 //mandar respuestas a tiempo real(responseObserver.onNext(...))
-                String taskName = event.getTaskName();
+                String studentTask = event.getStudentTask();
                 double taskDuration = event.getTaskDuration();
                 String feedback;
-                
-                if(taskDuration > 5.0){
-                    feedback = "Great Job! But try to be a little bit faster completing the task" + taskName;
-                }else{
-                    feedback = "You've done amazing! Keep it that way!" + taskName;
+
+                if (taskDuration > 5.0) {
+                    feedback = "Great Job! But try to be a little bit faster completing the task" + studentTask;
+                } else {
+                    feedback = "You've done amazing! Keep it that way!" + studentTask;
                 }
-                
-                FeedbackResponse response = FeedbackResponse.newBuilder().setFeedback(feedback).build();
-                
+
+                TaskFeedback response = TaskFeedback.newBuilder().setStudentName(studentName).setFeedback(feedback).build();
+
                 responseObserver.onNext(response);
             }
-            
+
             @Override
-            public void onError(Throwable t){
-                logger.log(Level.WARNING,"Encountered error in routeChat", t);
-                
+            public void onError(Throwable t) {
+                logger.log(Level.WARNING, "Encountered error in routeChat", t);
+
             }
-            
+
             @Override
-            public void onCompleted(){
+            public void onCompleted() {
                 responseObserver.onCompleted();
-                
+
             }
         };
     }
-    
+
 }

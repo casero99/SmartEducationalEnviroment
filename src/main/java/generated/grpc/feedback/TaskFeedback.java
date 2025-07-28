@@ -6,6 +6,7 @@ package generated.grpc.feedback;
 /**
  * <pre>
  *  class feedback
+ *bidirectional streaming
  * </pre>
  *
  * Protobuf type {@code GenderAFeedback.TaskFeedback}
@@ -359,6 +360,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    *  class feedback
+   *bidirectional streaming
    * </pre>
    *
    * Protobuf type {@code GenderAFeedback.TaskFeedback}
