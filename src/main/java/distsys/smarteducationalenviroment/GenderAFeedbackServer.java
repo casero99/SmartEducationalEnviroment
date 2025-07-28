@@ -85,47 +85,50 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                         .build();
             }
         };
+
+        //Bi-directional RPC
         
-    */ //Bi-directional RPC
-    public StreamObserver<StudentTask> liveTaskFeedback(final StreamObserver<TaskFeedback> responseObserver) {
+    @Override
+        public StreamObserver<StudentTask> liveTaskFeedback(final StreamObserver<TaskFeedback> responseObserver) {
         return new StreamObserver<StudentTask>() {
 
-            @Override
-            public void onNext(StudentTask event) {
-                //aqui va la logica de bi-directional streaming
-                //mandar respuestas a tiempo real(responseObserver.onNext(...))
-                //extract the data sent by the client
-                String studentName = event.getStudentName();
-                String studentTask = event.getStudentTask();
-                double taskDuration = event.getTaskDuration();
-                String feedback; //preguntar acerca de este
+                @Override
+                public void onNext(StudentTask event) {
+                    //aqui va la logica de bi-directional streaming
+                    //mandar respuestas a tiempo real(responseObserver.onNext(...))
+                    //extract the data sent by the client
+                    String studentName = event.getStudentName();
+                    String studentTask = event.getStudentTask();
+                    double taskDuration = event.getTaskDuration();
+                    String feedback; //preguntar acerca de este
 
-                //feedback logic based on task duration
-                if (taskDuration > 5.0) {
-                    feedback = "Great Job! But try to be a little bit faster completing the task" + studentTask;
-                } else {
-                    feedback = "You've done amazing! Keep it that way!" + studentTask;
+                    //feedback logic based on task duration
+                    if (taskDuration > 5.0) {
+                        feedback = "Great Job! But try to be a little bit faster completing the task" + studentTask;
+                    } else {
+                        feedback = "You've done amazing! Keep it that way!" + studentTask;
+                    }
+
+                    //build the reponse message managed by feedback
+                    TaskFeedback response = TaskFeedback.newBuilder().setStudentName(studentName).setFeedback(feedback).build();
+
+                    //real time feedback to client
+                    responseObserver.onNext(response);
                 }
 
-                //build the reponse message managed by feedback
-                TaskFeedback response = TaskFeedback.newBuilder().setStudentName(studentName).setFeedback(feedback).build();
+                @Override
+                public void onError(Throwable t) {
+                    logger.log(Level.WARNING, "Encountered error in liveTaskFeedback", t);
 
-                //real time feedback to client
-                responseObserver.onNext(response);
-            }
+                }
 
-            @Override
-            public void onError(Throwable t) {
-                logger.log(Level.WARNING, "Encountered error in liveTaskFeedback", t);
+                @Override
+                public void onCompleted() {
+                    responseObserver.onCompleted();
 
-            }
+                }
+            };
+        }
 
-            @Override
-            public void onCompleted() {
-                responseObserver.onCompleted();
-
-            }
-        };
     }
-
 }
