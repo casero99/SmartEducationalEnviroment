@@ -20,7 +20,7 @@ service ParticipationAnalizer {
   
 }
 
-//shared student info (3 services)
+//shared student info
 message Student {
      string studentName = 1;    // Name of the student
      int32 studentAge = 2;      // Age of student

@@ -1,25 +1,24 @@
-
 package distsys.smarteducationalenviroment;
 
-/*
+import generated.grpc.analyzer.CustomFeedbackReply;
+import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.analyzer.ParticipationAnalizerGrpc.ParticipationAnalizerImplBase;
-import generated.grpc.analyzer.ParticipationEntry;
+import generated.grpc.analyzer.ParticipationRequest;
 import generated.grpc.analyzer.ParticipationStatistics;
+import generated.grpc.analyzer.Student;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /* @author Carolina*/
-/*
-public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase{
+public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
+
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        
 
         int port = 50052;
 
@@ -34,7 +33,6 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase{
 
         } catch (IOException e) {
             e.printStackTrace();// TODO Auto-generated catch block
-            
 
         } catch (InterruptedException e) {
             e.printStackTrace();// TODO Auto-generated catch block
@@ -42,56 +40,77 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase{
         }
 
     }
+
     @Override
-    public  StreamObserver<ParticipationEntry> trackerParticipation(final StreamObserver<ParticipationStatistics> responseObserver){
-        return new StreamObserver<ParticipationEntry>(){
-            
-            int maleCount =0;
-            int femaleCount = 0;
-            double totalDuration = 0;
-            long startTime = System.nanoTime();
-            
-            @Override
-            public void onNext(ParticipationEntry entry){
-                String gender = entry.getGender();
-                double taskDuration = entry.getTaskDuration();
-                
-                if(gender.equalsIgnoreCase("male")){
-                    maleCount++;
-                }else if(gender.equalsIgnoreCase("female")){
-                    femaleCount++;
-                }
-                totalDuration += taskDuration;
+    //public  StreamObserver<ParticipationEntry> trackerParticipation(final StreamObserver<ParticipationStatistics> responseObserver){
+    public void analyzerParticipation(ParticipationRequest request, StreamObserver<ParticipationStatistics> responseObserver) {
+
+        int maleCount = 0;
+        int femaleCount = 0;
+
+        for (Student student : request.getStudentsList()) {
+            String gender = student.getGender();
+
+            if (gender.equalsIgnoreCase("male")) {
+                maleCount++;
+            } else if (gender.equalsIgnoreCase("female")) {
+                femaleCount++;
             }
-            
+        }
+
+        int totalNumStudents = maleCount + femaleCount;
+        float malePercentage = totalNumStudents > 0 ? (maleCount * 100f) / totalNumStudents : 0;
+        float femalePercentage = totalNumStudents > 0 ? (femaleCount * 100f) / totalNumStudents : 0;
+
+        String summary = "Students participation summary:\n"
+                + "Total MALE students: " + maleCount + "\n"
+                + "Total FEMALE students: " + femaleCount + "\n"
+                + "Total: " + totalNumStudents + " students.";
+
+        ParticipationStatistics pStats = ParticipationStatistics.newBuilder()
+                .setMalePercentage(malePercentage)
+                .setFemalePercentage(femalePercentage)
+                .setSummary(summary)
+                .build();
+
+        responseObserver.onNext(pStats);
+        responseObserver.onCompleted();
+
+    }
+
+    //second RPC - submit the custom feedback
+    @Override
+    public StreamObserver<CustomFeedbackRequest> submitCustomFeedback(StreamObserver<CustomFeedbackReply> response) {
+        return new StreamObserver<CustomFeedbackRequest>() {
+
+            //creating the space where the feedback will be store
+            StringBuilder storeFeedback = new StringBuilder();
+
             @Override
-            public void onError(Throwable t){
-                logger.log(Level.WARNING, "Error during participation tracking", t);
+            public void onNext(CustomFeedbackRequest request) {
+                String studentName = request.getStudentName();
+                String feedback = request.getFeedback();
+
+                storeFeedback.append("Feedback for ").append(studentName).append(": ").append(feedback).append("\n");
             }
+
             @Override
-            public void onCompleted(){
-                long elapsedSeconds = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - startTime);
-                int total = maleCount + femaleCount;
-                
-                float malePercentage = total > 0 ? (maleCount * 100f) / total : 0;
-                float femalePercentage = total > 0 ? (femaleCount * 100f) / total : 0;
-                
-                String summary = "Total males: " + maleCount +
-                        "\nFemales: " + femaleCount +
-                        "\nDuration Total: " + totalDuration +
-                        "\nSession time (seconds): " + elapsedSeconds;
-                
-                ParticipationStatistics response = ParticipationStatistics.newBuilder()
-                        .setMalePercentage(malePercentage)
-                        .setFemalePercentage(femalePercentage)
-                        .setSummary(summary)
+            public void onError(Throwable t) {
+                logger.log(Level.WARNING, "Error during receiving the custom feedback", t);
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("Custom feedback received:\n" + storeFeedback.toString());
+
+                CustomFeedbackReply reply = CustomFeedbackReply.newBuilder()
+                        .setMessage("Feedback received and saved succesfully!")
                         .build();
-                
-                responseObserver.onNext(response);
+
+                responseObserver.onNext(reply);
                 responseObserver.onCompleted();
             }
         };
     }
-    
+
 }
-*/
