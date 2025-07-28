@@ -16,6 +16,8 @@ service ParticipationAnalizer {
 
    //  Server streaming
    rpc analyzerParticipation (ParticipationRequest) returns (stream ParticipationStatistics) {}
+
+   //client streaming
    rpc submitCustomFeedback (stream CustomFeedbackRequest) returns (CustomFeedbackReply){}
   
 }

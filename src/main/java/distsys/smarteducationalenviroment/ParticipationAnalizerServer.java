@@ -80,7 +80,9 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
     //second RPC - submit the custom feedback
     @Override
-    public StreamObserver<CustomFeedbackRequest> submitCustomFeedback(StreamObserver<CustomFeedbackReply> response) {
+    public StreamObserver<CustomFeedbackRequest> submitCustomFeedback(
+            StreamObserver<CustomFeedbackReply> responseObserver) {
+
         return new StreamObserver<CustomFeedbackRequest>() {
 
             //creating the space where the feedback will be store
@@ -109,7 +111,9 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
                 responseObserver.onNext(reply);
                 responseObserver.onCompleted();
+
             }
+
         };
     }
 

@@ -5,7 +5,7 @@ package generated.grpc.analyzer;
 
 /**
  * <pre>
- *shared student info (3 services)
+ *shared student info
  * </pre>
  *
  * Protobuf type {@code ParticipationAnalizer.Student}
@@ -452,7 +452,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *shared student info (3 services)
+   *shared student info
    * </pre>
    *
    * Protobuf type {@code ParticipationAnalizer.Student}

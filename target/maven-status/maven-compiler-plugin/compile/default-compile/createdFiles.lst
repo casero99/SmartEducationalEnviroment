@@ -23,6 +23,7 @@ generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorBaseDescrip
 generated\grpc\domestic\ResisterStudentsReply$Builder.class
 generated\grpc\feedback\GenderAFeedbackGrpc$3.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorFutureStub.class
+distsys\smarteducationalenviroment\ParticipationAnalizerServer$1.class
 generated\grpc\analyzer\CustomFeedbackReply$1.class
 generated\grpc\analyzer\CustomFeedbackRequestOrBuilder.class
 generated\grpc\analyzer\ParticipationStatistics.class
@@ -73,6 +74,7 @@ generated\grpc\domestic\Student$1.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackBlockingStub.class
 generated\grpc\feedback\GenderAFeedbackGrpc.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerStub.class
+distsys\smarteducationalenviroment\ParticipationAnalizerServer.class
 generated\grpc\feedback\StudentTask.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$2.class
 generated\grpc\feedback\TaskFeedback$Builder.class
