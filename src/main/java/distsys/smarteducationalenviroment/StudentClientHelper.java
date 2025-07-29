@@ -1,6 +1,16 @@
 
 package distsys.smarteducationalenviroment;
 
+import generated.grpc.domestic.DomesticActSimulatorGrpc;
+import generated.grpc.domestic.RegisterStudentsRequest;
+import generated.grpc.domestic.ResisterStudentsReply;
+import generated.grpc.domestic.Student;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import java.net.InetAddress;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
+
 /* @author Carolina*/
 
 /*
@@ -10,4 +20,45 @@ package distsys.smarteducationalenviroment;
 */
 public class StudentClientHelper {
     
+    public static String runUnaryDomesticTask(String name, int age, String gender, String task){
+        
+        try{
+            //discover the domestic via jmDns
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            ServiceInfo serviceInfo = jmdns.getServiceInfo("grpc.tcp.local.", "DomesticService", 50051);
+        
+            if(serviceInfo == null){
+                return "Could not find DomesticService via jmDNS";
+            }
+            
+            String host1 = serviceInfo.getInetAddresses()[0].getHostAddress();
+            int port1 = serviceInfo.getPort();
+            
+            //Creating gRPC channel and stub
+            
+            ManagedChannel channel = ManagedChannelBuilder.forAddress(host1, port1)
+                    .usePlaintext()
+                    .build();
+            
+            DomesticActSimulatorGrpc.DomesticActSimulatorBlockingStub stub = 
+                    DomesticActSimulatorGrpc.newBlockingStub(channel);
+            
+            //create request --- get reply
+            RegisterStudentsRequest request = RegisterStudentsRequest.newBuilder()
+                    .setStudentName(name)
+                    .setStudentAge(age)
+                    .setStudentGender(gender)
+                    .setTaskName(task)
+                    .build();
+        
+            ResisterStudentsReply reply = stub.registerStudents(request);
+            
+            channel.shutdown();
+            
+            return "Feedback: "+ reply.getMessage();
+        }catch(Exception e){
+            e.printStackTrace();
+            return "Error during gRPC request: " + e.getMessage();
+        }
+    }
 }

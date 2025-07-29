@@ -78,12 +78,15 @@ generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackBlockingStub.class
 generated\grpc\feedback\GenderAFeedbackGrpc.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerStub.class
 distsys\smarteducationalenviroment\ParticipationAnalizerServer.class
+distsys\smarteducationalenviroment\StudentClientHelper.class
 generated\grpc\feedback\StudentTask.class
 distsys\smarteducationalenviroment\StudentClient.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$2.class
 generated\grpc\feedback\TaskFeedback$Builder.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerImplBase.class
 generated\grpc\domestic\RegisterStudentsRequest.class
+distsys\smarteducationalenviroment\StudentClientGUI$1.class
+distsys\smarteducationalenviroment\StudentClientGUI.class
 generated\grpc\analyzer\ParticipationAnalizerImpl.class
 generated\grpc\analyzer\StudentOrBuilder.class
 generated\grpc\domestic\Student$Builder.class

@@ -81,7 +81,7 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
             if (!studentName.isEmpty() && studentAge != 0 && !taskName.isEmpty()) {
                 students.add(student); //adding student info to the list
 
-                result.append("good ")
+                result.append("The student ")
                         .append(studentName)
                         .append(" (").append(gender).append(", ")
                         .append(studentAge).append(" y/o)")

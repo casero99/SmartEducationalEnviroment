@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -35,10 +36,12 @@ public class StudentClientGUI {
         
         JTextField fName = new JTextField();
         JTextField fAge = new JTextField();
-        JTextField fGender = new JTextField();
         
-        String[] tasks = {"Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
-        JComboBox<String> taskDropdown = new JComboBox<>(tasks);
+        String[] fGender = {"-Select gender-","Male", "Female", "Other"};
+        JComboBox<String> genderDd = new JComboBox<>(fGender);
+        
+        String[] tasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+        JComboBox<String> taskDd = new JComboBox<>(tasks);
         
         inPanel.add(new JLabel("Student Name: "));
         inPanel.add(fName);
@@ -47,10 +50,10 @@ public class StudentClientGUI {
         inPanel.add(fAge);
         
         inPanel.add(new JLabel("Student Gender: "));
-        inPanel.add(fGender);
+        inPanel.add(genderDd);
         
         inPanel.add(new JLabel("Select Task to do: "));
-        inPanel.add(taskDropdown);
+        inPanel.add(taskDd);
         
         JButton subButton = new JButton("Submit Domestic Task");
         
@@ -72,13 +75,46 @@ public class StudentClientGUI {
             @Override
             public void actionPerformed(ActionEvent e){
                 String name = fName.getText();
-                String age = fAge.getText();
-                String gender = fGender.getText();
-                String task = (String) taskDropdown.getSelectedItem();
+                String ageStr = fAge.getText();
+                
+                 //message will be displayed if the user leaves the spaces empty.
+                    if(name.isEmpty() || ageStr.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Please fill all the boxes.");
+                        return;
+                    }
+                    
+                 //age from an int to a string
+                 int age;
+                 try{
+                     age = Integer.parseInt(ageStr);
+                     
+                 }catch(NumberFormatException ex){
+                     JOptionPane.showMessageDialog(null, "Age must be a number");
+                     return;
+                 }
+                
+                String gender = (String) genderDd.getSelectedItem();
+                
+                    //message will be displayed if the user doesn't select a gender.
+                    if(gender.equals("-Select gender-")){
+                        JOptionPane.showMessageDialog(null, "Please select a valid gender");
+                        return;
+                    }
+                
+                String task = (String) taskDd.getSelectedItem();
+                
+                //message will be displayed if the user doesn't select a gender.
+                    if(task.equals("-Select task to do-")){
+                        JOptionPane.showMessageDialog(null, "Please select a valid task");
+                        return;
+                    }
+                    
+                    //calling the gRPC helper method
+                    String result = StudentClientHelper.runUnaryDomesticTask(name, age, gender, task);
                 
                 outputArea.append("Submitting task...\n");
-                outputArea.append("Student name: " + name + " , age: " + age + " , gender: " + gender + " , and task to do: " + task + "\n");
-                outputArea.append("this is a placeholder - gRPC goes here\n\n\n");
+                outputArea.append("Student Name: " + name + "\n Age: " + age + "\n Gender: " + gender + "\n Task to do: " + task + "\n");
+                outputArea.append("!!!! " + result + "\n");
             }
         });
         
