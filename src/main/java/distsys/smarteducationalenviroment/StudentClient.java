@@ -22,10 +22,13 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import java.awt.HeadlessException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 import javax.swing.JOptionPane;
 
@@ -35,15 +38,37 @@ public class StudentClient {
     private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
 
     //*********************************************************
-    //Unary rpc StudentClient
+    // Channels
     //*********************************************************
     public static void main(String[] args) throws Exception {
         String host = "localhost";
-
+        
+        //discovering the services via jmDNS
+        JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+        
+        ServiceInfo info1 = jmdns.getServiceInfo("grpc.tcp.local.", "DomesticService");
+        ServiceInfo info2 = jmdns.getServiceInfo("grpc.tcp.local.", "ParticipationAnalizer");
+        ServiceInfo info3 = jmdns.getServiceInfo("grpc.tcp.local.", "GenderFeedback");
+        
+        if (info1 == null || info2 == null || info3 == null){
+            System.out.println("One or more services could not be found via jmDNS");
+            return;
+        }
+        
+        String host1 = info1.getInetAddresses()[0].getHostAddress();
+        int port1 = info1.getPort();
+        
+        String host2 = info2.getInetAddresses()[0].getHostAddress();
+        int port2 = info2.getPort();
+        
+        String host3 = info3.getInetAddresses()[0].getHostAddress();
+        int port3 = info3.getPort();
+        
+        //**********************************************
         //Channel 1. Port 50051 - Unary Server. Domestic Activity Simulator
-        int port1 = 50051;
+        //port1 = 50051;
         ManagedChannel channel1 = ManagedChannelBuilder
-                .forAddress(host, port1)
+                .forAddress(host1, port1)
                 .usePlaintext()
                 .build();
 
@@ -51,20 +76,22 @@ public class StudentClient {
 
         channel1.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
 
-        //Channel 2. Port 50052 - Client Streaming. Participation Analizer
-        int port2 = 50052;
+        //**********************************************
+        //Channel 2. Port 50052 - Client & Server Streaming. Participation Analizer
+        //port2 = 50052;
         ManagedChannel channel2 = ManagedChannelBuilder
-                .forAddress(host, port2)
+                .forAddress(host2, port2)
                 .usePlaintext()
                 .build();
         runServerStreamingParticipationAnalizer(channel2);
         runClientStreamingCustomFeedback(channel2);
         channel2.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
 
-        //Channel 3. Port 50053 - Server Streaming & Bi-directional Streaming server. Gender A. Feedback
-        int port3 = 50053;
+        //**********************************************
+        //Channel 3. Port 50053 - Client Streaming & Bi-directional Streaming server. Gender A. Feedback
+        //port3 = 50053;
         ManagedChannel channel3 = ManagedChannelBuilder
-                .forAddress(host, port3)
+                .forAddress(host3, port3)
                 .usePlaintext()
                 .build();
         runClientStreamingTaskPerformance(channel3);

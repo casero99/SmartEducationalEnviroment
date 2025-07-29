@@ -10,8 +10,11 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 /* @author Carolina*/
 
@@ -21,6 +24,19 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
+        /*
+            The purpose of jmDNS is for the server to announce itself on the network so the client
+         can find it without knowing the IP or the Port.
+        
+        */
+        
+        JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+        //Service - jmDNS Type - Service Name - Port
+        ServiceInfo serviceInfo = ServiceInfo.create("grpc.tcp.local.", "ParticipationAnalizer", 50052, "gRPC service for Participation Analizer");
+        jmdns.registerService(serviceInfo);
+        System.out.println("**********************************");
+        System.out.println("jmDNS: Participation Analizer Registered");
+        System.out.println("**********************************");
         int port = 50052;
 
         try {
@@ -28,8 +44,10 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
                     .addService(new ParticipationAnalizerServer())
                     .build()
                     .start();
+            System.out.println("**********************************");
             logger.log(Level.INFO, "ParticipationAnalizer started, listening on {0}", port);
             System.out.println(" Server started, listening on" + port);
+            System.out.println("**********************************");
             server.awaitTermination();
 
         } catch (IOException e) {

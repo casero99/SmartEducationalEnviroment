@@ -8,10 +8,13 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 /* @author Carolina*/
 
@@ -22,7 +25,20 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
     List<Student> studentList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
+        /*
+            The purpose of jmDNS is for the server to announce itself on the network so the client
+         can find it without knowing the IP or the Port.
+        
+        */
+        
+        JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+        //Service - jmDNS Type - Service Name - Port
+        ServiceInfo serviceInfo = ServiceInfo.create("grpc.tcp.local.", "DomesticService", 50051, "gRPC service for Domestic Activities Simulator");
+        jmdns.registerService(serviceInfo);
+        System.out.println("**********************************");
+        System.out.println("jmDNS: Domestic Service Registered");
+        System.out.println("**********************************");
+        
         int port = 50051;
 
         try {
@@ -30,8 +46,10 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
                     .addService(new DomesticActSimulatorServer())
                     .build()
                     .start();
+            System.out.println("**********************************");
             logger.log(Level.INFO, "DomesticActSimulator started, listening on {0}", port);
             System.out.println(" Server started, listening on " + port);
+            System.out.println("**********************************");
             server.awaitTermination();
 
         } catch (IOException e) {
