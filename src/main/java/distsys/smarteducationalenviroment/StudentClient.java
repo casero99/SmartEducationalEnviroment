@@ -128,7 +128,7 @@ public class StudentClient {
                     tasks[0]);
 
             String durationStng = JOptionPane.showInputDialog("Enter duration of the task (minutes): ");
-            double duration = Double.parseDouble(durationStng);
+            int duration = Integer.parseInt(durationStng);
 
             Student student = Student.newBuilder()
                     .setStudentName(name)
@@ -174,13 +174,20 @@ public class StudentClient {
             String name = JOptionPane.showInputDialog("Student name: ");
             int age = Integer.parseInt(JOptionPane.showInputDialog("Student age: "));
             String gender = JOptionPane.showInputDialog("Gender (Male/Female/Other): ");
-            String task = JOptionPane.showInputDialog("Task to-do: ");
+            String[] tasks = {"Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+            String taskName = (String) JOptionPane.showInputDialog(null,
+                    "Select Task to-do: ",
+                    "Household Task",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    tasks,
+                    tasks[0]);
 
             generated.grpc.analyzer.Student student = generated.grpc.analyzer.Student.newBuilder()
                     .setStudentName(name)
                     .setStudentAge(age)
                     .setGender(gender)
-                    .setTaskName(task)
+                    .setTaskName(taskName)
                     .build();
 
             students.add(student);
@@ -299,7 +306,7 @@ catch (Exception e){
 
                 StudentTask task = StudentTask.newBuilder()
                         .setStudentName(name)
-                        .setStudentTask(name)
+                        .setStudentTask(taskName)
                         .setTaskDuration(duration)
                         .build();
                 requestObserver.onNext(task);
