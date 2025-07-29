@@ -5,10 +5,10 @@ import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.domestic.DomesticActSimulatorGrpc;
 import generated.grpc.domestic.RegisterStudentsRequest;
 import generated.grpc.domestic.ResisterStudentsReply;
+import generated.grpc.domestic.Student;
 import generated.grpc.analyzer.ParticipationAnalizerGrpc;
 import generated.grpc.analyzer.ParticipationRequest;
 import generated.grpc.analyzer.ParticipationStatistics;
-import generated.grpc.analyzer.Student;
 import generated.grpc.feedback.TaskFeedbackSummary;
 import generated.grpc.feedback.StudentTask;
 import generated.grpc.feedback.TaskFeedback;
@@ -30,11 +30,13 @@ import java.util.concurrent.CountDownLatch;
 import javax.swing.JOptionPane;
 
 /*@author Carolina*/
+
 public class StudentClient {
 
     private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
-
+    //*********************************************************
     //Unary rpc StudentClient
+    //*********************************************************
     public static void main(String[] args) throws Exception {
         String host = "localhost";
 
@@ -65,12 +67,13 @@ public class StudentClient {
                 .forAddress(host, port3)
                 .usePlaintext()
                 .build();
-        runClientStreamingTaskPerformance(channel3);
+        //runClientStreamingTaskPerformance(channel3);
         runBidirectionalFeedback(channel3);
         channel3.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
     }
-
+    //*********************************************************
     //SERVICE 1. UNARY - Domestic Activity Simulator
+    //*********************************************************
     private static void runUnaryDomesticTask(ManagedChannel channel) throws InterruptedException {
         DomesticActSimulatorGrpc.DomesticActSimulatorBlockingStub blockingStub = DomesticActSimulatorGrpc.newBlockingStub(channel);
         try {
@@ -128,8 +131,9 @@ public class StudentClient {
         }
 
     }
-
-//SERVER 2. Server Streaming RPC - Participation Analizer
+    //*********************************************************
+    //SERVER 2. Server Streaming RPC - Participation Analizer
+    //*********************************************************
     private static void runServerStreamingParticipationAnalizer(ManagedChannel channel) {
         ParticipationAnalizerGrpc.ParticipationAnalizerBlockingStub blockingStub = ParticipationAnalizerGrpc.newBlockingStub(channel);
 
@@ -170,8 +174,9 @@ public class StudentClient {
 
         JOptionPane.showMessageDialog(null, feedback.toString());
     }
-
-//SERVER 2. Client Streaming RPC - Participation Analizer     
+    //*********************************************************
+    //SERVER 2. Client Streaming RPC - Participation Analizer     
+    //*********************************************************
     private static void runClientStreamingCustomFeedback(ManagedChannel channel) throws InterruptedException {
         ParticipationAnalizerGrpc.ParticipationAnalizerStub asyncStub = ParticipationAnalizerGrpc.newStub(channel);
 
@@ -217,10 +222,12 @@ public class StudentClient {
             requestObserver.onError(e);
         }
     }
-
-    //SERVER 3. Server Streaming RPC -Gender Analizer Feedback
+    //*********************************************************
+    //SERVER 3. Client Streaming RPC -Gender Analizer Feedback
+    //*********************************************************
+   
     private static void runClientStreamingTaskPerformance(ManagedChannel channel) {
-        GenderAFeedbackGrpc.GenderAFeedbackBlockingStub blockingStub = GenderAFeedbackGrpc.newBlockingStub(channel);
+        GenderAFeedbackGrpc.GenderAFeedbackStub asyncStub = GenderAFeedbackGrpc.newStub(channel);
 
         StreamObserver<StudentTask> requestObserver = asyncStub.taskPerformance(new StreamObserver<TaskFeedbackSummary>() {
             @Override
@@ -271,7 +278,9 @@ public class StudentClient {
         }
     }
 
-//SERVER 3. Bi-Directional Streaming RPC -Gender Analizer Feedback
+    //*********************************************************
+    //SERVER 3. Bi-Directional Streaming RPC -Gender Analizer Feedback
+    //*********************************************************
     private static void runBidirectionalFeedback(ManagedChannel channel) throws InterruptedException {
         GenderAFeedbackGrpc.GenderAFeedbackStub asyncStub = GenderAFeedbackGrpc.newStub(channel);
         CountDownLatch latch = new CountDownLatch(1);
@@ -308,7 +317,7 @@ public class StudentClient {
                     tasks,
                     tasks[0]);
 
-            double duration = Double.parseDouble(JOptionPane.showInputDialog("Task duration (in minutes): "));
+            int duration = Integer.parseInt(JOptionPane.showInputDialog("Task duration (in minutes): "));
 
             StudentTask event = StudentTask.newBuilder()
                     .setStudentName(name)

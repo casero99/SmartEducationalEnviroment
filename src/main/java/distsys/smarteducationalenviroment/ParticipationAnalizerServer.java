@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /* @author Carolina*/
+
 public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
     private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());

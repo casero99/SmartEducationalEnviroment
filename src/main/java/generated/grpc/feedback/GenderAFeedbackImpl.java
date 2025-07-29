@@ -47,7 +47,7 @@ public final class GenderAFeedbackImpl {
       "edback\030\002 \001(\t2\303\001\n\017GenderAFeedback\022Y\n\017task" +
       "Performance\022\034.GenderAFeedback.StudentTas" +
       "k\032$.GenderAFeedback.TaskFeedbackSummary\"" +
-      "\0000\001\022U\n\020liveTaskFeedback\022\034.GenderAFeedbac" +
+      "\000(\001\022U\n\020liveTaskFeedback\022\034.GenderAFeedbac" +
       "k.StudentTask\032\035.GenderAFeedback.TaskFeed" +
       "back\"\000(\0010\001B0\n\027generated.grpc.feedbackB\023G" +
       "enderAFeedbackImplP\001b\006proto3"

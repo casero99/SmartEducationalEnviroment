@@ -22,7 +22,7 @@ public final class GenderAFeedbackGrpc {
       fullMethodName = SERVICE_NAME + '/' + "taskPerformance",
       requestType = generated.grpc.feedback.StudentTask.class,
       responseType = generated.grpc.feedback.TaskFeedbackSummary.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
   public static io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask,
       generated.grpc.feedback.TaskFeedbackSummary> getTaskPerformanceMethod() {
     io.grpc.MethodDescriptor<generated.grpc.feedback.StudentTask, generated.grpc.feedback.TaskFeedbackSummary> getTaskPerformanceMethod;
@@ -31,7 +31,7 @@ public final class GenderAFeedbackGrpc {
         if ((getTaskPerformanceMethod = GenderAFeedbackGrpc.getTaskPerformanceMethod) == null) {
           GenderAFeedbackGrpc.getTaskPerformanceMethod = getTaskPerformanceMethod =
               io.grpc.MethodDescriptor.<generated.grpc.feedback.StudentTask, generated.grpc.feedback.TaskFeedbackSummary>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "taskPerformance"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -130,9 +130,9 @@ public final class GenderAFeedbackGrpc {
      *  Client Streaming - The client starts the duration of tasks from each students. 
      * </pre>
      */
-    public void taskPerformance(generated.grpc.feedback.StudentTask request,
+    public io.grpc.stub.StreamObserver<generated.grpc.feedback.StudentTask> taskPerformance(
         io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedbackSummary> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getTaskPerformanceMethod(), responseObserver);
+      return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getTaskPerformanceMethod(), responseObserver);
     }
 
     /**
@@ -146,7 +146,7 @@ public final class GenderAFeedbackGrpc {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getTaskPerformanceMethod(),
-            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            io.grpc.stub.ServerCalls.asyncClientStreamingCall(
               new MethodHandlers<
                 generated.grpc.feedback.StudentTask,
                 generated.grpc.feedback.TaskFeedbackSummary>(
@@ -181,10 +181,10 @@ public final class GenderAFeedbackGrpc {
      *  Client Streaming - The client starts the duration of tasks from each students. 
      * </pre>
      */
-    public void taskPerformance(generated.grpc.feedback.StudentTask request,
+    public io.grpc.stub.StreamObserver<generated.grpc.feedback.StudentTask> taskPerformance(
         io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedbackSummary> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
-          getChannel().newCall(getTaskPerformanceMethod(), getCallOptions()), request, responseObserver);
+      return io.grpc.stub.ClientCalls.asyncClientStreamingCall(
+          getChannel().newCall(getTaskPerformanceMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -208,17 +208,6 @@ public final class GenderAFeedbackGrpc {
     protected GenderAFeedbackBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new GenderAFeedbackBlockingStub(channel, callOptions);
-    }
-
-    /**
-     * <pre>
-     *  Client Streaming - The client starts the duration of tasks from each students. 
-     * </pre>
-     */
-    public java.util.Iterator<generated.grpc.feedback.TaskFeedbackSummary> taskPerformance(
-        generated.grpc.feedback.StudentTask request) {
-      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
-          getChannel(), getTaskPerformanceMethod(), getCallOptions(), request);
     }
   }
 
@@ -257,10 +246,6 @@ public final class GenderAFeedbackGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_TASK_PERFORMANCE:
-          serviceImpl.taskPerformance((generated.grpc.feedback.StudentTask) request,
-              (io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedbackSummary>) responseObserver);
-          break;
         default:
           throw new AssertionError();
       }
@@ -271,6 +256,9 @@ public final class GenderAFeedbackGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_TASK_PERFORMANCE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.taskPerformance(
+              (io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedbackSummary>) responseObserver);
         case METHODID_LIVE_TASK_FEEDBACK:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.liveTaskFeedback(
               (io.grpc.stub.StreamObserver<generated.grpc.feedback.TaskFeedback>) responseObserver);

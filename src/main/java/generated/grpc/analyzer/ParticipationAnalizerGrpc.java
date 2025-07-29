@@ -136,6 +136,9 @@ public final class ParticipationAnalizerGrpc {
     }
 
     /**
+     * <pre>
+     *client streaming
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackRequest> submitCustomFeedback(
         io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackReply> responseObserver) {
@@ -188,6 +191,9 @@ public final class ParticipationAnalizerGrpc {
     }
 
     /**
+     * <pre>
+     *client streaming
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackRequest> submitCustomFeedback(
         io.grpc.stub.StreamObserver<generated.grpc.analyzer.CustomFeedbackReply> responseObserver) {

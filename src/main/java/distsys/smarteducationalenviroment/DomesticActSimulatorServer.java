@@ -84,3 +84,4 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
         responseObserver.onCompleted();
     }
 }
+

@@ -14,7 +14,7 @@ package GenderAFeedback;
 service GenderAFeedback {
 
    //  Client Streaming - The client starts the duration of tasks from each students. 
-   rpc taskPerformance (StudentTask) returns (stream TaskFeedbackSummary) {}
+   rpc taskPerformance (stream StudentTask) returns (TaskFeedbackSummary) {}
 
    // Bi-directional Streaming - the client sends events and the server responds with real-time suggestions or prompts, 
    // and it allows responsive feedback from students.
