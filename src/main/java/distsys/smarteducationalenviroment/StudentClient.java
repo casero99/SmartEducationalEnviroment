@@ -67,7 +67,7 @@ public class StudentClient {
                 .forAddress(host, port3)
                 .usePlaintext()
                 .build();
-        //runClientStreamingTaskPerformance(channel3);
+        runClientStreamingTaskPerformance(channel3);
         runBidirectionalFeedback(channel3);
         channel3.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
     }
@@ -204,7 +204,7 @@ public class StudentClient {
             }
         });
         try {
-            int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many feedback submitted?"));
+            int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many feedbacks are you submitting?"));
 
             for (int i = 0; i < entryCount; i++) {
                 String name = JOptionPane.showInputDialog("Student name: ");
@@ -222,6 +222,7 @@ public class StudentClient {
             }
         } catch (HeadlessException | NumberFormatException e) {
             requestObserver.onError(e);
+            return;// prevents further onNext() calls after onError 
         }
     }
     //*********************************************************
