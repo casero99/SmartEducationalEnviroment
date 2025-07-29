@@ -30,10 +30,10 @@ import java.util.concurrent.CountDownLatch;
 import javax.swing.JOptionPane;
 
 /*@author Carolina*/
-
 public class StudentClient {
 
     private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
+
     //*********************************************************
     //Unary rpc StudentClient
     //*********************************************************
@@ -71,6 +71,7 @@ public class StudentClient {
         runBidirectionalFeedback(channel3);
         channel3.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
     }
+
     //*********************************************************
     //SERVICE 1. UNARY - Domestic Activity Simulator
     //*********************************************************
@@ -131,6 +132,7 @@ public class StudentClient {
         }
 
     }
+
     //*********************************************************
     //SERVER 2. Server Streaming RPC - Participation Analizer
     //*********************************************************
@@ -174,6 +176,7 @@ public class StudentClient {
 
         JOptionPane.showMessageDialog(null, feedback.toString());
     }
+
     //*********************************************************
     //SERVER 2. Client Streaming RPC - Participation Analizer     
     //*********************************************************
@@ -213,11 +216,10 @@ public class StudentClient {
                         .build();
                 requestObserver.onNext(feedbackMsg);
 
-                requestObserver.onCompleted();
-                latch.await(3, TimeUnit.SECONDS);
+                requestObserver.onCompleted();    //closes the stream after sending all the messages
+                latch.await(3, TimeUnit.SECONDS); //waits for server to respond
 
             }
-            requestObserver.onCompleted();
         } catch (HeadlessException | NumberFormatException e) {
             requestObserver.onError(e);
         }
@@ -225,7 +227,7 @@ public class StudentClient {
     //*********************************************************
     //SERVER 3. Client Streaming RPC -Gender Analizer Feedback
     //*********************************************************
-   
+
     private static void runClientStreamingTaskPerformance(ManagedChannel channel) {
         GenderAFeedbackGrpc.GenderAFeedbackStub asyncStub = GenderAFeedbackGrpc.newStub(channel);
 
@@ -316,20 +318,34 @@ public class StudentClient {
                     null,
                     tasks,
                     tasks[0]);
+            
+            //if user input a string instead of an integer
+            int duration = 0;
+            boolean validInput = false;
 
-            int duration = Integer.parseInt(JOptionPane.showInputDialog("Task duration (in minutes): "));
+            while (!validInput) {
+                try {
+                    String durationInput = JOptionPane.showInputDialog("Task duration (in minutes): ");
+                    duration = Integer.parseInt(durationInput.trim());
+                    validInput = true;
+                    
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid number (ex. 5)");
+                }
+            }
 
-            StudentTask event = StudentTask.newBuilder()
-                    .setStudentName(name)
-                    .setStudentTask(taskName)
-                    .setTaskDuration(duration)
-                    .build();
+                StudentTask event = StudentTask.newBuilder()
+                        .setStudentName(name)
+                        .setStudentTask(taskName)
+                        .setTaskDuration(duration)
+                        .build();
 
-            requestObserver.onNext(event);
+                requestObserver.onNext(event);
 
+            }
+
+            requestObserver.onCompleted();
+            latch.await(3, TimeUnit.SECONDS);
         }
-
-        requestObserver.onCompleted();
-        latch.await(3, TimeUnit.SECONDS);
-    }
+    
 }
