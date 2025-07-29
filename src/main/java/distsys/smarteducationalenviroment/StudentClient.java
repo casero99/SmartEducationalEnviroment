@@ -214,15 +214,17 @@ public class StudentClient {
                         .setStudentName(name)
                         .setFeedback(feedback)
                         .build();
-                requestObserver.onNext(feedbackMsg);
-
+                requestObserver.onNext(feedbackMsg); //send feedback
+}
                 requestObserver.onCompleted();    //closes the stream after sending all the messages
                 latch.await(3, TimeUnit.SECONDS); //waits for server to respond
 
-            }
-        } catch (HeadlessException | NumberFormatException e) {
-            requestObserver.onError(e);
-            return;// prevents further onNext() calls after onError 
+            
+        }// catch (HeadlessException | NumberFormatException e) {
+           // requestObserver.onError(e);
+           // return;// prevents further onNext() calls after onError 
+catch (Exception e){
+    requestObserver.onError(e);
         }
     }
     //*********************************************************
