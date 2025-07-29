@@ -51,7 +51,7 @@ public class StudentClient {
         ServiceInfo info3 = jmdns.getServiceInfo("grpc.tcp.local.", "GenderFeedback");
         
         if (info1 == null || info2 == null || info3 == null){
-            System.out.println("One or more services could not be found via jmDNS");
+            System.out.println("***********One or more services could not be found via jmDNS");
             return;
         }
         

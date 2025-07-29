@@ -7,6 +7,7 @@ import generated.grpc.domestic.ResisterStudentsReply;
 import generated.grpc.domestic.Student;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import java.io.IOException;
 import java.net.InetAddress;
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
@@ -28,7 +29,7 @@ public class StudentClientHelper {
             ServiceInfo serviceInfo = jmdns.getServiceInfo("grpc.tcp.local.", "DomesticService", 50051);
         
             if(serviceInfo == null){
-                return "Could not find DomesticService via jmDNS";
+                return "****************Could not find DomesticService via jmDNS";
             }
             
             String host1 = serviceInfo.getInetAddresses()[0].getHostAddress();
@@ -44,21 +45,25 @@ public class StudentClientHelper {
                     DomesticActSimulatorGrpc.newBlockingStub(channel);
             
             //create request --- get reply
-            RegisterStudentsRequest request = RegisterStudentsRequest.newBuilder()
+            Student student = Student.newBuilder()
                     .setStudentName(name)
                     .setStudentAge(age)
-                    .setStudentGender(gender)
+                    .setGender(gender)
                     .setTaskName(task)
                     .build();
+            
+             RegisterStudentsRequest request = RegisterStudentsRequest.newBuilder()
+                     .addStudents(student)
+                     .build();
         
             ResisterStudentsReply reply = stub.registerStudents(request);
             
             channel.shutdown();
             
             return "Feedback: "+ reply.getMessage();
-        }catch(Exception e){
-            e.printStackTrace();
-            return "Error during gRPC request: " + e.getMessage();
+            
+        }catch(IOException e){
+            return "*****************Error during gRPC request: " + e.getMessage();
         }
     }
 }

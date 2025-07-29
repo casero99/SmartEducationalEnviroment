@@ -36,7 +36,7 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
         ServiceInfo serviceInfo = ServiceInfo.create("grpc.tcp.local.", "DomesticService", 50051, "gRPC service for Domestic Activities Simulator");
         jmdns.registerService(serviceInfo);
         System.out.println("**********************************");
-        System.out.println("jmDNS: Domestic Service Registered");
+        System.out.println("**************jmDNS: Domestic Service Registered");
         System.out.println("**********************************");
         
         int port = 50051;
@@ -48,7 +48,7 @@ public class DomesticActSimulatorServer extends DomesticActSimulatorImplBase {
                     .start();
             System.out.println("**********************************");
             logger.log(Level.INFO, "DomesticActSimulator started, listening on {0}", port);
-            System.out.println(" Server started, listening on " + port);
+            System.out.println("************ Server started, listening on " + port);
             System.out.println("**********************************");
             server.awaitTermination();
 
