@@ -1,9 +1,9 @@
 package distsys.smarteducationalenviroment;
 
-
 import generated.grpc.analyzer.CustomFeedbackReply;
 import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.analyzer.Student;
+import generated.grpc.feedback.StudentTask;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -64,24 +64,28 @@ public class StudentClientGUI {
 
         inPanel.add(new JLabel("Select Task to do: "));
         inPanel.add(taskDd);
-        
+
         inPanel.add(new JLabel()); //empty cell
 
         //************** CENTER PANEL FOR OUTPUT *****************
         JTextArea outputArea = new JTextArea();
         outputArea.setEditable(false);
         JScrollPane pScroll = new JScrollPane(outputArea);
-        
+
         //************** BOTTOM PANEL BUTTONS*****************
         JButton subButton = new JButton("Submit Domestic Task");
         JButton analyzeButton = new JButton("Submit Analized Task");
         JButton feedbackButton = new JButton("Submit feedback Task");
-        
+        JButton performanceButton = new JButton("Submit task performance");
+        JButton feedbackLiveButton = new JButton("Live feedback");
+
         JPanel pButton = new JPanel(); //default FlowLayout
         pButton.add(subButton);
         pButton.add(analyzeButton);
         pButton.add(feedbackButton);
-        
+        pButton.add(performanceButton);
+        pButton.add(feedbackLiveButton);
+
         //***************** ADD PANELS TO FRAME ******************
         jframe.add(inPanel, BorderLayout.NORTH);
         jframe.add(pScroll, BorderLayout.CENTER);
@@ -135,7 +139,6 @@ public class StudentClientGUI {
                 outputArea.append("!!!! " + result + "\n");
             }
         });
-
 
         //*********************************************************
         //SERVER 2. Server Streaming RPC - Participation Analizer
@@ -191,35 +194,125 @@ public class StudentClientGUI {
             outputArea.append("!!!Server replied:\n " + feedback + "\n");
 
         });
-        
+
         //*********************************************************
         //SERVER 2. Client Streaming RPC - Participation Analizer
         //*********************************************************        
         feedbackButton.addActionListener(e -> {
             List<CustomFeedbackRequest> feedbackList = new ArrayList<>();
-            
+
             int total = Integer.parseInt(JOptionPane.showInputDialog("How many feedbacks will you want to write?"));
-            
-            for(int i = 0; i<total; i++){
+
+            for (int i = 0; i < total; i++) {
                 String name = JOptionPane.showInputDialog("Student name: ");
                 String feedback = JOptionPane.showInputDialog("Write feedback of student or overall: ");
-                
+
                 CustomFeedbackRequest request = CustomFeedbackRequest.newBuilder()
                         .setStudentName(name)
                         .setFeedback(feedback)
                         .build();
-                
+
                 feedbackList.add(request);
             }
             String result = StudentClientHelper.runClientStreamingCustomFeedback(feedbackList);
             outputArea.append("Custom feedback sent: \n" + result + "\n");
         });
+
+        //*********************************************************
+        //SERVER 3. Client Streaming RPC - Gender Feedback
+        //*********************************************************
+        performanceButton.addActionListener(e -> {
+            List<StudentTask> taskList = new ArrayList<>();
+
+            int total = Integer.parseInt(JOptionPane.showInputDialog("How many students to enter task duration for?"));
+
+            for (int i = 0; i < total; i++) {
+                String name = JOptionPane.showInputDialog("Student name: ");
+                String[] performancetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+                JComboBox<String> performancetaskDd = new JComboBox<>(tasks);
+
+                int option = JOptionPane.showConfirmDialog(null, performancetaskDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
+                //message will be displayed if the user doesn't select a gender.
+                if (option != JOptionPane.OK_CANCEL_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Please select a valid task");
+                    return;
+                }
+                
+                //get the selected task
+                String selectedTask = (String) performancetaskDd.getSelectedItem();
+
+                String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
+                //task duration from an int to a string
+                int time;
+                try {
+                    time = Integer.parseInt(timeStr);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Age must be a number");
+                    return;
+                }
+
+                //Building student message
+                StudentTask studentTask = StudentTask.newBuilder()
+                        .setStudentName(name)
+                        .setStudentTask(selectedTask)
+                        .setTaskDuration(time)
+                        .build();
+
+                taskList.add(studentTask);
+            }
+            String result = StudentClientHelper.runClientStreamingTaskPerformance(taskList);
+            outputArea.append("Task performance result: \n" + result + "\n");
+        });
         
+        //*********************************************************
+        //SERVER 3. Bi-directional RPC - Gender Feedback
+        //*********************************************************
+
+        feedbackLiveButton.addActionListener(e -> {
+            List<StudentTask> taskList = new ArrayList<>();
+
+            int total = Integer.parseInt(JOptionPane.showInputDialog("How many students to enter live feedback for?"));
+
+            for (int i = 0; i < total; i++) {
+                String name = JOptionPane.showInputDialog("Student name: ");
+                String[] performancelivetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+                JComboBox<String> performancetaskliveDd = new JComboBox<>(tasks);
+
+                int option = JOptionPane.showConfirmDialog(null, performancetaskliveDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
+                //message will be displayed if the user doesn't select a gender.
+                if (option != JOptionPane.OK_CANCEL_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Please select a valid task");
+                    return;
+                }
+                
+                //get the selected task
+                String selectedTask = (String) performancetaskliveDd.getSelectedItem();
+
+                String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
+                //task duration from an int to a string
+                int time;
+                try {
+                    time = Integer.parseInt(timeStr);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Time duration must be a number");
+                    return;
+                }
+
+                //Building student message
+                StudentTask studentTask = StudentTask.newBuilder()
+                        .setStudentName(name)
+                        .setStudentTask(selectedTask)
+                        .setTaskDuration(time)
+                        .build();
+
+                taskList.add(studentTask);
+            }
+        String result = StudentClientHelper.runBidirectionalFeedback(taskList);
+        outputArea.append("!!!Live task feedback sent: \n" + result+ "\n");
+        });
         //************** SHOW THE WINDOW **************************
         jframe.setVisible(true);
 
     }
 
 }
-
-

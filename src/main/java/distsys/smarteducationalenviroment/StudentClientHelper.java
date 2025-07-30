@@ -9,6 +9,10 @@ import generated.grpc.domestic.DomesticActSimulatorGrpc;
 import generated.grpc.domestic.RegisterStudentsRequest;
 import generated.grpc.domestic.ResisterStudentsReply;
 import generated.grpc.domestic.Student;
+import generated.grpc.feedback.GenderAFeedbackGrpc;
+import generated.grpc.feedback.StudentTask;
+import generated.grpc.feedback.TaskFeedback;
+import generated.grpc.feedback.TaskFeedbackSummary;
 //import generated.grpc.analyzer.Student;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -156,30 +160,168 @@ public class StudentClientHelper {
                 public void onNext(CustomFeedbackReply value) {
                     result.append(value.getMessage());
                 }
+
                 @Override
-                public void onError(Throwable t){
+                public void onError(Throwable t) {
                     result.append("Error receiving the server reply: ").append(t.getMessage());
                     latch.countDown();
                 }
+
                 @Override
-                public void onCompleted(){
+                public void onCompleted() {
                     latch.countDown();
                 }
             };
             //Stream observer for sending the requests
             StreamObserver<CustomFeedbackRequest> requestObserver = asyncStub.submitCustomFeedback(responseObserver);
             //sending all the request in the list
-            for(CustomFeedbackRequest request : feedbackList){
+            for (CustomFeedbackRequest request : feedbackList) {
                 requestObserver.onNext(request);
             }
-            
+
             requestObserver.onCompleted();      //Mark the end of the requests
             latch.await(3, TimeUnit.SECONDS);   //wait for the response
             channel.shutdown();                 //close channel
-            
+
             return result.toString();
-        }catch(Exception e){
+        } catch (Exception e) {
             return "Error during client streaming gRPC request: " + e.getMessage();
+        }
+
+    }
+
+    //*********************************************************
+    //SERVER 3. Client Streaming RPC - Gender Feedback
+    //*********************************************************
+    public static String runClientStreamingTaskPerformance(List<StudentTask> taskList) {
+        try {
+            //discover the domestic via jmDns
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            ServiceInfo serviceInfo = jmdns.getServiceInfo("grpc.tcp.local.", "GenderFeedback", 50053);
+
+            if (serviceInfo == null) {
+                return "****************Could not find GenderFeedback via jmDNS";
+            }
+
+            String host3 = serviceInfo.getInetAddresses()[0].getHostAddress();
+            int port3 = serviceInfo.getPort();
+
+            //Creating gRPC channel and stub
+            ManagedChannel channel = ManagedChannelBuilder.forAddress(host3, port3)
+                    .usePlaintext()
+                    .build();
+
+            GenderAFeedbackGrpc.GenderAFeedbackStub asyncStub
+                    = GenderAFeedbackGrpc.newStub(channel);
+
+            //prepare a latch to wait for the server response
+            StringBuilder result = new StringBuilder();
+            CountDownLatch latch = new CountDownLatch(1);
+
+            //stream observer for receiving the reply
+            StreamObserver<TaskFeedbackSummary> responseObserver = new StreamObserver<TaskFeedbackSummary>() {
+                @Override
+                public void onNext(TaskFeedbackSummary summary) {
+                    result.append("Task summary: \n")
+                            .append("Total Tasks: ").append(summary.getTotalTask()).append("\n")
+                            .append("Total Time: ").append(summary.getTotalTime()).append(" seconds\n")
+                            .append("summary:  ").append(summary.getSummary()).append("\n");
+
+                }
+
+                @Override
+                public void onError(Throwable t) {
+                    result.append("Error receiving the summary: ").append(t.getMessage());
+                    latch.countDown();
+                }
+
+                @Override
+                public void onCompleted() {
+                    latch.countDown();
+                }
+            };
+            //Stream observer for sending the requests
+            StreamObserver<StudentTask> requestObserver = asyncStub.taskPerformance(responseObserver);
+            //sending all the request in the list
+            for (StudentTask task : taskList) {
+                requestObserver.onNext(task);
+            }
+            requestObserver.onCompleted();      //Mark the end of the requests
+            latch.await(3, TimeUnit.SECONDS);   //wait for the response
+            channel.shutdown();                 //close channel
+
+            return result.toString();
+        } catch (Exception e) {
+            return "Error in task performance client stream: " + e.getMessage();
+        }
+    }
+
+    //*********************************************************
+    //SERVER 3. bi-directional Streaming RPC - Gender Feedback
+    //*********************************************************
+    public static String runBidirectionalFeedback(List<StudentTask> studentTasks) {
+        try {
+            //discover the service via jmDns
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            ServiceInfo serviceInfo = jmdns.getServiceInfo("grpc.tcp.local.", "GenderFeedback", 50053);
+
+            if (serviceInfo == null) {
+                return "****************Could not find GenderFeedback via jmDNS";
+            }
+
+            String host3 = serviceInfo.getInetAddresses()[0].getHostAddress();
+            int port3 = serviceInfo.getPort();
+
+            //Creating gRPC channel and stub
+            ManagedChannel channel = ManagedChannelBuilder.forAddress(host3, port3)
+                    .usePlaintext()
+                    .build();
+
+            GenderAFeedbackGrpc.GenderAFeedbackStub asyncStub
+                    = GenderAFeedbackGrpc.newStub(channel);
+
+            //prepare a latch to wait for the server response
+            StringBuilder result = new StringBuilder();
+            CountDownLatch latch = new CountDownLatch(1);
+
+            //stream observer for receiving the reply
+            StreamObserver<TaskFeedback> responseObserver = new StreamObserver<TaskFeedback>() {
+                @Override
+                public void onNext(TaskFeedback value) {
+                    result.append("Feedback from server: \n")
+                            .append(value.getStudentName()).append(" - ")
+                            .append(value.getFeedback())
+                            .append("\n");
+
+                }
+
+                @Override
+                public void onError(Throwable t) {
+                    result.append("Error from server: ").append(t.getMessage());
+                    latch.countDown();
+                }
+
+                @Override
+                public void onCompleted() {
+                    result.append("!!!Server completed, sending feedback (; ");
+                    latch.countDown();
+                }
+            };
+            //Stream observer to send messages from client to server
+            StreamObserver<StudentTask> requestObserver = asyncStub.liveTaskFeedback(responseObserver);
+            //sending all the request in the list
+            for (StudentTask task : studentTasks) {
+                requestObserver.onNext(task);
+                Thread.sleep(500); //simulate delay between messages
+            }
+
+            requestObserver.onCompleted();      //Mark the end of the requests
+            latch.await(3, TimeUnit.SECONDS);   //wait for the response
+            channel.shutdown();                 //close channel
+
+            return result.toString();
+        } catch (Exception e) {
+            return "Error in bidirectional gRPC: " + e.getMessage();
         }
 
     }
