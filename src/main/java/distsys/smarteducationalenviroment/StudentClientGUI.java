@@ -1,12 +1,16 @@
 package distsys.smarteducationalenviroment;
 
 
+import generated.grpc.analyzer.CustomFeedbackReply;
+import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.analyzer.Student;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -70,16 +74,20 @@ public class StudentClientGUI {
         
         //************** BOTTOM PANEL BUTTONS*****************
         JButton subButton = new JButton("Submit Domestic Task");
-        JButton analyzeButton = new JButton("Submit AnalizeParticipation Task");
+        JButton analyzeButton = new JButton("Submit Analized Task");
+        JButton feedbackButton = new JButton("Submit feedback Task");
         
         JPanel pButton = new JPanel(); //default FlowLayout
         pButton.add(subButton);
         pButton.add(analyzeButton);
+        pButton.add(feedbackButton);
+        
         //***************** ADD PANELS TO FRAME ******************
         jframe.add(inPanel, BorderLayout.NORTH);
         jframe.add(pScroll, BorderLayout.CENTER);
+        jframe.add(pButton, BorderLayout.SOUTH);
 
-        //************** BUTTON LOGIC "PLACEHOLDER" **************
+        //************** BUTTON LOGIC "UNARY RPC" **************
         subButton.addActionListener(new ActionListener() {
 
             @Override
@@ -128,15 +136,10 @@ public class StudentClientGUI {
             }
         });
 
-        //************** SHOW THE WINDOW **************************
-        jframe.setVisible(true);
 
         //*********************************************************
         //SERVER 2. Server Streaming RPC - Participation Analizer
         //*********************************************************
-        JButton analyzeButton = new JButton("Analyze Participation");
-        JPanel subButton2 = new JPanel();
-        subButton2.add(analyzeButton);
         analyzeButton.addActionListener(e -> {
 
             //gather input from fields and validating inputs
@@ -188,6 +191,32 @@ public class StudentClientGUI {
             outputArea.append("!!!Server replied:\n " + feedback + "\n");
 
         });
+        
+        //*********************************************************
+        //SERVER 2. Client Streaming RPC - Participation Analizer
+        //*********************************************************        
+        feedbackButton.addActionListener(e -> {
+            List<CustomFeedbackRequest> feedbackList = new ArrayList<>();
+            
+            int total = Integer.parseInt(JOptionPane.showInputDialog("How many feedbacks will you want to write?"));
+            
+            for(int i = 0; i<total; i++){
+                String name = JOptionPane.showInputDialog("Student name: ");
+                String feedback = JOptionPane.showInputDialog("Write feedback of student or overall: ");
+                
+                CustomFeedbackRequest request = CustomFeedbackRequest.newBuilder()
+                        .setStudentName(name)
+                        .setFeedback(feedback)
+                        .build();
+                
+                feedbackList.add(request);
+            }
+            String result = StudentClientHelper.runClientStreamingCustomFeedback(feedbackList);
+            outputArea.append("Custom feedback sent: \n" + result + "\n");
+        });
+        
+        //************** SHOW THE WINDOW **************************
+        jframe.setVisible(true);
 
     }
 
