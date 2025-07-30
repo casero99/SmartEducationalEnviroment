@@ -5,7 +5,9 @@ import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.analyzer.Student;
 import generated.grpc.feedback.StudentTask;
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -42,7 +44,10 @@ public class StudentClientGUI {
         jframe.setLayout(new BorderLayout());
 
         // **************TOP PANEL FOR INPUT****************
-        JPanel inPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel inPanel = new JPanel(new GridLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5,5,5,5);
+        gbc.anchor = GridBagConstraints.WEST;
 
         JTextField fName = new JTextField();
         JTextField fAge = new JTextField();
@@ -53,16 +58,28 @@ public class StudentClientGUI {
         String[] tasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
         JComboBox<String> taskDd = new JComboBox<>(tasks);
 
+        gbc.gridx=0;
+        gbc.gridy=0;
         inPanel.add(new JLabel("Student Name: "));
-        inPanel.add(fName);
+        gbc.gridx=1;
+        inPanel.add(fName, gbc);
 
+        gbc.gridx=0;
+        gbc.gridy=1;
         inPanel.add(new JLabel("Student Age: "));
+        gbc.gridx=1;
         inPanel.add(fAge);
 
+        gbc.gridx=0;
+        gbc.gridy=2;
         inPanel.add(new JLabel("Student Gender: "));
+        gbc.gridx=1;
         inPanel.add(genderDd);
 
+        gbc.gridx=0;
+        gbc.gridy=3;
         inPanel.add(new JLabel("Select Task to do: "));
+        gbc.gridx=1;
         inPanel.add(taskDd);
 
         inPanel.add(new JLabel()); //empty cell
