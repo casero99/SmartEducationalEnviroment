@@ -19,7 +19,7 @@ import javax.jmdns.ServiceInfo;
 
 public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
 
-    private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
+    private static final Logger logger = Logger.getLogger(GenderAFeedbackServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -45,7 +45,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                     .build()
                     .start();
             System.out.println("**********************************");
-            logger.log(Level.INFO, "ParticipationAnalizer started, listening on {0}", port);
+            logger.log(Level.INFO, "GenderAFeedbackServer started, listening on {0}", port);
             System.out.println(" Server started, listening on" + port);
             System.out.println("**********************************");
             server.awaitTermination();
@@ -71,7 +71,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
             @Override
             public void onNext(StudentTask task) {
                 String studentName = task.getStudentName();
-                String studentTaks = task.getStudentTask();
+                String studentTask = task.getStudentTask();
                 int taskDuration = task.getTaskDuration();
 
                 totalDuration += taskDuration;
@@ -86,7 +86,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                     msg = "Too slow. Try to speed up";
                 }
 
-                feedbackBuilder.append("Good").append(studentName).append(" did ").append(studentTaks)
+                feedbackBuilder.append("Feedback for ").append(studentName).append(" did ").append(studentTask)
                         .append(" in ").append(taskDuration).append(" seconds ").append(msg).append("\n");
 
                 System.out.println("Received task from " + studentName);
@@ -106,6 +106,9 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                         .setTotalTime(totalTaskDuration)
                         .setSummary(feedbackBuilder.toString())
                         .build();
+                
+                responseObserver.onNext(summary);
+                responseObserver.onCompleted();
             }
         };
     }
@@ -122,14 +125,16 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                 //extract the data sent by the client
                 String studentName = event.getStudentName();
                 String studentTask = event.getStudentTask();
-                double taskDuration = event.getTaskDuration();
+                int taskDuration = event.getTaskDuration();
                 String feedback; //preguntar acerca de este
 
                 //feedback logic based on task duration
-                if (taskDuration > 5.0) {
-                    feedback = "Great Job! But try to be a little bit faster completing the task" + studentTask;
-                } else {
-                    feedback = "You've done amazing! Keep it that way!" + studentTask;
+                if (taskDuration <= 5) {
+                    feedback = "Great Job! Fast and efficient!" + studentTask;
+                } else if(taskDuration <=10) {
+                    feedback = "Very well! Average speed" + studentTask;
+                }else{
+                    feedback = "Try to improve speed.";
                 }
 
                 //build the reponse message managed by feedback

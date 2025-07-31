@@ -254,10 +254,10 @@ public class StudentClient {
                 latch.await(3, TimeUnit.SECONDS); //waits for server to respond
 
             
-        }// catch (HeadlessException | NumberFormatException e) {
+        // catch (HeadlessException | NumberFormatException e) {
            // requestObserver.onError(e);
            // return;// prevents further onNext() calls after onError 
-catch (Exception e){
+        }catch (Exception e){
     requestObserver.onError(e);
         }
     }

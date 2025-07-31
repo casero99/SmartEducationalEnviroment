@@ -20,7 +20,7 @@ import javax.jmdns.ServiceInfo;
 
 public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
-    private static final Logger logger = Logger.getLogger(DomesticActSimulatorServer.class.getName());
+    private static final Logger logger = Logger.getLogger(ParticipationAnalizerServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -86,13 +86,13 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
                 + "Total FEMALE students: " + femaleCount + "\n"
                 + "Total: " + totalNumStudents + " students.";
 
-        ParticipationStatistics pStats = ParticipationStatistics.newBuilder()
+        ParticipationStatistics response = ParticipationStatistics.newBuilder()
                 .setMalePercentage(malePercentage)
                 .setFemalePercentage(femalePercentage)
                 .setSummary(summary)
                 .build();
 
-        responseObserver.onNext(pStats);
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
 
     }
@@ -125,7 +125,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
                 System.out.println("Custom feedback received:\n" + storeFeedback.toString());
 
                 CustomFeedbackReply reply = CustomFeedbackReply.newBuilder()
-                        .setMessage("Feedback received and saved succesfully!")
+                        .setMessage("Feedback received and saved succesfully!" + storeFeedback.toString())
                         .build();
 
                 responseObserver.onNext(reply);

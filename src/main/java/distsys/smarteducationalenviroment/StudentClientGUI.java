@@ -38,51 +38,30 @@ public class StudentClientGUI {
         //SERVICE 1. UNARY - Domestic Activity Simulator
         //*********************************************************
         //main window (JFrame)
-        JFrame jframe = new JFrame("Domestic Simulator");
+        JFrame jframe = new JFrame("Smart Educational Enviroment");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setSize(500, 400);
+        jframe.setSize(400, 350);
         jframe.setLayout(new BorderLayout());
 
         // **************TOP PANEL FOR INPUT****************
         JPanel inPanel = new JPanel(new GridLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5,5,5,5);
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5,10,5,10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JTextField fName = new JTextField();
-        JTextField fAge = new JTextField();
+        //labels and inputs
+        JTextField fName = new JTextField(20);
+        JTextField fAge = new JTextField(5);
 
         String[] fGender = {"-Select gender-", "Male", "Female", "Other"};
         JComboBox<String> genderDd = new JComboBox<>(fGender);
 
         String[] tasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
         JComboBox<String> taskDd = new JComboBox<>(tasks);
-
-        gbc.gridx=0;
-        gbc.gridy=0;
-        inPanel.add(new JLabel("Student Name: "));
-        gbc.gridx=1;
-        inPanel.add(fName, gbc);
-
-        gbc.gridx=0;
-        gbc.gridy=1;
-        inPanel.add(new JLabel("Student Age: "));
-        gbc.gridx=1;
-        inPanel.add(fAge);
-
-        gbc.gridx=0;
-        gbc.gridy=2;
-        inPanel.add(new JLabel("Student Gender: "));
-        gbc.gridx=1;
-        inPanel.add(genderDd);
-
-        gbc.gridx=0;
-        gbc.gridy=3;
-        inPanel.add(new JLabel("Select Task to do: "));
-        gbc.gridx=1;
-        inPanel.add(taskDd);
-
-        inPanel.add(new JLabel()); //empty cell
+        
+        //************** CENTER PANEL FOR OUTPUT *****************
+        JButton addButton = new JButton("Register student");
+        JButton sendButton = new JButton("Send all");
 
         //************** CENTER PANEL FOR OUTPUT *****************
         JTextArea outputArea = new JTextArea();
@@ -107,6 +86,48 @@ public class StudentClientGUI {
         jframe.add(inPanel, BorderLayout.NORTH);
         jframe.add(pScroll, BorderLayout.CENTER);
         jframe.add(pButton, BorderLayout.SOUTH);
+        
+        //---NAME----------------------------------
+        //-----------------------------------------
+        gbc.gridx=0;
+        gbc.gridy=0;
+        inPanel.add(new JLabel("Student Name: "));
+        gbc.gridx=1;
+        inPanel.add(fName, gbc);
+        
+        //---AGE-----------------------------------
+        //-----------------------------------------
+        gbc.gridx=0;
+        gbc.gridy=1;
+        inPanel.add(new JLabel("Student Age: "));
+        gbc.gridx=1;
+        inPanel.add(fAge);
+        
+        //---GENDER--------------------------------
+        //-----------------------------------------
+        gbc.gridx=0;
+        gbc.gridy=2;
+        inPanel.add(new JLabel("Student Gender: "));
+        gbc.gridx=1;
+        inPanel.add(genderDd);
+        
+        //---TASK----------------------------------
+        //-----------------------------------------
+        gbc.gridx=0;
+        gbc.gridy=3;
+        inPanel.add(new JLabel("Select Task to do: "));
+        gbc.gridx=1;
+        inPanel.add(taskDd);
+        
+        gbc.gridx=0;
+        gbc.gridy=4;
+        inPanel.add(addButton, gbc);
+        gbc.gridx=1;
+        inPanel.add(sendButton, gbc);
+
+        inPanel.add(new JLabel()); //empty cell
+        
+        
 
         //************** BUTTON LOGIC "UNARY RPC" **************
         subButton.addActionListener(new ActionListener() {
