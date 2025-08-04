@@ -19,6 +19,7 @@ import javax.jmdns.ServiceInfo;
 
 public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
 
+    //logger to helo print server logs in a clean way
     private static final Logger logger = Logger.getLogger(GenderAFeedbackServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -30,7 +31,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
         */
         
         JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
-        //Service - jmDNS Type - Service Name - Port
+        //Service - Service Name - Port - Description
         ServiceInfo serviceInfo = ServiceInfo.create("grpc.tcp.local.", "GenderFeedback", 50053, "gRPC service for Gender A. Feedback");
         jmdns.registerService(serviceInfo);
         System.out.println("**********************************");
@@ -40,6 +41,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
         int port = 50053;
 
         try {
+            //start the gRPC server and attach the GenderAFeedbackServer to the port
             Server server = ServerBuilder.forPort(port)
                     .addService(new GenderAFeedbackServer())
                     .build()
@@ -48,7 +50,7 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
             logger.log(Level.INFO, "GenderAFeedbackServer started, listening on {0}", port);
             System.out.println(" Server started, listening on" + port);
             System.out.println("**********************************");
-            server.awaitTermination();
+            server.awaitTermination(); //keep the server running
 
         } catch (IOException e) {
             e.printStackTrace();// TODO Auto-generated catch block
@@ -60,7 +62,10 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
 
     }
 
-    //public void taskPerformance(StudentTask request, StreamObserver<TaskFeedbackSummary> responseObserver){
+    /*
+        CLIENT STREAMING -- receives multiple information and sends one summary at the end
+    */
+    @Override
     public StreamObserver<StudentTask> taskPerformance(StreamObserver<TaskFeedbackSummary> responseObserver) {
         return new StreamObserver<StudentTask>() {
 
@@ -74,9 +79,11 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                 String studentTask = task.getStudentTask();
                 int taskDuration = task.getTaskDuration();
 
+                //total time and number of tasks
                 totalDuration += taskDuration;
                 taskCount++;
 
+                //individual feedback message
                 String msg;
                 if (taskDuration <= 5) {
                     msg = "Fast, efficient, and done pretty well! (:";
@@ -86,12 +93,14 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                     msg = "Too slow. Try to speed up";
                 }
 
+                //append formatted feedback for each student
                 feedbackBuilder.append("Feedback for ").append(studentName).append(" did ").append(studentTask)
                         .append(" in ").append(taskDuration).append(" seconds ").append(msg).append("\n");
 
                 System.out.println("Received task from " + studentName);
             }
 
+            //if an error happends during stream
             @Override
             public void onError(Throwable t) {
                 logger.log(Level.WARNING, "Encountered error in recordRoute", t);
@@ -99,20 +108,26 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
 
             @Override
             public void onCompleted() {
+                //when all client data has been sent, compute average time
                 int totalTaskDuration = (taskCount == 0) ? 0 : totalDuration / taskCount;
 
+                //summary response
                 TaskFeedbackSummary summary = TaskFeedbackSummary.newBuilder()
                         .setTotalTask(taskCount)
                         .setTotalTime(totalTaskDuration)
                         .setSummary(feedbackBuilder.toString())
                         .build();
                 
+                //sending the resposne to the client
                 responseObserver.onNext(summary);
                 responseObserver.onCompleted();
             }
         };
     }
-        //Bi-directional RPC
+        /*
+    BIDIRECTIONAL STREAMING -- Real time feedback as the client send each task 
+    
+    */
     
     @Override
     public StreamObserver<StudentTask> liveTaskFeedback(StreamObserver<TaskFeedback> responseObserver) {

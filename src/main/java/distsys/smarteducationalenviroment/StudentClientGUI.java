@@ -63,7 +63,6 @@ public class StudentClientGUI {
 
         //************** CENTER PANEL FOR OUTPUT *****************
         JButton addButton = new JButton("Register student");
-        JButton sendButton = new JButton("Send all");
 
         //************** CENTER PANEL FOR OUTPUT *****************
         JTextArea outputArea = new JTextArea();
@@ -125,7 +124,6 @@ public class StudentClientGUI {
         gbc.gridy = 4;
         inPanel.add(addButton, gbc);
         gbc.gridx = 1;
-        inPanel.add(sendButton, gbc);
 
         inPanel.add(new JLabel()); //empty cell
 
@@ -264,19 +262,7 @@ public class StudentClientGUI {
 
             String gender = (String) genderDd.getSelectedItem();
 
-            //message will be displayed if the user doesn't select a gender.
-            if (gender.equals("-Select gender-")) {
-                JOptionPane.showMessageDialog(null, "Please select a valid gender");
-                return;
-            }
-
             String task = (String) taskDd.getSelectedItem();
-
-            //message will be displayed if the user doesn't select a gender.
-            if (task.equals("-Select task to do-")) {
-                JOptionPane.showMessageDialog(null, "Please select a valid task");
-                return;
-            }
 
             //Building student message
             Student student = Student.newBuilder()
@@ -302,7 +288,7 @@ public class StudentClientGUI {
 
             for (int i = 0; i < total; i++) {
                 String name = JOptionPane.showInputDialog("Student name: ");
-                String feedback = JOptionPane.showInputDialog("Write feedback of student or overall: ");
+                String feedback = JOptionPane.showInputDialog("Write feedback of student or overall: ", "\n");
 
                 CustomFeedbackRequest request = CustomFeedbackRequest.newBuilder()
                         .setStudentName(name)
@@ -324,14 +310,8 @@ public class StudentClientGUI {
             int total = Integer.parseInt(JOptionPane.showInputDialog("How many students to enter task duration for?"));
 
             for (int i = 0; i < total; i++) {
-                String name = JOptionPane.showInputDialog("Student name: ");
-                String[] performancetasks = { "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
-                JComboBox<String> performancetaskDd = new JComboBox<>(tasks);
-
-               
-
-                //get the selected task
-                String selectedTask = (String) performancetaskDd.getSelectedItem();
+                String name = JOptionPane.showInputDialog("Student name: ", "\n");
+                String performancetasks = JOptionPane.showInputDialog("Task done: ", "\n");
 
                 String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
                 //task duration from an int to a string
@@ -346,7 +326,7 @@ public class StudentClientGUI {
                 //Building student message
                 StudentTask studentTask = StudentTask.newBuilder()
                         .setStudentName(name)
-                        .setStudentTask(selectedTask)
+                        .setStudentTask(performancetasks)
                         .setTaskDuration(time)
                         .build();
 
@@ -366,12 +346,7 @@ public class StudentClientGUI {
 
             for (int i = 0; i < total; i++) {
                 String name = JOptionPane.showInputDialog("Student name: ");
-                String[] performancelivetasks = { "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
-                JComboBox<String> performancetaskliveDd = new JComboBox<>(tasks);
-
-
-                //get the selected task
-                String selectedTask = (String) performancetaskliveDd.getSelectedItem();
+                String performancetasks = JOptionPane.showInputDialog("Task done: ", "\n");
 
                 String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
                 //task duration from an int to a string
@@ -386,7 +361,7 @@ public class StudentClientGUI {
                 //Building student message
                 StudentTask studentTask = StudentTask.newBuilder()
                         .setStudentName(name)
-                        .setStudentTask(selectedTask)
+                        .setStudentTask(performancetasks)
                         .setTaskDuration(time)
                         .build();
 

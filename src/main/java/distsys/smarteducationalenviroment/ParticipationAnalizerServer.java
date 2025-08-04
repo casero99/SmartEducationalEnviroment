@@ -20,6 +20,7 @@ import javax.jmdns.ServiceInfo;
 
 public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
+    //logger to helo print server logs in a clean way
     private static final Logger logger = Logger.getLogger(ParticipationAnalizerServer.class.getName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -31,7 +32,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
         */
         
         JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
-        //Service - jmDNS Type - Service Name - Port
+        //Service - Service Name - Port - Description
         ServiceInfo serviceInfo = ServiceInfo.create("grpc.tcp.local.", "ParticipationAnalizer", 50052, "gRPC service for Participation Analizer");
         jmdns.registerService(serviceInfo);
         System.out.println("**********************************");
@@ -40,6 +41,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
         int port = 50052;
 
         try {
+            //create and start the gRPC server on port 50052
             Server server = ServerBuilder.forPort(port)
                     .addService(new ParticipationAnalizerServer())
                     .build()
@@ -48,7 +50,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
             logger.log(Level.INFO, "ParticipationAnalizer started, listening on {0}", port);
             System.out.println(" Server started, listening on" + port);
             System.out.println("**********************************");
-            server.awaitTermination();
+            server.awaitTermination(); //keep the server running
 
         } catch (IOException e) {
             e.printStackTrace();// TODO Auto-generated catch block
@@ -59,14 +61,19 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
         }
 
     }
- //SERVER
+ 
+    /*
+    SERVER STREAMING -- Receives a full list of students
+    and returns a summary of male/female of the participant students
+    
+    */
     @Override
-    //public  StreamObserver<ParticipationEntry> trackerParticipation(final StreamObserver<ParticipationStatistics> responseObserver){
-    public void analyzerParticipation(ParticipationRequest request, StreamObserver<ParticipationStatistics> responseObserver) {
+     public void analyzerParticipation(ParticipationRequest request, StreamObserver<ParticipationStatistics> responseObserver) {
 
         int maleCount = 0;
         int femaleCount = 0;
 
+        //loop of each student and count gender
         for (Student student : request.getStudentsList()) {
             String gender = student.getGender();
 
@@ -78,40 +85,54 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
         }
 
         int totalNumStudents = maleCount + femaleCount;
+        
+        //calculating the percentage of each gender
         float malePercentage = totalNumStudents > 0 ? (maleCount * 100f) / totalNumStudents : 0;
         float femalePercentage = totalNumStudents > 0 ? (femaleCount * 100f) / totalNumStudents : 0;
 
+        
+        //summary message
         String summary = "Students participation summary:\n"
                 + "Total MALE students: " + maleCount + "\n"
                 + "Total FEMALE students: " + femaleCount + "\n"
                 + "Total: " + totalNumStudents + " students.";
 
+        
+        //response object created
         ParticipationStatistics response = ParticipationStatistics.newBuilder()
                 .setMalePercentage(malePercentage)
                 .setFemalePercentage(femalePercentage)
                 .setSummary(summary)
                 .build();
 
+        //sending the response
         responseObserver.onNext(response);
         responseObserver.onCompleted();
 
     }
 
-    //second RPC - CLIENT submit the custom feedback
+    /*
+     CLIENT STREAMING -- Allows client to send multimple feedback messages
+     and then the server replies once with a full feedback summary
+     
+     */
     @Override
     public StreamObserver<CustomFeedbackRequest> submitCustomFeedback(
             StreamObserver<CustomFeedbackReply> responseObserver) {
 
+        //creating the space where the feedback will be store
         return new StreamObserver<CustomFeedbackRequest>() {
 
-            //creating the space where the feedback will be store
+            // storing feedback messages
             StringBuilder storeFeedback = new StringBuilder();
 
             @Override
             public void onNext(CustomFeedbackRequest request) {
+                //extract student name and the feedbacks
                 String studentName = request.getStudentName();
                 String feedback = request.getFeedback();
 
+                //append to feedback summary
                 storeFeedback.append("Feedback for ").append(studentName).append(": ").append(feedback).append("\n");
             }
 
@@ -122,6 +143,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
             @Override
             public void onCompleted() {
+                //printing the feedback
                 System.out.println("Custom feedback received:\n" + storeFeedback.toString());
 
                 CustomFeedbackReply reply = CustomFeedbackReply.newBuilder()

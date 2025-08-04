@@ -37,12 +37,8 @@ import javax.swing.JOptionPane;
  * @author Carolina
  */
 public class StudentClientERROR {
-    
-
-
-
-
-
+   
+    //Logger for debugginf and showing gRPC call results
     private static final Logger logger = Logger.getLogger(StudentClientERROR.class.getName());
 
     //*********************************************************
@@ -54,15 +50,18 @@ public class StudentClientERROR {
         //discovering the services via jmDNS
         JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
         
+        //discover all 3 services created by ther service name
         ServiceInfo info1 = jmdns.getServiceInfo("grpc.tcp.local.", "DomesticService");
         ServiceInfo info2 = jmdns.getServiceInfo("grpc.tcp.local.", "ParticipationAnalizer");
         ServiceInfo info3 = jmdns.getServiceInfo("grpc.tcp.local.", "GenderFeedback");
         
+        //verify if services were found
         if (info1 == null || info2 == null || info3 == null){
             System.out.println("***********One or more services could not be found via jmDNS");
             return;
         }
         
+        //extract host and port for each service
         String host1 = info1.getInetAddresses()[0].getHostAddress();
         int port1 = info1.getPort();
         
@@ -87,6 +86,7 @@ public class StudentClientERROR {
         //**********************************************
         //Channel 2. Port 50052 - Client & Server Streaming. Participation Analizer
         //port2 = 50052;
+        //**********************************************
         ManagedChannel channel2 = ManagedChannelBuilder
                 .forAddress(host2, port2)
                 .usePlaintext()
@@ -98,6 +98,7 @@ public class StudentClientERROR {
         //**********************************************
         //Channel 3. Port 50053 - Client Streaming & Bi-directional Streaming server. Gender A. Feedback
         //port3 = 50053;
+        //**********************************************
         ManagedChannel channel3 = ManagedChannelBuilder
                 .forAddress(host3, port3)
                 .usePlaintext()
@@ -117,6 +118,7 @@ public class StudentClientERROR {
                 .build();
         DomesticActSimulatorGrpc.DomesticActSimulatorBlockingStub blockingStub = DomesticActSimulatorGrpc.newBlockingStub(channel);
         try {
+            //build the student object from GUI input
             Student student = Student.newBuilder()
             .setStudentName(name)
                     .setStudentAge(age)
@@ -166,7 +168,7 @@ public class StudentClientERROR {
         for (int i = 0; i < number; i++) {
             String name = JOptionPane.showInputDialog("Student name: ");
             int age = Integer.parseInt(JOptionPane.showInputDialog("Student age: "));
-            String gender = JOptionPane.showInputDialog("Gender (Male/Female/Other): ");
+            String gender = JOptionPane.showInputDialog("Gender (Male/Female): ");
             String[] tasks = {"Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
             String taskName = (String) JOptionPane.showInputDialog(null,
                     "Select Task to-do: ",
@@ -246,10 +248,6 @@ public class StudentClientERROR {
                 requestObserver.onCompleted();    //closes the stream after sending all the messages
                 latch.await(3, TimeUnit.SECONDS); //waits for server to respond
 
-            
-        // catch (HeadlessException | NumberFormatException e) {
-           // requestObserver.onError(e);
-           // return;// prevents further onNext() calls after onError 
         }catch (Exception e){
     requestObserver.onError(e);
         }
