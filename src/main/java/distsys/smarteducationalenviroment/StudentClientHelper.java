@@ -31,10 +31,15 @@ import javax.jmdns.ServiceInfo;
  /*
     This class basically is a 'helper class' 
     that contains the gRPC connection logic.
+    Discovers services using jmDNS, establishing the channels, building the requests,
+    and manages the responses for each service.
 
  */
 public class StudentClientHelper {
-
+    
+        //*********************************************************
+        //SERVER . UNARY Streaming RPC - Domestic Activity Simulator
+        //*********************************************************
     public static String runUnaryDomesticTask(String name, int age, String gender, String task) {
 
         try {
@@ -42,10 +47,12 @@ public class StudentClientHelper {
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
             ServiceInfo serviceInfo = jmdns.getServiceInfo("grpc.tcp.local.", "DomesticService", 50051);
 
+            //if the service is not found
             if (serviceInfo == null) {
                 return "****************Could not find DomesticService via jmDNS";
             }
 
+            //get the IP and port from discovered service
             String host1 = serviceInfo.getInetAddresses()[0].getHostAddress();
             int port1 = serviceInfo.getPort();
 
@@ -65,6 +72,7 @@ public class StudentClientHelper {
                     .setTaskName(task)
                     .build();
 
+            //call the server and get response
             RegisterStudentsRequest request = RegisterStudentsRequest.newBuilder()
                     .addStudents(students)
                     .build();
@@ -114,12 +122,7 @@ public class StudentClientHelper {
             Iterator<ParticipationStatistics> stats = stub.analyzerParticipation(request);
 
             //create the iterator for the server stream
-            /*
-            StringBuilder resultBuilder = new StringBuilder();
-            while (replies.hasNext()) {
-                ParticipationStatistics reply = replies.next();
-                resultBuilder.append(" . ").append(reply.getSummary()).append("\n");
-            }*/
+            
             while(stats.hasNext()){
                 ParticipationStatistics percentage = stats.next();
                 feedback.append(" MALE %: ").append(percentage.getMalePercentage())
