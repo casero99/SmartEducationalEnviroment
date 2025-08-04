@@ -328,12 +328,7 @@ public class StudentClientGUI {
                 String[] performancetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
                 JComboBox<String> performancetaskDd = new JComboBox<>(tasks);
 
-                int option = JOptionPane.showConfirmDialog(null, performancetaskDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
-                //message will be displayed if the user doesn't select a gender.
-                if (option != JOptionPane.OK_CANCEL_OPTION) {
-                    JOptionPane.showMessageDialog(null, "Please select a valid task");
-                    return;
-                }
+               
 
                 //get the selected task
                 String selectedTask = (String) performancetaskDd.getSelectedItem();
@@ -374,12 +369,6 @@ public class StudentClientGUI {
                 String[] performancelivetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
                 JComboBox<String> performancetaskliveDd = new JComboBox<>(tasks);
 
-                int option = JOptionPane.showConfirmDialog(null, performancetaskliveDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
-                //message will be displayed if the user doesn't select a gender.
-                if (option != JOptionPane.OK_CANCEL_OPTION) {
-                    JOptionPane.showMessageDialog(null, "Please select a valid task");
-                    return;
-                }
 
                 //get the selected task
                 String selectedTask = (String) performancetaskliveDd.getSelectedItem();
