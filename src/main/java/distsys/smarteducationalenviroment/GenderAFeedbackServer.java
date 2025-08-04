@@ -94,8 +94,8 @@ public class GenderAFeedbackServer extends GenderAFeedbackImplBase {
                 }
 
                 //append formatted feedback for each student
-                feedbackBuilder.append("Feedback for ").append(studentName).append(" did ").append(studentTask)
-                        .append(" in ").append(taskDuration).append(" seconds ").append(msg).append("\n");
+                feedbackBuilder.append("\n Feedback for ").append(studentName).append(" did ").append(studentTask)
+                        .append(" in ").append(taskDuration).append(" minutes ").append(msg).append("\n");
 
                 System.out.println("Received task from " + studentName);
             }
