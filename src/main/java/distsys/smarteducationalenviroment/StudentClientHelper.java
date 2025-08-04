@@ -83,7 +83,7 @@ public class StudentClientHelper {
     //*********************************************************
     //SERVER 2. Server Streaming RPC - Participation Analizer
     //*********************************************************
-    public static String runServerStreamingParticipationAnalizer(generated.grpc.analyzer.Student student) {
+    public static String runServerStreamingParticipationAnalizer(List<generated.grpc.analyzer.Student> studentList) {
         try {
             //discover the domestic via jmDns
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
@@ -96,6 +96,8 @@ public class StudentClientHelper {
             String host2 = serviceInfo.getInetAddresses()[0].getHostAddress();
             int port2 = serviceInfo.getPort();
 
+            StringBuilder feedback = new StringBuilder();
+            
             //Creating gRPC channel and stub
             ManagedChannel channel = ManagedChannelBuilder.forAddress(host2, port2)
                     .usePlaintext()
@@ -106,24 +108,35 @@ public class StudentClientHelper {
 
             //Create the request
             ParticipationRequest request = ParticipationRequest.newBuilder()
-                    .addStudents(student) //expecting a list, but it can be only one student
+                    .addAllStudents(studentList) //expecting a list, but it can be only one student
                     .build();
             //send request and receive streamed responses
-            Iterator<ParticipationStatistics> replies = stub.analyzerParticipation(request);
+            Iterator<ParticipationStatistics> stats = stub.analyzerParticipation(request);
 
             //create the iterator for the server stream
+            /*
             StringBuilder resultBuilder = new StringBuilder();
             while (replies.hasNext()) {
                 ParticipationStatistics reply = replies.next();
                 resultBuilder.append(" . ").append(reply.getSummary()).append("\n");
-            }
+            }*/
+            while(stats.hasNext()){
+                ParticipationStatistics percentage = stats.next();
+                feedback.append(" MALE %: ").append(percentage.getMalePercentage())
+                    .append(", FEMALE %: ").append(percentage.getFemalePercentage())
+                    .append("\n").append(percentage.getSummary()).append("\n");
+        }
+            
 
-            channel.shutdown();
-            return resultBuilder.toString();
+            channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+            return feedback.toString();
+           
 
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
             return "*****************Error during gRPC request: " + e.getMessage();
         }
+             
     }
 
     //*********************************************************

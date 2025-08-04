@@ -59,7 +59,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
         }
 
     }
-
+ //SERVER
     @Override
     //public  StreamObserver<ParticipationEntry> trackerParticipation(final StreamObserver<ParticipationStatistics> responseObserver){
     public void analyzerParticipation(ParticipationRequest request, StreamObserver<ParticipationStatistics> responseObserver) {
@@ -97,7 +97,7 @@ public class ParticipationAnalizerServer extends ParticipationAnalizerImplBase {
 
     }
 
-    //second RPC - submit the custom feedback
+    //second RPC - CLIENT submit the custom feedback
     @Override
     public StreamObserver<CustomFeedbackRequest> submitCustomFeedback(
             StreamObserver<CustomFeedbackReply> responseObserver) {

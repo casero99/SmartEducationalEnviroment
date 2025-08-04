@@ -30,14 +30,17 @@ generated\grpc\analyzer\CustomFeedbackReplyOrBuilder.class
 generated\grpc\domestic\ResisterStudentsReply$1.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc.class
 generated\grpc\analyzer\ParticipationRequest$1.class
+distsys\smarteducationalenviroment\StudentClientGUI2$3.class
 generated\grpc\analyzer\Student$1.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$3.class
 generated\grpc\analyzer\CustomFeedbackReply$Builder.class
+distsys\smarteducationalenviroment\StudentClientGUI2.class
 generated\grpc\domestic\ResisterStudentsReplyOrBuilder.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorMethodDescriptorSupplier.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackFutureStub.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackImplBase.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackBlockingStub.class
+distsys\smarteducationalenviroment\StudentClientGUI2$2.class
 distsys\smarteducationalenviroment\StudentClientHelper$1.class
 distsys\smarteducationalenviroment\StudentClientHelper.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$2.class
@@ -68,7 +71,9 @@ generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorFileDescrip
 generated\grpc\domestic\RegisterStudentsRequestOrBuilder.class
 generated\grpc\analyzer\ParticipationRequest.class
 generated\grpc\analyzer\Student$Builder.class
+distsys\smarteducationalenviroment\StudentClientGUI2$1.class
 generated\grpc\feedback\StudentTaskOrBuilder.class
+distsys\smarteducationalenviroment\StudentClientGUI2$4.class
 generated\grpc\analyzer\ParticipationRequest$Builder.class
 distsys\smarteducationalenviroment\StudentClient$2.class
 generated\grpc\feedback\TaskFeedbackOrBuilder.class
