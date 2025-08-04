@@ -43,7 +43,7 @@ public class StudentClientERROR {
 
 
 
-    private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
+    private static final Logger logger = Logger.getLogger(StudentClientERROR.class.getName());
 
     //*********************************************************
     // Channels
@@ -234,7 +234,7 @@ public class StudentClientERROR {
             int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many feedbacks are you submitting?"));
 
             for (int i = 0; i < entryCount; i++) {
-                String name = JOptionPane.showInputDialog("Student name: ");
+                String name = JOptionPane.showInputDialog("Student name: \n");
                 String feedback = JOptionPane.showInputDialog("Feedback: \n");
 
                 CustomFeedbackRequest feedbackMsg = CustomFeedbackRequest.newBuilder()
@@ -320,7 +320,7 @@ public class StudentClientERROR {
         StreamObserver<StudentTask> requestObserver = asyncStub.liveTaskFeedback(new StreamObserver<TaskFeedback>() {
             @Override
             public void onNext(TaskFeedback value) {
-                JOptionPane.showMessageDialog(null, "Observations: " + value.getFeedback());
+                JOptionPane.showMessageDialog(null, "Observations: " + value.getFeedback()+ "\n");
             }
 
             @Override

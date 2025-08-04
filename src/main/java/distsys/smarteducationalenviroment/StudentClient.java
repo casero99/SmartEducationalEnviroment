@@ -1,5 +1,5 @@
 package distsys.smarteducationalenviroment;
-
+/*
 import generated.grpc.analyzer.CustomFeedbackReply;
 import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.domestic.DomesticActSimulatorGrpc;
@@ -33,6 +33,7 @@ import javax.jmdns.ServiceInfo;
 import javax.swing.JOptionPane;
 
 /*@author Carolina*/
+/*
 public class StudentClient {
 
     private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
@@ -386,3 +387,4 @@ public class StudentClient {
         }
     
 }
+*/

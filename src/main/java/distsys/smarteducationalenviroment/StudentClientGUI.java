@@ -325,7 +325,7 @@ public class StudentClientGUI {
 
             for (int i = 0; i < total; i++) {
                 String name = JOptionPane.showInputDialog("Student name: ");
-                String[] performancetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+                String[] performancetasks = { "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
                 JComboBox<String> performancetaskDd = new JComboBox<>(tasks);
 
                
@@ -366,7 +366,7 @@ public class StudentClientGUI {
 
             for (int i = 0; i < total; i++) {
                 String name = JOptionPane.showInputDialog("Student name: ");
-                String[] performancelivetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+                String[] performancelivetasks = { "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
                 JComboBox<String> performancetaskliveDd = new JComboBox<>(tasks);
 
 
