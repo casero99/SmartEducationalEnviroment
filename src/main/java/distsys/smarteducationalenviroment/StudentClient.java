@@ -1,5 +1,5 @@
 package distsys.smarteducationalenviroment;
-/*
+
 import generated.grpc.analyzer.CustomFeedbackReply;
 import generated.grpc.analyzer.CustomFeedbackRequest;
 import generated.grpc.domestic.DomesticActSimulatorGrpc;
@@ -32,10 +32,13 @@ import javax.jmdns.ServiceInfo;
 
 import javax.swing.JOptionPane;
 
-/*@author Carolina*/
-/*
-public class StudentClient {
-
+/**
+ *
+ * @author Carolina
+ */
+public class StudentClient{
+   
+    //Logger for debugginf and showing gRPC call results
     private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
 
     //*********************************************************
@@ -47,15 +50,18 @@ public class StudentClient {
         //discovering the services via jmDNS
         JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
         
+        //discover all 3 services created by ther service name
         ServiceInfo info1 = jmdns.getServiceInfo("grpc.tcp.local.", "DomesticService");
         ServiceInfo info2 = jmdns.getServiceInfo("grpc.tcp.local.", "ParticipationAnalizer");
         ServiceInfo info3 = jmdns.getServiceInfo("grpc.tcp.local.", "GenderFeedback");
         
+        //verify if services were found
         if (info1 == null || info2 == null || info3 == null){
             System.out.println("***********One or more services could not be found via jmDNS");
             return;
         }
         
+        //extract host and port for each service
         String host1 = info1.getInetAddresses()[0].getHostAddress();
         int port1 = info1.getPort();
         
@@ -68,18 +74,19 @@ public class StudentClient {
         //**********************************************
         //Channel 1. Port 50051 - Unary Server. Domestic Activity Simulator
         //port1 = 50051;
-        ManagedChannel channel1 = ManagedChannelBuilder
-                .forAddress(host1, port1)
-                .usePlaintext()
-                .build();
+       // ManagedChannel channel1 = ManagedChannelBuilder
+         //       .forAddress(host1, port1)
+         //       .usePlaintext()
+         //       .build();
 
-        runUnaryDomesticTask(channel1);
+        //runUnaryDomesticTask(channel1);
 
-        channel1.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
+        //channel1.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
 
         //**********************************************
         //Channel 2. Port 50052 - Client & Server Streaming. Participation Analizer
         //port2 = 50052;
+        //**********************************************
         ManagedChannel channel2 = ManagedChannelBuilder
                 .forAddress(host2, port2)
                 .usePlaintext()
@@ -91,6 +98,7 @@ public class StudentClient {
         //**********************************************
         //Channel 3. Port 50053 - Client Streaming & Bi-directional Streaming server. Gender A. Feedback
         //port3 = 50053;
+        //**********************************************
         ManagedChannel channel3 = ManagedChannelBuilder
                 .forAddress(host3, port3)
                 .usePlaintext()
@@ -103,40 +111,22 @@ public class StudentClient {
     //*********************************************************
     //SERVICE 1. UNARY - Domestic Activity Simulator
     //*********************************************************
-    private static void runUnaryDomesticTask(ManagedChannel channel) throws InterruptedException {
+    private static void runUnaryDomesticTask(String name, int age, String gender, String taskName) {
+        //connect to the unary RPC server
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
+                .usePlaintext()
+                .build();
         DomesticActSimulatorGrpc.DomesticActSimulatorBlockingStub blockingStub = DomesticActSimulatorGrpc.newBlockingStub(channel);
         try {
-            String name = JOptionPane.showInputDialog("Please enter name: ");
-            String ageString = JOptionPane.showInputDialog("Enter age: ");
-            int age = Integer.parseInt(ageString); //convert 'ageString' to an integer.
-
-            String[] genders = {"Male", "Female", "Other"};
-            String gender = (String) JOptionPane.showInputDialog(null,
-                    "Select gender: ",
-                    "Student gender",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    genders,
-                    genders[0]);
-
-            String[] tasks = {"Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
-            String taskName = (String) JOptionPane.showInputDialog(null,
-                    "Select Task to-do: ",
-                    "Household Task",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    tasks,
-                    tasks[0]);
-
-            String durationStng = JOptionPane.showInputDialog("Enter duration of the task (minutes): ");
-            int duration = Integer.parseInt(durationStng);
-
+            //build the student object from GUI input
             Student student = Student.newBuilder()
-                    .setStudentName(name)
+            .setStudentName(name)
                     .setStudentAge(age)
                     .setGender(gender)
                     .setTaskName(taskName)
                     .build();
+            
+            
             // Building the request of the messege for student
             RegisterStudentsRequest request = RegisterStudentsRequest.newBuilder()
                     .addStudents(student)
@@ -144,7 +134,7 @@ public class StudentClient {
 
             //send request to server
             ResisterStudentsReply response = blockingStub.registerStudents(request);
-
+            
             //Show response
             JOptionPane.showMessageDialog(null, "Server message:\n"
                     + response.getMessage() + "\nRegistered in: ");
@@ -155,8 +145,12 @@ public class StudentClient {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "ERROR: Input invalid number.");
         } finally {
+            try{
             //shutdown channel
             channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
         }
 
     }
@@ -174,7 +168,7 @@ public class StudentClient {
         for (int i = 0; i < number; i++) {
             String name = JOptionPane.showInputDialog("Student name: ");
             int age = Integer.parseInt(JOptionPane.showInputDialog("Student age: "));
-            String gender = JOptionPane.showInputDialog("Gender (Male/Female/Other): ");
+            String gender = JOptionPane.showInputDialog("Gender (Male/Female): ");
             String[] tasks = {"Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
             String taskName = (String) JOptionPane.showInputDialog(null,
                     "Select Task to-do: ",
@@ -242,7 +236,7 @@ public class StudentClient {
             int entryCount = Integer.parseInt(JOptionPane.showInputDialog("How many feedbacks are you submitting?"));
 
             for (int i = 0; i < entryCount; i++) {
-                String name = JOptionPane.showInputDialog("Student name: ");
+                String name = JOptionPane.showInputDialog("Student name: \n");
                 String feedback = JOptionPane.showInputDialog("Feedback: \n");
 
                 CustomFeedbackRequest feedbackMsg = CustomFeedbackRequest.newBuilder()
@@ -254,10 +248,6 @@ public class StudentClient {
                 requestObserver.onCompleted();    //closes the stream after sending all the messages
                 latch.await(3, TimeUnit.SECONDS); //waits for server to respond
 
-            
-        // catch (HeadlessException | NumberFormatException e) {
-           // requestObserver.onError(e);
-           // return;// prevents further onNext() calls after onError 
         }catch (Exception e){
     requestObserver.onError(e);
         }
@@ -328,7 +318,7 @@ public class StudentClient {
         StreamObserver<StudentTask> requestObserver = asyncStub.liveTaskFeedback(new StreamObserver<TaskFeedback>() {
             @Override
             public void onNext(TaskFeedback value) {
-                JOptionPane.showMessageDialog(null, "Observations: " + value.getFeedback());
+                JOptionPane.showMessageDialog(null, "Observations: " + value.getFeedback()+ "\n");
             }
 
             @Override
@@ -387,4 +377,5 @@ public class StudentClient {
         }
     
 }
-*/
+
+

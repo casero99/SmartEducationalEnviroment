@@ -35,11 +35,19 @@ public class StudentClientGUI {
 
     public static void main(String[] args) {
 
-        //*********************************************************
-        //SERVICE 1. UNARY - Domestic Activity Simulator
-        //*********************************************************
+       
+        /*
+        GUI initialization
+        studentLis: stores the registered students
+        
+        The layout splits into:
+        top -> inputs
+        center -> outputs
+        bottom -> buttons
+        
+        */
         List<Student> studentList = new ArrayList<>();
-        //main window (JFrame)
+        //main window (JFrame: Main application window)
         JFrame jframe = new JFrame("Smart Educational Enviroment");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setSize(400, 350);
@@ -52,6 +60,7 @@ public class StudentClientGUI {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //labels and inputs
+        // collects the students name, age, gender, and task
         JTextField fName = new JTextField(20);
         JTextField fAge = new JTextField(5);
 
@@ -128,6 +137,9 @@ public class StudentClientGUI {
         inPanel.add(new JLabel()); //empty cell
 
         //************** BUTTON LOGIC "UNARY RPC" **************
+        
+        //add student to 'student list'
+        //sends the single student info to the DomesticActSimulatorServer
         subButton.addActionListener(new ActionListener() {
 
             @Override
@@ -137,42 +149,6 @@ public class StudentClientGUI {
                 String gender = genderDd.getSelectedItem().toString();
                 String taskName = taskDd.getSelectedItem().toString();
 
-                /* String name = fName.getText();
-                String ageStr = fAge.getText();
-
-                //message will be displayed if the user leaves the spaces empty.
-                if (name.isEmpty() || ageStr.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please fill all the boxes.");
-                    return;
-                }
-
-                //age from an int to a string
-                int age;
-
-                try {
-                    age = Integer.parseInt(ageStr);
-
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Age must be a number");
-                    return;
-                }
-
-                String gender = (String) genderDd.getSelectedItem();
-
-                //message will be displayed if the user doesn't select a gender.
-                if (gender.equals("-Select gender-")) {
-                    JOptionPane.showMessageDialog(null, "Please select a valid gender");
-                    return;
-                }
-
-                String task = (String) taskDd.getSelectedItem();
-
-                //message will be displayed if the user doesn't select a gender.
-                if (task.equals("-Select task to do-")) {
-                    JOptionPane.showMessageDialog(null, "Please select a valid task");
-                    return;
-                }
-                 */
                 //calling the gRPC helper method
                 String result = StudentClientHelper.runUnaryDomesticTask(name, age, gender, taskName);
 
@@ -182,6 +158,7 @@ public class StudentClientGUI {
             }
         });
 
+        //e-> extends the 'ActionListener()'
         addButton.addActionListener(e -> {
             String name = fName.getText().trim();
             String ageStr = fAge.getText().trim();
@@ -238,7 +215,9 @@ public class StudentClientGUI {
         //*********************************************************
         //SERVER 2. Server Streaming RPC - Participation Analizer
         //*********************************************************
+        //Send students in the list to the server and receives the participation statistics
         submitAnalyzeButton.addActionListener(e -> {
+            
 
             //gather input from fields and validating inputs
             String name = fName.getText().trim();
@@ -281,6 +260,7 @@ public class StudentClientGUI {
         //*********************************************************
         //SERVER 2. Client Streaming RPC - Participation Analizer
         //*********************************************************        
+        //each students feedback is sent as a stream to the server
         feedbackButton.addActionListener(e -> {
             List<CustomFeedbackRequest> feedbackList = new ArrayList<>();
 
@@ -304,6 +284,7 @@ public class StudentClientGUI {
         //*********************************************************
         //SERVER 3. Client Streaming RPC - Gender Feedback
         //*********************************************************
+        // simulate class task performance and receive aggregted feedback
         performanceButton.addActionListener(e -> {
             List<StudentTask> taskList = new ArrayList<>();
 
@@ -339,6 +320,7 @@ public class StudentClientGUI {
         //*********************************************************
         //SERVER 3. Bi-directional RPC - Gender Feedback
         //*********************************************************
+        //Sends one task at a time and receives feedback in real-time
         feedbackLiveButton.addActionListener(e -> {
             List<StudentTask> taskList = new ArrayList<>();
 
@@ -371,7 +353,7 @@ public class StudentClientGUI {
             outputArea.append("!!!Live task feedback sent: \n" + result + "\n");
         });
         //************** SHOW THE WINDOW **************************
-        jframe.setVisible(true);
+        jframe.setVisible(true); //display the full GUI window after all components are initialized
 
     }
 
