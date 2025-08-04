@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 It will show fields, buttons, and outputs!
 
  */
+
 public class StudentClientGUI {
 
     public static void main(String[] args) {
@@ -37,6 +38,7 @@ public class StudentClientGUI {
         //*********************************************************
         //SERVICE 1. UNARY - Domestic Activity Simulator
         //*********************************************************
+        List<Student> studentList = new ArrayList<>();
         //main window (JFrame)
         JFrame jframe = new JFrame("Smart Educational Enviroment");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -182,232 +184,231 @@ public class StudentClientGUI {
             }
         });
 
+        addButton.addActionListener(e -> {
+            String name = fName.getText().trim();
+            String ageStr = fAge.getText().trim();
+                String gender = genderDd.getSelectedItem().toString();
+            String taskName = taskDd.getSelectedItem().toString();
+
+            //message will be displayed if the user leaves the spaces empty.
+            if (name.isEmpty() || ageStr.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill all the boxes.");
+                return;
+            }
+
+            //age from an int to a string
+            int age;
+
+            try {
+                age = Integer.parseInt(ageStr);
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Age must be a number");
+                return;
+            }
+            //message will be displayed if the user doesn't select a gender.
+            if (gender.equals("-Select gender-")) {
+                    JOptionPane.showMessageDialog(null, "Please select a valid gender");
+                    return;
+                }
+            //message will be displayed if the user doesn't select a gender.
+                if (taskName.equals("-Select task to do-")) {
+                    JOptionPane.showMessageDialog(null, "Please select a valid task");
+                    return;
+                }
+                
+                //Creating and sotre student
+            Student student = Student.newBuilder()
+                    .setStudentName(name)
+                    .setStudentAge(age)
+                    .setGender(gender)
+                    .setTaskName(taskName)
+                    .build();
+            
+            studentList.add(student); //student added to the list
+            
+            outputArea.append(" The student " + name+ "\n , age: " + age + "\n , gender: " + gender + "\n , task to do: " + taskName + " is registered succesfully!\n\n");
+                
+            fName.setText("");
+            fAge.setText("");
+            genderDd.setSelectedIndex(0);
+            taskDd.setSelectedIndex(0);
+            fName.requestFocus();
+        });
+
+        
         //*********************************************************
         //SERVER 2. Server Streaming RPC - Participation Analizer
         //*********************************************************
         submitAnalyzeButton.addActionListener(e -> {
 
-            int numStudents = 0;
+            //gather input from fields and validating inputs
+            String name = fName.getText().trim();
+            String ageStr = fAge.getText().trim();
 
-            try {
-                String input = JOptionPane.showInputDialog("How many students are to analyze?");
-                numStudents = Integer.parseInt(input);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Please enter a valid number!!!");
+            //message will be displayed if the user leaves the spaces empty.
+            if (name.isEmpty() || ageStr.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill all the boxes.");
                 return;
             }
 
-            List<generated.grpc.analyzer.Student> studentList = new ArrayList<>();
+            //age from an int to a string
+            int age;
+            try {
+                age = Integer.parseInt(ageStr);
 
-            for (int i = 0; i < numStudents; i++) {
-                String name = JOptionPane.showInputDialog("Student name: ");
-                String ageStr = JOptionPane.showInputDialog("Student age: ");
-                int age;
-                try {
-                    age = Integer.parseInt(ageStr);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Age must be a number!!!");
-                    return;
-
-                }
-                String[] genders = {"Male", "Female", "Other"};
-                String gender = (String) JOptionPane.showInputDialog(null,
-                        "Select gender: ",
-                        "Student gender",
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        genders,
-                        genders[0]);
-
-                String[] task = {"Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
-                String taskName = (String) JOptionPane.showInputDialog(null,
-                        "Select Task to-do: ",
-                        "Household Task",
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        task,
-                        task[0]);
-                
-                generated.grpc.analyzer.Student s= generated.grpc.analyzer.Student.newBuilder()
-                        .setStudentName(name)
-                        .setStudentAge(age)
-                        .setGender(gender)
-                        .setTaskName(taskName)
-                        .build();
-                
-                studentList.add(s);
-                
-                /*
-                    //gather input from fields and validating inputs
-                    String name = fName.getText().trim();
-                    String ageStr = fAge.getText().trim();
-
-                    //message will be displayed if the user leaves the spaces empty.
-                    if (name.isEmpty() || ageStr.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Please fill all the boxes.");
-                        return;
-                    }
-
-                    //age from an int to a string
-                    int age;
-                    try {
-                        age = Integer.parseInt(ageStr);
-
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Age must be a number");
-                        return;
-                    }
-
-                    String gender = (String) genderDd.getSelectedItem();
-
-                    //message will be displayed if the user doesn't select a gender.
-                    if (gender.equals("-Select gender-")) {
-                        JOptionPane.showMessageDialog(null, "Please select a valid gender");
-                        return;
-                    }
-
-                    String task = (String) taskDd.getSelectedItem();
-
-                    //message will be displayed if the user doesn't select a gender.
-                    if (task.equals("-Select task to do-")) {
-                        JOptionPane.showMessageDialog(null, "Please select a valid task");
-                        return;
-                    }
-
-                    //Building student message
-                    Student student = Student.newBuilder()
-                            .setStudentName(name)
-                            .setStudentAge(age)
-                            .setGender(gender)
-                            .setTaskName(task)
-                            .build();
-                 */
-
-                //calling 'helper' to run server-streaming RPC
-                String feedback = StudentClientHelper.runServerStreamingParticipationAnalizer(studentList);
-                outputArea.append("!!!Server replied:\n " + feedback + "\n");
-
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Age must be a number");
+                return;
             }
+
+            String gender = (String) genderDd.getSelectedItem();
+
+            //message will be displayed if the user doesn't select a gender.
+            if (gender.equals("-Select gender-")) {
+                JOptionPane.showMessageDialog(null, "Please select a valid gender");
+                return;
+            }
+
+            String task = (String) taskDd.getSelectedItem();
+
+            //message will be displayed if the user doesn't select a gender.
+            if (task.equals("-Select task to do-")) {
+                JOptionPane.showMessageDialog(null, "Please select a valid task");
+                return;
+            }
+
+            //Building student message
+            Student student = Student.newBuilder()
+                    .setStudentName(name)
+                    .setStudentAge(age)
+                    .setGender(gender)
+                    .setTaskName(task)
+                    .build();
+
+            //calling 'helper' to run server-streaming RPC
+            String feedback = StudentClientHelper.runServerStreamingParticipationAnalizer(studentList);
+            outputArea.append("!!!Server replied:\n " + feedback + "\n");
+
         });
-        
 
-                //*********************************************************
-                //SERVER 2. Client Streaming RPC - Participation Analizer
-                //*********************************************************        
-                feedbackButton.addActionListener(e -> {
-                List<CustomFeedbackRequest> feedbackList = new ArrayList<>();
+        //*********************************************************
+        //SERVER 2. Client Streaming RPC - Participation Analizer
+        //*********************************************************        
+        feedbackButton.addActionListener(e -> {
+            List<CustomFeedbackRequest> feedbackList = new ArrayList<>();
 
-                int total = Integer.parseInt(JOptionPane.showInputDialog("How many feedbacks will you want to write?"));
+            int total = Integer.parseInt(JOptionPane.showInputDialog("How many feedbacks will you want to write?"));
 
-                for (int i = 0; i < total; i++) {
-                    String name = JOptionPane.showInputDialog("Student name: ");
-                    String feedback = JOptionPane.showInputDialog("Write feedback of student or overall: ");
+            for (int i = 0; i < total; i++) {
+                String name = JOptionPane.showInputDialog("Student name: ");
+                String feedback = JOptionPane.showInputDialog("Write feedback of student or overall: ");
 
-                    CustomFeedbackRequest request = CustomFeedbackRequest.newBuilder()
-                            .setStudentName(name)
-                            .setFeedback(feedback)
-                            .build();
+                CustomFeedbackRequest request = CustomFeedbackRequest.newBuilder()
+                        .setStudentName(name)
+                        .setFeedback(feedback)
+                        .build();
 
-                    feedbackList.add(request);
+                feedbackList.add(request);
+            }
+            String result = StudentClientHelper.runClientStreamingCustomFeedback(feedbackList);
+            outputArea.append("Custom feedback sent: \n" + result + "\n");
+        });
+
+        //*********************************************************
+        //SERVER 3. Client Streaming RPC - Gender Feedback
+        //*********************************************************
+        performanceButton.addActionListener(e -> {
+            List<StudentTask> taskList = new ArrayList<>();
+
+            int total = Integer.parseInt(JOptionPane.showInputDialog("How many students to enter task duration for?"));
+
+            for (int i = 0; i < total; i++) {
+                String name = JOptionPane.showInputDialog("Student name: ");
+                String[] performancetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+                JComboBox<String> performancetaskDd = new JComboBox<>(tasks);
+
+                int option = JOptionPane.showConfirmDialog(null, performancetaskDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
+                //message will be displayed if the user doesn't select a gender.
+                if (option != JOptionPane.OK_CANCEL_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Please select a valid task");
+                    return;
                 }
-                String result = StudentClientHelper.runClientStreamingCustomFeedback(feedbackList);
-                outputArea.append("Custom feedback sent: \n" + result + "\n");
-            });
 
-            //*********************************************************
-            //SERVER 3. Client Streaming RPC - Gender Feedback
-            //*********************************************************
-            performanceButton.addActionListener(e -> {
-                List<StudentTask> taskList = new ArrayList<>();
+                //get the selected task
+                String selectedTask = (String) performancetaskDd.getSelectedItem();
 
-                int total = Integer.parseInt(JOptionPane.showInputDialog("How many students to enter task duration for?"));
-
-                for (int i = 0; i < total; i++) {
-                    String name = JOptionPane.showInputDialog("Student name: ");
-                    String[] performancetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
-                    JComboBox<String> performancetaskDd = new JComboBox<>(tasks);
-
-                    int option = JOptionPane.showConfirmDialog(null, performancetaskDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
-                    //message will be displayed if the user doesn't select a gender.
-                    if (option != JOptionPane.OK_CANCEL_OPTION) {
-                        JOptionPane.showMessageDialog(null, "Please select a valid task");
-                        return;
-                    }
-
-                    //get the selected task
-                    String selectedTask = (String) performancetaskDd.getSelectedItem();
-
-                    String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
-                    //task duration from an int to a string
-                    int time;
-                    try {
-                        time = Integer.parseInt(timeStr);
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Age must be a number");
-                        return;
-                    }
-
-                    //Building student message
-                    StudentTask studentTask = StudentTask.newBuilder()
-                            .setStudentName(name)
-                            .setStudentTask(selectedTask)
-                            .setTaskDuration(time)
-                            .build();
-
-                    taskList.add(studentTask);
+                String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
+                //task duration from an int to a string
+                int time;
+                try {
+                    time = Integer.parseInt(timeStr);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Age must be a number");
+                    return;
                 }
-                String result = StudentClientHelper.runClientStreamingTaskPerformance(taskList);
-                outputArea.append("Task performance result: \n" + result + "\n");
-            });
 
-            //*********************************************************
-            //SERVER 3. Bi-directional RPC - Gender Feedback
-            //*********************************************************
-            feedbackLiveButton.addActionListener(e -> {
-                List<StudentTask> taskList = new ArrayList<>();
+                //Building student message
+                StudentTask studentTask = StudentTask.newBuilder()
+                        .setStudentName(name)
+                        .setStudentTask(selectedTask)
+                        .setTaskDuration(time)
+                        .build();
 
-                int total = Integer.parseInt(JOptionPane.showInputDialog("How many students to enter live feedback for?"));
+                taskList.add(studentTask);
+            }
+            String result = StudentClientHelper.runClientStreamingTaskPerformance(taskList);
+            outputArea.append("Task performance result: \n" + result + "\n");
+        });
 
-                for (int i = 0; i < total; i++) {
-                    String name = JOptionPane.showInputDialog("Student name: ");
-                    String[] performancelivetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
-                    JComboBox<String> performancetaskliveDd = new JComboBox<>(tasks);
+        //*********************************************************
+        //SERVER 3. Bi-directional RPC - Gender Feedback
+        //*********************************************************
+        feedbackLiveButton.addActionListener(e -> {
+            List<StudentTask> taskList = new ArrayList<>();
 
-                    int option = JOptionPane.showConfirmDialog(null, performancetaskliveDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
-                    //message will be displayed if the user doesn't select a gender.
-                    if (option != JOptionPane.OK_CANCEL_OPTION) {
-                        JOptionPane.showMessageDialog(null, "Please select a valid task");
-                        return;
-                    }
+            int total = Integer.parseInt(JOptionPane.showInputDialog("How many students to enter live feedback for?"));
 
-                    //get the selected task
-                    String selectedTask = (String) performancetaskliveDd.getSelectedItem();
+            for (int i = 0; i < total; i++) {
+                String name = JOptionPane.showInputDialog("Student name: ");
+                String[] performancelivetasks = {"-Select task to do-", "Washing Dishes", "Sweeping", "Mooping", "Laundry", "Cooking", "Ironing", "Make the bed"};
+                JComboBox<String> performancetaskliveDd = new JComboBox<>(tasks);
 
-                    String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
-                    //task duration from an int to a string
-                    int time;
-                    try {
-                        time = Integer.parseInt(timeStr);
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Time duration must be a number");
-                        return;
-                    }
-
-                    //Building student message
-                    StudentTask studentTask = StudentTask.newBuilder()
-                            .setStudentName(name)
-                            .setStudentTask(selectedTask)
-                            .setTaskDuration(time)
-                            .build();
-
-                    taskList.add(studentTask);
+                int option = JOptionPane.showConfirmDialog(null, performancetaskliveDd, "Select task to do", JOptionPane.OK_CANCEL_OPTION);
+                //message will be displayed if the user doesn't select a gender.
+                if (option != JOptionPane.OK_CANCEL_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Please select a valid task");
+                    return;
                 }
-                String result = StudentClientHelper.runBidirectionalFeedback(taskList);
-                outputArea.append("!!!Live task feedback sent: \n" + result + "\n");
-            });
-            //************** SHOW THE WINDOW **************************
-            jframe.setVisible(true);
 
-        }
+                //get the selected task
+                String selectedTask = (String) performancetaskliveDd.getSelectedItem();
+
+                String timeStr = JOptionPane.showInputDialog("How many minutes did it take? ");
+                //task duration from an int to a string
+                int time;
+                try {
+                    time = Integer.parseInt(timeStr);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Time duration must be a number");
+                    return;
+                }
+
+                //Building student message
+                StudentTask studentTask = StudentTask.newBuilder()
+                        .setStudentName(name)
+                        .setStudentTask(selectedTask)
+                        .setTaskDuration(time)
+                        .build();
+
+                taskList.add(studentTask);
+            }
+            String result = StudentClientHelper.runBidirectionalFeedback(taskList);
+            outputArea.append("!!!Live task feedback sent: \n" + result + "\n");
+        });
+        //************** SHOW THE WINDOW **************************
+        jframe.setVisible(true);
 
     }
+
+}

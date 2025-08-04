@@ -4,6 +4,7 @@ generated\grpc\domestic\DomesticActSimulatorGrpc$1.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$MethodHandlers.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerBaseDescriptorSupplier.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerFileDescriptorSupplier.class
+distsys\smarteducationalenviroment\StudentClientERROR$1.class
 generated\grpc\feedback\TaskFeedback.class
 generated\grpc\feedback\TaskFeedbackSummary.class
 generated\grpc\domestic\StudentOrBuilder.class
@@ -43,6 +44,7 @@ generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackBlockingStub.class
 distsys\smarteducationalenviroment\StudentClientGUI2$2.class
 distsys\smarteducationalenviroment\StudentClientHelper$1.class
 distsys\smarteducationalenviroment\StudentClientHelper.class
+distsys\smarteducationalenviroment\StudentClientERROR$3.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$2.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerImplBase.class
 distsys\smarteducationalenviroment\StudentClientGUI.class
@@ -53,6 +55,7 @@ generated\grpc\feedback\GenderAFeedbackGrpc$1.class
 generated\grpc\analyzer\CustomFeedbackRequest$1.class
 generated\grpc\feedback\TaskFeedback$1.class
 generated\grpc\feedback\GenderAFeedbackGrpc$GenderAFeedbackBaseDescriptorSupplier.class
+distsys\smarteducationalenviroment\StudentClientERROR$2.class
 distsys\smarteducationalenviroment\GenderAFeedbackServer$2.class
 generated\grpc\feedback\StudentTask$Builder.class
 generated\grpc\feedback\TaskFeedbackSummary$1.class
@@ -63,6 +66,7 @@ generated\grpc\analyzer\ParticipationRequestOrBuilder.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorBlockingStub.class
 generated\grpc\domestic\RegisterStudentsRequest$Builder.class
 generated\grpc\analyzer\ParticipationAnalizerGrpc$ParticipationAnalizerMethodDescriptorSupplier.class
+distsys\smarteducationalenviroment\StudentClientERROR.class
 generated\grpc\domestic\DomesticActSimulatorGrpc$DomesticActSimulatorFutureStub.class
 distsys\smarteducationalenviroment\StudentClient$3.class
 generated\grpc\analyzer\CustomFeedbackReply$1.class
